@@ -1,7 +1,3 @@
-# # maispipoca_g1
-Firmware da placa Mais Pipoca G1
-
-
 # Projeto da Máquina Mais Pipoca G1
 
 # Hardware
