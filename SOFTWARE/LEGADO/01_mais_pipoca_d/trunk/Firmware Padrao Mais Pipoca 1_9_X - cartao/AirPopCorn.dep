@@ -1,0 +1,998 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<project>
+  <fileVersion>2</fileVersion>
+  <fileChecksum>72987178</fileChecksum>
+  <configuration>
+    <name>Debug</name>
+    <outputs>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Config_Normal.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdint.h</file>
+      <file>$PROJ_DIR$\Drivers\WH1602_2\WH1602_2.H</file>
+      <file>$PROJ_DIR$\Debug\Obj\MenuConfiguracaoSistema.pbi</file>
+      <file>$PROJ_DIR$\aplicacao\ControleMotor\controleMotor.h</file>
+      <file>$PROJ_DIR$\Kernel\StackMacros.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\WH1602_2.o</file>
+      <file>$PROJ_DIR$\aplicacao\ControleMotor\PIDtemperatura.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\Teclado.pbi</file>
+      <file>$PROJ_DIR$\Debug\Exe\MaisPipoca_1_8_13_placa_c.hex</file>
+      <file>$TOOLKIT_DIR$\inc\c\ycheck.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\cstartup_M.o</file>
+      <file>$PROJ_DIR$\Kernel\queue.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\RTC.o</file>
+      <file>$PROJ_DIR$\Drivers\Teclado\teclado.h</file>
+      <file>$PROJ_DIR$\Drivers\sst25vf016b\paginacaoMemoriaFlash.h</file>
+      <file>$PROJ_DIR$\aplicacao\interfaceUsuario\pipocaTeste.h</file>
+      <file>$PROJ_DIR$\Kernel\semphr.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\RelatorioVendas.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\AcumuladorDinheiro.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Defaults.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\portasm.o</file>
+      <file>$TOOLKIT_DIR$\inc\c\xencoding_limits.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\ControleEmbalagem.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\AnimacaoLeds.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.pbi</file>
+      <file>$PROJ_DIR$\Drivers\sst25vf016b\SPI_WRAPPER.H</file>
+      <file>$PROJ_DIR$\Debug\Obj\MonitorPagamentos.pbi</file>
+      <file>$PROJ_DIR$\Kernel\task.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\uart.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\spi_wrapper.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\TELET.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\PlayerWave.pbi</file>
+      <file>$PROJ_DIR$\aplicacao\impressora\impressora.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\main.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\queue.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\Impressora.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\Protocolo.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\c\xtgmath.h</file>
+      <file>$PROJ_DIR$\Kernel\portmacro.h</file>
+      <file>$PROJ_DIR$\Kernel\FreeRTOS.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\ymath.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\list.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\PipocaTeste.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Product_string.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\yvals.h</file>
+      <file>$PROJ_DIR$\Debug\Exe\c.out</file>
+      <file>$TOOLKIT_DIR$\inc\c\intrinsics.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Product.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\RelatorioVendas.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\Teclado.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\Assinatura.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\c\DLib_Threads.h</file>
+      <file>$PROJ_DIR$\Kernel\system_LPC17xx.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\spi_wrapper.pbi</file>
+      <file>$PROJ_DIR$\Kernel\mpu_wrappers.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\PIDtemperatura.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\AirPopCorn.pbd</file>
+      <file>$PROJ_DIR$\Debug\Obj\Assinatura.o</file>
+      <file>$PROJ_DIR$\Kernel\LPC17xx.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\math.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\Parametros.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\MenuConfiguracaoSistema.o</file>
+      <file>$PROJ_DIR$\Drivers\74595\74595.H</file>
+      <file>$PROJ_DIR$\aplicacao\TELET\TELET.H</file>
+      <file>$PROJ_DIR$\Drivers\sst25vf016b\sst25vf016b.c</file>
+      <file>$PROJ_DIR$\Kernel\projdefs.h</file>
+      <file>$PROJ_DIR$\aplicacao\ControleMotor\ControleEmbalagem.h</file>
+      <file>$PROJ_DIR$\Drivers\PlayerWave\PlayerWave.c</file>
+      <file>$PROJ_DIR$\Kernel\queue.c</file>
+      <file>$TOOLKIT_DIR$\inc\c\stddef.h</file>
+      <file>$PROJ_DIR$\Drivers\WATCHDOG\WATCHDOG.C</file>
+      <file>$PROJ_DIR$\Drivers\RTC\RTC.C</file>
+      <file>$PROJ_DIR$\Drivers\WH1602_2\WH1602_2.C</file>
+      <file>$PROJ_DIR$\Drivers\Teclado\Teclado.c</file>
+      <file>$PROJ_DIR$\aplicacao\parametros\parametros.h</file>
+      <file>$PROJ_DIR$\Kernel\tasks.c</file>
+      <file>$PROJ_DIR$\main.c</file>
+      <file>$PROJ_DIR$\Drivers\AmostragemAnalogica\AmostraAnalogica.c</file>
+      <file>$PROJ_DIR$\Drivers\CCTALK\cctalk.c</file>
+      <file>$PROJ_DIR$\Drivers\UARTS\uart.c</file>
+      <file>$PROJ_DIR$\target\board.c</file>
+      <file>$PROJ_DIR$\Drivers\sst25vf016b\memoryWrapper.c</file>
+      <file>$PROJ_DIR$\Kernel\list.c</file>
+      <file>$PROJ_DIR$\Drivers\WH1602\WH1602.C</file>
+      <file>$PROJ_DIR$\Kernel\port.c</file>
+      <file>$PROJ_DIR$\Drivers\sst25vf016b\spi_wrapper.c</file>
+      <file>$PROJ_DIR$\Kernel\portasm.s</file>
+      <file>$PROJ_DIR$\cstartup_M.asm</file>
+      <file>$PROJ_DIR$\Kernel\heap_1.c</file>
+      <file>$TOOLKIT_DIR$\inc\c\ysizet.h</file>
+      <file>$PROJ_DIR$\Kernel\core_cm3.h</file>
+      <file>$PROJ_DIR$\Drivers\Protocolo\Protocolo.c</file>
+      <file>$PROJ_DIR$\Debug\Obj\heap_1.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\port.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\NXP\iolpc1768.h</file>
+      <file>$PROJ_DIR$\Aplicacao\Impressora\Impressora.c</file>
+      <file>$PROJ_DIR$\Aplicacao\InterfaceUsuario\AcumuladorDinheiro.c</file>
+      <file>$PROJ_DIR$\Aplicacao\Parametros\Parametros.c</file>
+      <file>$PROJ_DIR$\Drivers\WH1602\WH1602.H</file>
+      <file>$PROJ_DIR$\Aplicacao\ControleMotor\ControleMotor.c</file>
+      <file>$PROJ_DIR$\Aplicacao\InterfaceUsuario\ControleAmostraGratis.c</file>
+      <file>$PROJ_DIR$\Aplicacao\InterfaceUsuario\InterfaceUsuario.c</file>
+      <file>$PROJ_DIR$\Aplicacao\InterfaceUsuario\MenuConfiguracaoSistema.c</file>
+      <file>$PROJ_DIR$\Aplicacao\ControleMotor\PIDtemperatura.c</file>
+      <file>$PROJ_DIR$\Aplicacao\ControleMotor\DosadorMilho.c</file>
+      <file>$PROJ_DIR$\Aplicacao\InterfaceUsuario\MonitorPagamentos.c</file>
+      <file>$PROJ_DIR$\Aplicacao\InterfaceUsuario\PipocaTeste.c</file>
+      <file>$PROJ_DIR$\Aplicacao\ControleMotor\ControleEmbalagem.c</file>
+      <file>$PROJ_DIR$\Aplicacao\TELET\TELET.C</file>
+      <file>$PROJ_DIR$\Aplicacao\Horimetro\Horimetro.c</file>
+      <file>$PROJ_DIR$\Aplicacao\Assinatura\Assinatura.c</file>
+      <file>$PROJ_DIR$\Aplicacao\InterfaceUsuario\InterfacAjusteRelogio.c</file>
+      <file>$PROJ_DIR$\Aplicacao\InterfaceUsuario\AnimacaoLeds.c</file>
+      <file>$PROJ_DIR$\Aplicacao\RelatorioVendas\RelatorioVendas.c</file>
+      <file>$PROJ_DIR$\Drivers\74595\74595.C</file>
+      <file>$PROJ_DIR$\Debug\Obj\WH1602_2.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\ControleAmostraGratis.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\InterfacAjusteRelogio.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\TELET.o</file>
+      <file>$TOOLKIT_DIR$\inc\c\io_macros.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\PipocaTeste.o</file>
+      <file>$PROJ_DIR$\Drivers\playerWave\playerWave.h</file>
+      <file>$PROJ_DIR$\Drivers\protocolo\protocolo.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\tasks.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\WH1602.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdio.h</file>
+      <file>$PROJ_DIR$\aplicacao\relatorioVendas\relatoriovendas.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\cctalk.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\AcumuladorDinheiro.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\heap_1.o</file>
+      <file>$PROJ_DIR$\Drivers\UARTS\uart.h</file>
+      <file>$PROJ_DIR$\Drivers\UARTS\uart_types.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\Parametros.o</file>
+      <file>$PROJ_DIR$\Aplicacao\InterfaceUsuario\interfacAjusteRelogio.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\Horimetro.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\DosadorMilho.o</file>
+      <file>$PROJ_DIR$\Kernel\freertosconfig.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\board.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\tasks.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\memoryWrapper.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\Horimetro.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\DosadorMilho.pbi</file>
+      <file>$PROJ_DIR$\Drivers\AmostragemAnalogica\tabelaTermistor.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\74595.o</file>
+      <file>$PROJ_DIR$\Kernel\list.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\MonitorPagamentos.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\memoryWrapper.o</file>
+      <file>$PROJ_DIR$\aplicacao\interfaceUsuario\controleAmostraGratis.h</file>
+      <file>$PROJ_DIR$\mapa_memoria.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\RTC.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\port.o</file>
+      <file>$TOOLKIT_DIR$\inc\c\stdlib.h</file>
+      <file>$PROJ_DIR$\aplicacao\interfaceusuario\monitorPagamentos.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\AmostraAnalogica.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\PlayerWave.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\InterfacAjusteRelogio.pbi</file>
+      <file>$PROJ_DIR$\aplicacao\assinatura\assinatura.h</file>
+      <file>$TOOLKIT_DIR$\inc\c\string.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\ControleAmostraGratis.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\sst25vf016b.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\PIDtemperatura.pbi</file>
+      <file>$PROJ_DIR$\Aplicacao\InterfaceUsuario\acumuladorDinheiro.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\InterfaceUsuario.o</file>
+      <file>$PROJ_DIR$\Kernel\portable.h</file>
+      <file>$PROJ_DIR$\Drivers\sst25vf016b\sst25vf016b.h</file>
+      <file>$TOOLKIT_DIR$\inc\NXP\iolpc1766.h</file>
+      <file>$PROJ_DIR$\includes.h</file>
+      <file>$PROJ_DIR$\aplicacao\interfaceUsuario\animacaoLeds.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\InterfaceUsuario.pbi</file>
+      <file>$PROJ_DIR$\Drivers\WH1602\WH1602_targetWrapper.h</file>
+      <file>$PROJ_DIR$\target\mapeamento_gpios.h</file>
+      <file>$PROJ_DIR$\aplicacao\ControleMotor\DosadorMilho.h</file>
+      <file>$PROJ_DIR$\aplicacao\interfaceUsuario\menuConfiguracaoSistema.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\ControleMotor.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\ControleEmbalagem.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\queue.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\uart.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\board.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\AnimacaoLeds.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\WATCHDOG.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\Impressora.pbi</file>
+      <file>$PROJ_DIR$\Drivers\sst25vf016b\memoryWrapper.h</file>
+      <file>$PROJ_DIR$\Drivers\RTC\RTC.H</file>
+      <file>$PROJ_DIR$\Debug\Obj\cctalk.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\list.pbi</file>
+      <file>$PROJ_DIR$\aplicacao\horimetro\horimetro.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\WH1602.o</file>
+      <file>$PROJ_DIR$\Debug\Obj\Protocolo.o</file>
+      <file>$PROJ_DIR$\Drivers\amostragemAnalogica\amostraanalogica.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\AmostraAnalogica.pbi</file>
+      <file>$PROJ_DIR$\Debug\Obj\ControleMotor.o</file>
+      <file>$PROJ_DIR$\Drivers\WATCHDOG\WATCHDOG.H</file>
+      <file>$PROJ_DIR$\Debug\Obj\74595.pbi</file>
+      <file>$PROJ_DIR$\target\board.h</file>
+      <file>$PROJ_DIR$\Drivers\CCTALK\cctalk.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\sst25vf016b.pbi</file>
+      <file>$TOOLKIT_DIR$\inc\c\ystdio.h</file>
+      <file>$PROJ_DIR$\Drivers\WH1602_2\WH1602_2_targetWrapper.h</file>
+      <file>$PROJ_DIR$\Debug\Obj\WATCHDOG.o</file>
+    </outputs>
+    <file>
+      <name>[ROOT_NODE]</name>
+      <outputs>
+        <tool>
+          <name>ILINK</name>
+          <file> 46</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Debug\Exe\c.out</name>
+      <outputs>
+        <tool>
+          <name>OBJCOPY</name>
+          <file> 9</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Drivers\sst25vf016b\sst25vf016b.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 160</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 196</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 95 166 120 165 26</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Drivers\PlayerWave\PlayerWave.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 155</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 32</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 95 166 120 122 167 137 59 91 1 10 45 20 0 48 22 52 47 53 40 70 90 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Kernel\queue.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 35</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 176</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 152 10 45 20 0 48 22 52 90 158 44 40 70 66 137 59 91 1 47 53 164 39 55 28 145</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Drivers\WATCHDOG\WATCHDOG.C</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 199</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 180</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 95 166 120 192</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Drivers\RTC\RTC.C</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 13</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 150</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 95 166 120 167 137 59 91 1 10 45 20 0 48 22 52 47 53 40 70 90 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Drivers\WH1602_2\WH1602_2.C</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 6</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 116</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 126 10 45 20 0 48 22 52 90 197 152 47 198 95 166 120 167 137 59 91 1 53 40 70 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Drivers\Teclado\Teclado.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 50</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 8</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 95 166 120 167 137 59 91 1 10 45 20 0 48 22 52 47 53 40 70 90 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Kernel\tasks.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 139</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 124</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 126 10 45 20 0 48 22 52 90 197 152 158 44 40 70 66 137 59 91 1 47 53 164 39 55 28 145 5</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\main.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 34</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 25</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 95 166 120 167 137 59 91 1 10 45 20 0 48 22 52 47 53 40 70 90 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Drivers\AmostragemAnalogica\AmostraAnalogica.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 154</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 190</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 95 166 120 167 137 59 91 1 10 45 20 0 48 22 52 47 53 40 70 90 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149 60 41 38 143</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Drivers\CCTALK\cctalk.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 184</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 128</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 126 10 45 20 0 48 22 52 90 197 152 95 166 120 195 167 137 59 91 1 47 53 40 70 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Drivers\UARTS\uart.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 29</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 177</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 126 10 45 20 0 48 22 52 90 197 95 166 120 131 132 47</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\target\board.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 138</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 178</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 95 166 120 194 171 167 137 59 91 1 10 45 20 0 48 22 52 47 53 40 70 90 66 164 39 55 145 28 17 12 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Drivers\sst25vf016b\memoryWrapper.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 147</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 140</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 95 166 120 158 10 45 20 0 48 22 52 90 44 165 182 15 26 167 137 59 91 1 47 53 40 70 66 164 39 55 145 28 17 12 171 194 99 2 63 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Kernel\list.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 42</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 185</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 152 10 45 20 0 48 22 52 90 40 70 66 137 59 91 1 47 53 164 39 55 145</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Drivers\WH1602\WH1602.C</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 187</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 125</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 126 10 45 20 0 48 22 52 90 197 152 170 95 166 120 167 137 59 91 1 47 53 40 70 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Kernel\port.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 151</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 94</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 40 70 10 45 20 0 48 22 52 90 66 137 59 91 1 47 53 164 39 55 28 145</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Drivers\sst25vf016b\spi_wrapper.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 30</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 54</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 26 95 166 120 167 137 59 91 1 10 45 20 0 48 22 52 47 53 40 70 90 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Kernel\portasm.s</name>
+      <outputs>
+        <tool>
+          <name>AARM</name>
+          <file> 21</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\cstartup_M.asm</name>
+      <outputs>
+        <tool>
+          <name>AARM</name>
+          <file> 11</file>
+        </tool>
+      </outputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Kernel\heap_1.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 130</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 93</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 40 70 10 45 20 0 48 22 52 90 66 137 59 91 1 47 53 164 39 55 28 145</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Drivers\Protocolo\Protocolo.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 188</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 37</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 95 166 120 123 167 137 59 91 1 10 45 20 0 48 22 52 47 53 40 70 90 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Aplicacao\Impressora\Impressora.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 36</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 181</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 95 166 120 158 10 45 20 0 48 22 52 90 44 167 137 59 91 1 47 53 40 70 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Aplicacao\InterfaceUsuario\AcumuladorDinheiro.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 129</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 19</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 167 137 59 91 1 10 45 20 0 48 22 52 47 53 40 70 90 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149 162</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Aplicacao\Parametros\Parametros.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 133</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 61</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 95 166 120 158 10 45 20 0 48 22 52 90 44 75 167 137 59 91 1 47 53 40 70 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Aplicacao\ControleMotor\ControleMotor.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 191</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 174</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 95 166 120 4 167 137 59 91 1 10 45 20 0 48 22 52 47 53 40 70 90 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Aplicacao\InterfaceUsuario\ControleAmostraGratis.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 159</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 117</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 95 166 120 167 137 59 91 1 10 45 20 0 48 22 52 47 53 40 70 90 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Aplicacao\InterfaceUsuario\InterfaceUsuario.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 163</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 169</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 158 10 45 20 0 48 22 52 90 44 126 197 152 167 137 59 91 1 47 53 40 70 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Aplicacao\InterfaceUsuario\MenuConfiguracaoSistema.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 62</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 3</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 126 10 45 20 0 48 22 52 90 197 152 158 44 167 137 59 91 1 47 53 40 70 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149 134</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Aplicacao\ControleMotor\PIDtemperatura.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 56</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 161</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 60 10 41 45 20 0 48 22 52 38 95 166 120 167 137 59 91 1 47 53 40 70 90 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Aplicacao\ControleMotor\DosadorMilho.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 136</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 142</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 95 166 120 167 137 59 91 1 10 45 20 0 48 22 52 47 53 40 70 90 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Aplicacao\InterfaceUsuario\MonitorPagamentos.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 146</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 27</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 95 166 120 126 10 45 20 0 48 22 52 90 197 152 153 167 137 59 91 1 47 53 40 70 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Aplicacao\InterfaceUsuario\PipocaTeste.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 121</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 43</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 167 137 59 91 1 10 45 20 0 48 22 52 47 53 40 70 90 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Aplicacao\ControleMotor\ControleEmbalagem.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 175</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 23</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 95 166 120 67 167 137 59 91 1 10 45 20 0 48 22 52 47 53 40 70 90 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Aplicacao\TELET\TELET.C</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 119</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 31</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 95 166 120 158 10 45 20 0 48 22 52 90 44 167 137 59 91 1 47 53 40 70 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Aplicacao\Horimetro\Horimetro.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 135</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 141</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 167 137 59 91 1 10 45 20 0 48 22 52 47 53 40 70 90 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Aplicacao\Assinatura\Assinatura.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 58</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 51</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 126 10 45 20 0 48 22 52 90 197 152 167 137 59 91 1 47 53 40 70 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Aplicacao\InterfaceUsuario\InterfacAjusteRelogio.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 118</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 156</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 126 10 45 20 0 48 22 52 90 197 152 158 44 134 167 137 59 91 1 47 53 40 70 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Aplicacao\InterfaceUsuario\AnimacaoLeds.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 179</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 24</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 167 137 59 91 1 10 45 20 0 48 22 52 47 53 40 70 90 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Aplicacao\RelatorioVendas\RelatorioVendas.c</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 18</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 49</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 158 10 45 20 0 48 22 52 90 44 126 197 167 137 59 91 1 47 53 40 70 66 164 39 55 145 28 17 12 171 194 99 2 63 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+    <file>
+      <name>$PROJ_DIR$\Drivers\74595\74595.C</name>
+      <outputs>
+        <tool>
+          <name>ICCARM</name>
+          <file> 144</file>
+        </tool>
+        <tool>
+          <name>BICOMP</name>
+          <file> 193</file>
+        </tool>
+      </outputs>
+      <inputs>
+        <tool>
+          <name>BICOMP</name>
+          <file> 95 166 120 47 10 63 167 137 59 91 1 45 20 0 48 22 52 53 40 70 90 66 164 39 55 145 28 17 12 171 194 99 2 182 165 14 189 131 195 123 122 192 183 4 172 67 7 75 153 173 168 148 16 33 127 64 157 186 149</file>
+        </tool>
+      </inputs>
+    </file>
+  </configuration>
+  <configuration>
+    <name>Release</name>
+    <outputs/>
+    <forcedrebuild>
+      <name>[MULTI_TOOL]</name>
+      <tool>ILINK</tool>
+    </forcedrebuild>
+  </configuration>
+</project>
+
+

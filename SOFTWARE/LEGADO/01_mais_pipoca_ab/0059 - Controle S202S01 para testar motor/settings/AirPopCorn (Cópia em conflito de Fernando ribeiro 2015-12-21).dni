@@ -1,0 +1,109 @@
+[InterruptLog]
+LogEnabled=0
+SumEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+ShowTimeSum=1
+SumSortOrder=0
+[DataLog]
+LogEnabled=0
+SumEnabled=0
+GraphEnabled=0
+ShowTimeLog=1
+ShowTimeSum=1
+[Stack]
+FillEnabled=0
+OverflowWarningsEnabled=1
+WarningThreshold=90
+SpWarningsEnabled=1
+WarnLogOnly=1
+UseTrigger=1
+TriggerName=main
+LimitSize=0
+ByteLimit=50
+[Interrupts]
+Enabled=1
+[MemoryMap]
+Enabled=0
+Base=0
+UseAuto=0
+TypeViolation=1
+UnspecRange=1
+ActionState=1
+[Trace1]
+Enabled=0
+ShowSource=1
+[DebugChecksum]
+Checksum=-1494518202
+[Exceptions]
+StopOnUncaught=_ 0
+StopOnThrow=_ 0
+[CallStack]
+ShowArgs=0
+[Disassembly]
+MixedMode=1
+[JLinkDriver]
+CStepIntDis=_ 0
+[array_types]
+Fmt0=unsigned char[10]	3	0
+Fmt1=unsigned char[128]	4	0
+Fmt2=unsigned char[14]	4	0
+Fmt3=unsigned char[256]	5	0
+Fmt4=unsigned char[26]	4	0
+Fmt5=unsigned char[32768]	4	0
+Fmt6=unsigned char[4096]	4	0
+Fmt7=unsigned char[4]	3	0
+Fmt8=unsigned char[64]	3	0
+Fmt9=unsigned int[5]	4	0
+Fmt10=unsigned short[5]	4	0
+[watch_formats]
+Fmt0={W}0:256-soma	4	0
+Fmt1={W}0:CCTALK_recebidos	3	0
+Fmt2={W}0:CM_cicloCounter	3	0
+Fmt3={W}0:PROTOCOLO_bytesEnviados	3	0
+Fmt4={W}0:assinatura[15]	1	0
+Fmt5={W}0:crc	4	0
+Fmt6={W}0:crcRecebido	4	0
+Fmt7={W}0:flags	1	0
+Fmt8={W}0:indice	3	0
+Fmt9={W}0:ligarResistencia	3	0
+Fmt10={W}0:mascaraLeds	4	0
+Fmt11={W}0:preset	1	0
+Fmt12={W}0:quantidade	3	0
+Fmt13={W}0:senha	1	0
+Fmt14={W}0:tamanho	3	0
+Fmt15={W}0:tmp	3	0
+[Disassemble mode]
+mode=0
+[Breakpoints2]
+Bp0=_ 0 "EMUL_CODE" "{$PROJ_DIR$\Aplicacao\InterfaceUsuario\MenuConfiguracaoSistema.c}.1063.17" 0 0 1 "" 0 "" 0
+Count=1
+[Log file]
+LoggingEnabled=_ 0
+LogFile=_ ""
+Category=_ 0
+[TermIOLog]
+LoggingEnabled=_ 0
+LogFile=_ ""
+[Aliases]
+A0=_ "C:\Users\Mais\Dropbox\SoftwaresMaisPipoca\FirmwareAirPopcorn-Versão Sem preAquecimento\Kernel\list.c" ""
+A1=_ "C:\Users\Mais\Dropbox\SoftwaresMaisPipoca\FirmwareAirPopcorn-Versão Sem preAquecimento\Kernel\portasm.s" ""
+A2=_ "C:\Users\Mais\Dropbox\SoftwaresMaisPipoca\FirmwareAirPopcorn-Versão Sem preAquecimento\main.c" ""
+A3=_ "C:\Users\Marcos\Dropbox\SoftwaresMaisPipoca\FirmwareAirPopcorn-Versão Sem preAquecimento\Kernel\list.c" ""
+A4=_ "C:\Users\Marcos\Dropbox\SoftwaresMaisPipoca\FirmwareAirPopcorn-Versão Sem preAquecimento\Kernel\portasm.s" ""
+A5=_ "C:\Users\Marcos\Dropbox\SoftwaresMaisPipoca\FirmwareAirPopcorn-Versão Sem preAquecimento\main.c" ""
+A6=_ "C:\Users\Marcos\OneDrive\Clientes\Almeida Technology\Softwares\FirmwareAirPopcorn-Versão Sem preAquecimento\Kernel\list.c" ""
+A7=_ "C:\Users\Marcos\OneDrive\EstruturaDados\10-AlmeidaTechnology\06-Softwares\01-Firmware\0019 - Firmware Padrao Mais Pipoca 1_5_5\Kernel\list.c" ""
+A8=_ "C:\Users\Marcos\OneDrive\EstruturaDados\10-AlmeidaTechnology\06-Softwares\01-Firmware\0019 - Firmware Padrao Mais Pipoca 1_5_5\main.c" ""
+A9=_ "C:\Users\Marcos\OneDrive\EstruturaDados\10-AlmeidaTechnology\06-Softwares\01-Firmware\0027 - Firmware Padrao Mais Pipoca 1_6_4\Kernel\list.c" ""
+A10=_ "C:\Users\Marcos\OneDrive\EstruturaDados\10-AlmeidaTechnology\06-Softwares\01-Firmware\0027 - Firmware Padrao Mais Pipoca 1_6_4\main.c" ""
+Count=11
+SuppressDialog=1
+[CallStackLog]
+Enabled=0
+[DriverProfiling]
+Enabled=0
+Mode=0
+Graph=0
+Symbiont=0
+Exclusions=
