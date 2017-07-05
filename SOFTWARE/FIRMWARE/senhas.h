@@ -35,7 +35,6 @@
 #define SENHA_CONFIG_FABRICA            3214
 #define SENHA_CAPTURA_CONFIG_FABRICA    3215    
 #define SENHA_MENU_AVANCADO             6651
-#define SENHA_AMOSTRA_GRATIS            PARAMETROS_leSenhaRoot()
 
 
 

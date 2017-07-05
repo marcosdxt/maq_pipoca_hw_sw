@@ -20,13 +20,6 @@
 |       Data criação       :  09/02/2015
 |
 |       Revisões           :  1.0.0.0
-|                             (20/05/2017) Alterado para rodar a vesão
-|                                          do controlador PID que utiliza
-|                                          soma para a integração e diferença
-|                                          para o diferenciador
-|                                          Removida a interrupção adicionar para
-|                                          desligar o gate do TRIAC, agora ele
-|                                          é desligado no cruzamento por zero
 |
 |
 | __________________________________________________________________________________
@@ -37,42 +30,19 @@
 //----------------------------------------------------------------------------------
 // Pais
 //----------------------------------------------------------------------------------
-//#define _BRASIL_
-//#define _URUGUAI_
-//#define _PARAGUAI_
-//#define _PARAGUAI_60HZ_
-#define _URUGUAI_60HZ_
+#define _BRASIL_
+
 //----------------------------------------------------------------------------------
 //      Definições para o brasil
 //----------------------------------------------------------------------------------
 #ifdef _BRASIL_
   #define PORTUGUES
   #define FQ_REDE_60_HZ
-  #define STR_VERSAO_BOARD      "     1.11.1-BR  "
-#endif
-
-#ifdef _URUGUAI_
+  #define STR_VERSAO_BOARD      "     1.9.60-BR  "
+#else
   #define FQ_REDE_50_HZ
   #define ESPANHOL
-  #define STR_VERSAO_BOARD      "     1.11.1-UY  "
-#endif
-
-#ifdef _PARAGUAI_
-  #define FQ_REDE_50_HZ
-  #define ESPANHOL
-  #define STR_VERSAO_BOARD      "     1.11.1-PY  "
-#endif
-
-#ifdef _PARAGUAI_60HZ_
-  #define FQ_REDE_60_HZ
-  #define ESPANHOL
-  #define STR_VERSAO_BOARD      "  1.11.1-PYBR   "
-#endif
-
-#ifdef _URUGUAI_60HZ_
-  #define FQ_REDE_60_HZ
-  #define ESPANHOL
-  #define STR_VERSAO_BOARD      "  1.11.1-UYBR   "
+  #define STR_VERSAO_BOARD      "     1.9.60-UY  "
 #endif
 //----------------------------------------------------------------------------------
 //      Definições para os demais países da América Latina

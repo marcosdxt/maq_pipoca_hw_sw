@@ -118,7 +118,7 @@ void IMPRESSORA_enviaLinha(char *linhas){
   else
     UART_init(3,115200,NULL,NULL,NULL);      
            
-  PROTOCOLO_enviaDadosDireto((unsigned char*)linhas,strlen(linhas));
+  PROTOCOLO_enviaDadosDireto(linhas,strlen(linhas));
   while(PROTOCOLO_bytesNoBufferTx());
   //vTaskDelay(50);
     

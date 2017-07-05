@@ -75,36 +75,9 @@
 /***********************************************************************************
 *       Constantes
 ***********************************************************************************/
-#ifdef _BRASIL_ 
-  const unsigned char MP_valorCanais[]={
-    0,2,5,10,20,50,100
-  };
-#endif
-
-#ifdef _URUGUAI_
-  const unsigned char MP_valorCanais[]={
-    0,2,5,10,20,50,100
-  };
-#endif
-  
-#ifdef _PARAGUAI_
-  const unsigned short int MP_valorCanais[]={
-    0,2000,5000,10000,20,50,100
-  };  
-#endif
-  
-#ifdef _PARAGUAI_60HZ_
-  const unsigned short int MP_valorCanais[]={
-    0,2000,5000,10000,20,50,100
-  };  
-#endif 
-  
-#ifdef _URUGUAI_60HZ_
-  const unsigned short int MP_valorCanais[]={
-    0,2000,5000,10000,20,50,100
-  };  
-#endif 
-  
+const unsigned char MP_valorCanais[]={
+  0,2,5,10,20,50,100
+};
 
 
 /***********************************************************************************
@@ -124,8 +97,6 @@ unsigned char MP_sinalMaquinaCartao=0;
 void(*MP_funcaoDriverModeiros)(void);
 unsigned short int MP_contadorBloqueio=0;
 unsigned int valorPipocaFicha=0;
-float MP_valor_credito_uca;
-
 /***********************************************************************************
 *       Funções locais
 ***********************************************************************************/
@@ -189,9 +160,6 @@ void MP_main(void*pPar){
   
   noteiro = PARAMETROS_leTipoNoteiro();
   valorPipocaFicha = PARAMETROS_leParametro(VALOR_PIPOCA);
-  
-  MP_valor_credito_uca = PARAMETROS_leValorCredito()/100.0;
-    
   for(;;){
     
     if(noteiro==BV20)// Só executa a máquina de estados 
@@ -257,7 +225,7 @@ void MP_verificaFilaPagamentos(void){
 unsigned char MP_decodifica_evento_cctalk(unsigned short int eventos){
   unsigned char descritor = eventos>>8;
   unsigned char parametro = eventos&0xFF;
-  static unsigned short int canal_evento=0;
+  static unsigned char canal_evento=0;
   
   if((descritor==BILL_VALIDATED_OK || descritor==BILL_VALIDATED_OK_AND_SCROW) && parametro){
     
@@ -707,7 +675,7 @@ void MP_trataMoedeiroICT(void){
   // Canal da moeda de 0,25  
   if(IO0INTSTATR_bit.P0_21){
     if(!MP_contadorBloqueio){
-      MP_valorMoedas += MP_valor_credito_uca;//0.25;    
+      MP_valorMoedas += 0.25;    
     }
     MP_contadorBloqueio = FILTRO_STEP_CREDITO;
     IO0INTCLR_bit.P0_21 = 1;    
@@ -791,7 +759,7 @@ void MP_trataMoedeiroICT(void){
 ***********************************************************************************/
 void MP_trataMoedeiroCommestero(void){
   
-#ifdef _BRASIL_
+#ifdef PORTUGUES
   
   // Canal 3
   // Canal da moeda de 0,25  
@@ -835,7 +803,7 @@ void MP_trataMoedeiroCommestero(void){
   
 #endif
   
-#ifdef _URUGUAI_
+#ifdef ESPANHOL
   
   // Canal 3
   // Canal da moeda de 5 pesos  
@@ -878,136 +846,6 @@ void MP_trataMoedeiroCommestero(void){
   }  
   
 #endif
-  
-#ifdef _URUGUAI_60HZ_
-  
-  // Canal 3
-  // Canal da moeda de 5 pesos  
-  if(IO0INTSTATR_bit.P0_21){
-    if(!MP_contadorBloqueio){
-      MP_valorMoedas += 5;        
-    }
-    MP_contadorBloqueio = FILTRO_STEP_CREDITO;
-    IO0INTCLR_bit.P0_21 = 1;
-  }  
-  
-  // Canal 4
-  // Canal da moeda de 10 pesos
-  if(IO0INTSTATR_bit.P0_22){
-    if(!MP_contadorBloqueio){
-      MP_valorMoedas += 10;
-    }
-    MP_contadorBloqueio = FILTRO_STEP_CREDITO;
-    IO0INTCLR_bit.P0_22 = 1;
-  }  
-  
-  // Canal 5
-  // Canal da moeda de 40 pesos
-  if(IO0INTSTATR_bit.P0_29){
-    if(!MP_contadorBloqueio){
-      MP_valorAcumulado += 50;
-    }
-    MP_contadorBloqueio = FILTRO_STEP_CREDITO;
-    IO0INTCLR_bit.P0_29 = 1;
-  }
-  
-  // Canal 6
-  // Canal da ficha
-  if(IO0INTSTATR_bit.P0_30){  
-    if(!MP_contadorBloqueio){
-      MP_valorAcumulado+=valorPipocaFicha;  
-    }
-    MP_contadorBloqueio = FILTRO_STEP_CREDITO;
-    IO0INTCLR_bit.P0_30 = 1;
-  }  
-  
-#endif
-  
-#ifdef _PARAGUAI_
-  // Canal 3
-  // Canal da moeda de 0,25  
-  if(IO0INTSTATR_bit.P0_21){
-    if(!MP_contadorBloqueio){
-      MP_valorMoedas += 500;//0.25;        
-    }
-    MP_contadorBloqueio = FILTRO_STEP_CREDITO;
-    IO0INTCLR_bit.P0_21 = 1;
-  }  
-  
-  // Canal 4
-  // Canal da moeda de 0,50
-  if(IO0INTSTATR_bit.P0_22){
-    if(!MP_contadorBloqueio){
-      MP_valorMoedas += 1000;//0.5;
-    }
-    MP_contadorBloqueio = FILTRO_STEP_CREDITO;
-    IO0INTCLR_bit.P0_22 = 1;
-  }  
-  
-  // Canal 5
-  // Canal da moeda de 1,00
-  if(IO0INTSTATR_bit.P0_29){
-    if(!MP_contadorBloqueio){
-      //MP_valorAcumulado += 1;
-    }
-    MP_contadorBloqueio = FILTRO_STEP_CREDITO;
-    IO0INTCLR_bit.P0_29 = 1;
-  }
-  
-  // Canal 6
-  // Canal da ficha
-  if(IO0INTSTATR_bit.P0_30){  
-    if(!MP_contadorBloqueio){
-      MP_valorAcumulado+=valorPipocaFicha;  
-    }
-    MP_contadorBloqueio = FILTRO_STEP_CREDITO;
-    IO0INTCLR_bit.P0_30 = 1;
-  }
-
-#endif  
-  
-#ifdef _PARAGUAI_60HZ_
-  // Canal 3
-  // Canal da moeda de 0,25  
-  if(IO0INTSTATR_bit.P0_21){
-    if(!MP_contadorBloqueio){
-      MP_valorMoedas += 500;//0.25;        
-    }
-    MP_contadorBloqueio = FILTRO_STEP_CREDITO;
-    IO0INTCLR_bit.P0_21 = 1;
-  }  
-  
-  // Canal 4
-  // Canal da moeda de 0,50
-  if(IO0INTSTATR_bit.P0_22){
-    if(!MP_contadorBloqueio){
-      MP_valorMoedas += 1000;//0.5;
-    }
-    MP_contadorBloqueio = FILTRO_STEP_CREDITO;
-    IO0INTCLR_bit.P0_22 = 1;
-  }  
-  
-  // Canal 5
-  // Canal da moeda de 1,00
-  if(IO0INTSTATR_bit.P0_29){
-    if(!MP_contadorBloqueio){
-      //MP_valorAcumulado += 1;
-    }
-    MP_contadorBloqueio = FILTRO_STEP_CREDITO;
-    IO0INTCLR_bit.P0_29 = 1;
-  }
-  
-  // Canal 6
-  // Canal da ficha
-  if(IO0INTSTATR_bit.P0_30){  
-    if(!MP_contadorBloqueio){
-      MP_valorAcumulado+=valorPipocaFicha;  
-    }
-    MP_contadorBloqueio = FILTRO_STEP_CREDITO;
-    IO0INTCLR_bit.P0_30 = 1;
-  }
-
-#endif    
 }
 /***********************************************************************************
 *       Fim do arquivo

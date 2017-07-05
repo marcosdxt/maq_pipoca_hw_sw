@@ -41,11 +41,6 @@ unsigned char MEMORYWRAPPER_readBytes(unsigned long int enderecoInicial,unsigned
                                       unsigned int size);
 
 unsigned char MEMORYWRAPPER_readSingle(unsigned long int enderecoInicial);
-
-void MEMORYWRAPPER_wait(void);
-
-void MEMORYWRAPPER_release(void);
-
 /***********************************************************************************
 *	End of file
 ***********************************************************************************/

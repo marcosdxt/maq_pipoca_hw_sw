@@ -215,23 +215,5 @@ unsigned char MEMORYWRAPPER_readSingle(unsigned long int enderecoInicial){
   return buffer;    
 }
 /***********************************************************************************
-*       Descrição       :       Wait do barramento da memória
-*       Parametros      :       nenhum
-*       Retorno         :       nenhum
-***********************************************************************************/
-void MEMORYWRAPPER_wait(void){
-  
-  while(!xSemaphoreTake(semDataFlash,portTICK_RATE_MS*1));
-}
-/***********************************************************************************
-*       Descrição       :       Release do barramento da memória
-*       Parametros      :       nenhum
-*       Retorno         :       nenhum
-***********************************************************************************/
-void MEMORYWRAPPER_release(void){
-  
-  xSemaphoreGive(semDataFlash);  
-}
-/***********************************************************************************
 *       Fim do arquivo
 ***********************************************************************************/

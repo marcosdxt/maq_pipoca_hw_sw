@@ -96,6 +96,5 @@
 #define ADR_FAT_CARTAO_PARCIAL          0x2030
 #define ADR_FAT_CARTAO_TOTAL            0x2040
 #define ADR_SENHA_ROOT                  0x2050
-#define ADR_VALOR_CREDITO_UCA           0x2060
 
 #endif//_MAPA_MEMORIA_H_

@@ -196,7 +196,7 @@ unsigned short int PARAMETROS_leParametro(unsigned char indice){
     case VALOR_PIPOCA:
          MEMORYWRAPPER_readBytes(ADR_VALOR_PIPOCA,buffer,4);      
          limiteInferior = 1;
-         limiteSuperior = 65000;
+         limiteSuperior = 1000;
          break;      
   }  
   crc = CCTALK_calculaCRC(buffer,0,2);
@@ -1748,47 +1748,6 @@ unsigned short int PARAMETROS_leSenhaRoot(void){
   }
    
   return 0;
-}
-/***********************************************************************************
-*       Descrição       :       Grava o valor do crédito salvo para o modeiro
-*                               UCA-1
-*       Parametros      :       (unsigned short int) valor configurado
-*                                                    para o pulso do UCA1
-*       Retorno         :       nenhum
-***********************************************************************************/
-void PARAMETROS_gravaValorCredito(unsigned short int credito){
-  unsigned char buffer[4];
-  unsigned short int crc;
-   
-  buffer[0] = credito>>8;
-  buffer[1] = credito;
-  
-  
-  crc = CCTALK_calculaCRC(buffer,0,2);
-  
-  buffer[2] = crc>>8;
-  buffer[3] = crc;
-  
-  MEMORYWRAPPER_writeBytes(ADR_VALOR_CREDITO_UCA,buffer,4);  
-}
-/***********************************************************************************
-*       Descrição       :       Lê o valor do crédito salvo para o moedeiro
-*                               UCA-1
-*       Parametros      :       nenhum
-*       Retorno         :       (unsigned short int) valor do pulso
-***********************************************************************************/
-unsigned short int PARAMETROS_leValorCredito(void){
-  unsigned char buffer[4];
-  unsigned short int crc;
-  
-  MEMORYWRAPPER_readBytes(ADR_VALOR_CREDITO_UCA,buffer,4);
-  crc = CCTALK_calculaCRC(buffer,0,2);
-  
-  if(crc==(buffer[2]<<8 | buffer[3])){
-    return (unsigned int)(buffer[0]<<8 | buffer[1]);
-  }
-   
-  return 25;
 }
 /***********************************************************************************
 *       Fim do arquivo

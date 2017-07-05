@@ -119,13 +119,11 @@ void PLAYERWAVE_iniciaMusica(unsigned char indice,unsigned char modo){
     
   if(!volume)
     return;
-    
+  
   POWER_WAVE_SET();
   PARAMETROS_carregaDadosIndiceMusicas(indice,&enderecoInicial,&tamanho);  
   enderecoInicialMusica = enderecoInicial;
   tamanhoMusica = tamanho;
-  
-  MEMORYWRAPPER_wait();  
   
   T0MR0 = T0TC+1000;  
   T0MCR_bit.MR0I = 1;  
@@ -140,10 +138,6 @@ void PLAYER_interrompeMusica(void){
   T0MCR_bit.MR0I = 0;   
   POWER_WAVE_CLR();
   tamanhoMusica = 0;
-  
-  vTaskDelay(10);
-  
-  MEMORYWRAPPER_release();
 }
 /***********************************************************************************
 *       Descrição       :       Função de interrupção 
@@ -182,11 +176,7 @@ void PLAYRWAVE_rti(void){
 *                                               ainda estiver sendo tocada
 ***********************************************************************************/
 unsigned char PLAYERWAVE_verificaToque(void){
- 
-  if(!tamanhoMusica){
-    vTaskDelay(5);  
-    MEMORYWRAPPER_release();
-  }
+  
  return  tamanhoMusica>0;
 }
 /***********************************************************************************

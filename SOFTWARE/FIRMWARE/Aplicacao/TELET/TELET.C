@@ -20,6 +20,9 @@
 |       Data criação       :  21/07/2015
 |
 |       Revisões           :  1.0.0.0
+|                             1.0.0.1 adição do envio do contador parcial no
+|                             pacote TELNET
+|                             
 |
 |
 | __________________________________________________________________________________
@@ -124,16 +127,15 @@ unsigned char TELET_escreveBlocoOperacao(unsigned int numeroSerie,
                                          unsigned int arrecadacaoParcial,
                                          unsigned int arrecadacaoTotal,
                                          unsigned char flags,
-                                         unsigned int arrecadaoCartao){/*
+                                         unsigned int arrecadaoCartao,
                                          unsigned int contadorVendasParcial,
-                                         unsigned int arrecadacaoCartaoParcial,
-                                         unsigned int arrecadacaoCartaoTotal,
+                                         unsigned int arrecadacaoCartaoParcial){/*,
                                          unsigned int valorPipoca,
                                          unsigned int comissaoPonto){    */                                       
  TELET_bufferRX[1] = 255;  
                                            
   TELET_bufferTX[0] = STX;
-  TELET_bufferTX[1] = 25;
+  TELET_bufferTX[1] = 33;
   TELET_bufferTX[2] = ESCREVE_BLOCO_OPERACAO;
   
   TELET_bufferTX[3] = numeroSerie>>24;
@@ -161,10 +163,20 @@ unsigned char TELET_escreveBlocoOperacao(unsigned int numeroSerie,
   TELET_bufferTX[21] = arrecadaoCartao>>8;
   TELET_bufferTX[22] = arrecadaoCartao;
   
-  TELET_bufferTX[23]= flags;
-  TELET_bufferTX[24]= TELET_checksum(TELET_bufferTX,24);
+  TELET_bufferTX[23] = contadorVendasParcial>>24;
+  TELET_bufferTX[24] = contadorVendasParcial>>16;
+  TELET_bufferTX[25] = contadorVendasParcial>>8;
+  TELET_bufferTX[26] = contadorVendasParcial;
   
-  TELET_enviaPacote(25);
+  TELET_bufferTX[27] = arrecadacaoCartaoParcial>>24;
+  TELET_bufferTX[28] = arrecadacaoCartaoParcial>>16;
+  TELET_bufferTX[29] = arrecadacaoCartaoParcial>>8;
+  TELET_bufferTX[30] = arrecadacaoCartaoParcial;
+  
+  TELET_bufferTX[31]= flags;
+  TELET_bufferTX[32]= TELET_checksum(TELET_bufferTX,32);
+  
+  TELET_enviaPacote(33);
   
   TELET_silentTime = 200;
   while(TELET_silentTime) 

@@ -164,7 +164,7 @@
         <debug>1</debug>
         <option>
           <name>CCOptimizationNoSizeConstraints</name>
-          <state>1</state>
+          <state>0</state>
         </option>
         <option>
           <name>CCDefines</name>
@@ -572,7 +572,7 @@
         </option>
         <option>
           <name>OOCOutputFile</name>
-          <state>mais_pipoca_1_11_1_UY_60HZ.hex</state>
+          <state>MaisPipoca_1_9_60_BR_.hex</state>
         </option>
         <option>
           <name>OOCCommandLineProducer</name>
@@ -1856,6 +1856,9 @@
       <file>
         <name>$PROJ_DIR$\Aplicacao\ControleMotor\PIDtemperatura.c</name>
       </file>
+    </group>
+    <group>
+      <name>GerenciadorEventos</name>
     </group>
     <group>
       <name>HORIMETRO</name>

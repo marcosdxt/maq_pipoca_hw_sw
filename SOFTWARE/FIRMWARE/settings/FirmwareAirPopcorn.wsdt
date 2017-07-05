@@ -12,7 +12,7 @@
           
           
           
-        <Column0>285</Column0><Column1>27</Column1><Column2>27</Column2><Column3>27</Column3></ColumnWidths>
+        <Column0>183</Column0><Column1>27</Column1><Column2>27</Column2><Column3>27</Column3></ColumnWidths>
       </Workspace>
       <Build>
         <PreferedWindows>
@@ -43,24 +43,24 @@
             <Factory>Workspace</Factory>
             <Session>
               
-            <NodeDict><ExpandedNode>AirPopCorn</ExpandedNode><ExpandedNode>AirPopCorn/APLICACAO</ExpandedNode><ExpandedNode>AirPopCorn/APLICACAO/CONTROLE_MOTOR</ExpandedNode><ExpandedNode>AirPopCorn/APLICACAO/InterfaceUsuario</ExpandedNode><ExpandedNode>AirPopCorn/APLICACAO/PARAMETROS</ExpandedNode><ExpandedNode>AirPopCorn/DRIVERS</ExpandedNode><ExpandedNode>AirPopCorn/TARGET</ExpandedNode><ExpandedNode>AirPopCorn/board</ExpandedNode></NodeDict></Session>
+            <NodeDict><ExpandedNode>AirPopCorn</ExpandedNode><ExpandedNode>AirPopCorn/APLICACAO</ExpandedNode><ExpandedNode>AirPopCorn/APLICACAO/InterfaceUsuario</ExpandedNode><ExpandedNode>AirPopCorn/APLICACAO/RELATORIOVENDAS</ExpandedNode><ExpandedNode>AirPopCorn/APLICACAO/TELET</ExpandedNode><ExpandedNode>AirPopCorn/DRIVERS</ExpandedNode><ExpandedNode>AirPopCorn/DRIVERS/CCTALK</ExpandedNode><ExpandedNode>AirPopCorn/Output</ExpandedNode><ExpandedNode>AirPopCorn/SENHAS</ExpandedNode><ExpandedNode>AirPopCorn/TARGET</ExpandedNode><ExpandedNode>AirPopCorn/board</ExpandedNode></NodeDict></Session>
           </Tab>
         </Tabs>
         
-      <SelectedTab>0</SelectedTab></Wnd2><Wnd3><Tabs><Tab><Identity>TabID-26664-23640</Identity><TabName>Build</TabName><Factory>Build</Factory><Session/></Tab></Tabs><SelectedTab>0</SelectedTab></Wnd3></Windows>
+      <SelectedTab>0</SelectedTab></Wnd2><Wnd3><Tabs><Tab><Identity>TabID-32508-2616</Identity><TabName>Build</TabName><Factory>Build</Factory><Session/></Tab><Tab><Identity>TabID-31462-2636</Identity><TabName>Debug Log</TabName><Factory>Debug-Log</Factory><Session/></Tab></Tabs><SelectedTab>0</SelectedTab></Wnd3></Windows>
     <Editor>
       
       
       
       
-    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Aplicacao\InterfaceUsuario\MenuConfiguracaoSistema.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>90</YPos2><SelStart2>0</SelStart2><SelEnd2>0</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\target\board.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>36</YPos2><SelStart2>1904</SelStart2><SelEnd2>1904</SelEnd2></Tab><ActiveTab>1</ActiveTab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Aplicacao\TELET\TELET.C</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>73</YPos2><SelStart2>3536</SelStart2><SelEnd2>3536</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Aplicacao\InterfaceUsuario\InterfaceUsuario.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>407</YPos2><SelStart2>15463</SelStart2><SelEnd2>15463</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\aplicacao\TELET\TELET.H</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>26</YPos2><SelStart2>1968</SelStart2><SelEnd2>1992</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\main.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>44</YPos2><SelStart2>2284</SelStart2><SelEnd2>2284</SelEnd2></Tab><ActiveTab>3</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Aplicacao\Parametros\Parametros.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>1633</YPos2><SelStart2>65832</SelStart2><SelEnd2>65832</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Kernel\tasks.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>1093</YPos2><SelStart2>36254</SelStart2><SelEnd2>36254</SelEnd2></Tab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
     <Positions>
       
       
       
       
       
-    <Top><Row0><Sizes><Toolbar-01ca5e58><key>iaridepm.enu1</key></Toolbar-01ca5e58></Sizes></Row0></Top><Left><Row0><Sizes><Wnd2><Rect><Top>-2</Top><Left>-2</Left><Bottom>540</Bottom><Right>376</Right><x>-2</x><y>-2</y><xscreen>-3259516</xscreen><yscreen>-1642463</yscreen><sizeHorzCX>-2122080728</sizeHorzCX><sizeHorzCY>-2097653894</sizeHorzCY><sizeVertCX>246094</sizeVertCX><sizeVertCY>692209</sizeVertCY></Rect></Wnd2></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes><Wnd3><Rect><Top>-2</Top><Left>-2</Left><Bottom>198</Bottom><Right>1538</Right><x>-2</x><y>-2</y><xscreen>1540</xscreen><yscreen>200</yscreen><sizeHorzCX>1002604</sizeHorzCX><sizeHorzCY>255428</sizeHorzCY><sizeVertCX>130208</sizeVertCX><sizeVertCY>255428</sizeVertCY></Rect></Wnd3></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
+    <Top><Row0><Sizes><Toolbar-049941f8><key>iaridepm.enu1</key></Toolbar-049941f8></Sizes></Row0><Row1><Sizes/></Row1></Top><Left><Row0><Sizes><Wnd2><Rect><Top>-2</Top><Left>-2</Left><Bottom>442</Bottom><Right>274</Right><x>-2</x><y>-2</y><xscreen>-1600442</xscreen><yscreen>-680718</yscreen><sizeHorzCX>-1171626646</sizeHorzCX><sizeHorzCY>-993748904</sizeHorzCY><sizeVertCX>202050</sizeVertCX><sizeVertCY>648175</sizeVertCY></Rect></Wnd2></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes><Wnd3><Rect><Top>-2</Top><Left>-2</Left><Bottom>198</Bottom><Right>1368</Right><x>-2</x><y>-2</y><xscreen>1370</xscreen><yscreen>200</yscreen><sizeHorzCX>1002928</sizeHorzCX><sizeHorzCY>291971</sizeHorzCY><sizeVertCX>146413</sizeVertCX><sizeVertCY>291971</sizeVertCY></Rect></Wnd3></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
   </Desktop>
 </Workspace>
 

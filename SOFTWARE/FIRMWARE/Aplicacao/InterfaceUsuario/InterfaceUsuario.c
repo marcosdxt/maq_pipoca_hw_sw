@@ -27,15 +27,6 @@
 |                                          Foram inseridas chamadas para envio
 |                                          no loop de falha da resistência e no
 |                                          de sinalização de falha
-|                             (20/05/2017) Alterado a forma como faz a limpeza da
-|                                          máquina durante o preparo. Agora utiliza
-|                                          a função serve_pipoca.
-|                                          Dentro do menu pipoca_teste havia uma 
-|                                          chamada errada para a limpeza, onde a velocidade
-|                                          estava com o parâmetro do valor da pipoca
-|                                          Criado menu para reiniciar a senha mestre,
-|                                          para utilizá-lo é necessário usar o gerador
-|                                          de contra-senha
 | __________________________________________________________________________________
 */
 
@@ -58,12 +49,12 @@
 
 #ifdef PORTUGUES
   #define STRING_EMPRESA                                          "  GRUPO ALTECH  "
-  #define STRING_VERSAO                                           STR_VERSAO_BOARD
+  #define STRING_VERSAO                                           STR_VERSAO_BOARD//"     1.9.28-BR  "
 #endif
 
 #ifdef ESPANHOL
   #define STRING_EMPRESA                                          "  GRUPO ALTECH  "
-  #define STRING_VERSAO                                           STR_VERSAO_BOARD
+  #define STRING_VERSAO                                           STR_VERSAO_BOARD//"     1.9.28-UY  "
 #endif
 
                   
@@ -161,7 +152,7 @@ void IU_exibeNumeroSerie(void);
 ***********************************************************************************/
 void IU_entry(void*pPar){
   eTECLA tecla;
-  unsigned char moedeiroTravado=0;  
+  unsigned char moedeiroTravado=0;
     
   HD44780_init(LCD_DISPLAY_8X5 | LCD_2_LINHAS,
                LCD_DISPLAY_LIGADO | LCD_CURSOR_DESLIGADO | LCD_CURSOR_FIXO);  
@@ -212,19 +203,7 @@ void IU_entry(void*pPar){
         
   
   // Faz a verificação inicial da resistência
-  // e trava o processo se não localizar    
-  HD44780_clearText();
-  HD44780_writeString("  Aguardando   ");
-  HD44780_posicionaTexto(0,1);
-  HD44780_writeString("  parada RPM...");
-  
-  while(MU_getRPMmedido());
-  
-  HD44780_clearText();
-  HD44780_writeString("  Verificando  ");
-  HD44780_posicionaTexto(0,1);
-  HD44780_writeString("  resistencia  ");  
-  
+  // e trava o processo se não localizar     
   if(!IU_verificacaoInicialResistencia()){
     for(;;){
 #ifdef PORTUGUES
@@ -259,7 +238,6 @@ void IU_entry(void*pPar){
   
   vTaskDelay(2000);
   MP_zeraTotalizadoresMoeda();
-  
   
   for(;;){
 
@@ -313,6 +291,8 @@ void IU_entry(void*pPar){
     if(!codigo){
     
       unsigned char locacao = PARAMETROS_leFlagLocacao();
+      
+      IU_enviaTelemetria();
       
       AL_setterEstado(LEDS_NORMAL);      
       
@@ -388,7 +368,6 @@ void IU_entry(void*pPar){
       }
       
       if(MP_descontaValor(valorPipoca) || IU_creditoPipoca || (flagLocacao&&TECLADO_getch() == TECLA_GRATIS)){
-        
         MP_enviaSinal(BV20_BLOQUEADO);
         IU_mensagemIniciandoPreparo();
         
@@ -403,29 +382,29 @@ void IU_entry(void*pPar){
                     HD44780_2_posicionaTexto(0,1);
                     HD44780_2_writeString("Chamar suporte  ");                       
                     IU_dosador = 255;
-                    for(;;);                    
+                    for(;;) IU_enviaTelemetria();                    
                     break;
             case 2: 
                     HD44780_2_posicionaTexto(0,0);              
                     HD44780_2_writeString("Falha embalagem ");                    
                     HD44780_2_posicionaTexto(0,1);
-                    HD44780_2_writeString("Chamar suporte  ");                                   
-                    for(;;);                    
+                    HD44780_2_writeString("Chamar suporte  ");    
+                    for(;;) IU_enviaTelemetria();                    
                     break;       
             case 4: 
                     HD44780_2_posicionaTexto(0,0);                             
                     HD44780_2_writeString("Falha ventilador");   
                     IU_falhaMotor = 255;
                     HD44780_2_posicionaTexto(0,1);
-                    HD44780_2_writeString("Chamar suporte  ");                                           
-                    for(;;);                    
+                    HD44780_2_writeString("Chamar suporte  "); 
+                    for(;;) IU_enviaTelemetria();                    
                     break;
             case 5: 
                     HD44780_2_posicionaTexto(0,0);                            
                     HD44780_2_writeString("Falha pre-aquec.");                    
                     HD44780_2_posicionaTexto(0,1);
-                    HD44780_2_writeString("Chamar suporte  ");                                   
-                    for(;;);                    
+                    HD44780_2_writeString("Chamar suporte  "); 
+                    for(;;) IU_enviaTelemetria();                   
                     break;
           }    
           
@@ -463,6 +442,7 @@ void IU_entry(void*pPar){
      // Falha no teste de verificação 
      // funcional     
      for(;;){
+       IU_enviaTelemetria();
        IU_escreveErros(codigo);          
        AL_setterEstado(LEDS_FORA_SERVICO);     
        tecla = TECLADO_getch();
@@ -577,9 +557,9 @@ void IU_mensagemIniciandoPreparo(void){
   
   #ifdef PORTUGUES
   HD44780_2_clearText();
-  HD44780_2_writeString("  Iniciando");
+  HD44780_2_writeString("Iniciando");
   HD44780_2_posicionaTexto(0,1);
-  HD44780_2_writeString("  preparo");
+  HD44780_2_writeString("preparo");
   #endif
   
   #ifdef ESPANHOL
@@ -638,25 +618,10 @@ void IU_desenhaPrecoPipoca(void){
   sprintf(bufferLinha,"Valor(R$):%1d.00 ",valor);  
 #endif
   
-#ifdef _URUGUAI_
+#ifdef ESPANHOL
   sprintf(bufferLinha,"Valor($U):%1d.00 ",valor);  
 #endif
-  
-#ifdef _URUGUAI_60HZ_
-  sprintf(bufferLinha,"Valor($U):%1d.00 ",valor);  
-#endif
-  
-#ifdef _PARAGUAI_
-  sprintf(bufferLinha,"Valor(G$):%5d  ",valor);  
-#endif  
-#ifdef _PARAGUAI_60HZ_
-  sprintf(bufferLinha,"Valor(G$):%5d  ",valor);  
-#endif   
-  HD44780_2_posicionaTexto(0,0);
-  HD44780_2_posicionaTexto(0,0);  
   HD44780_2_writeString(bufferLinha);  
-  HD44780_2_posicionaTexto(15,0);
-  HD44780_2_writeChar(' ');
 }
 /***********************************************************************************
 *       Descrição       :       Escreve no display o total de dinheiro inserido
@@ -673,22 +638,9 @@ void IU_escreveDinheiroInserido(void){
     sprintf(bufferLinha,"Pago (R$):%3.2f  ",valor);  
 #endif
 
-#ifdef  _URUGUAI_
+#ifdef  ESPANHOL
     sprintf(bufferLinha,"Pago ($U):%3.2f  ",valor);  
 #endif    
-    
-#ifdef  _URUGUAI_60HZ_
-    sprintf(bufferLinha,"Pago ($U):%3.2f  ",valor);  
-#endif    
-    
-#ifdef _PARAGUAI_
-    sprintf(bufferLinha,"Pago (G$):%5.0f    ",valor);  
-#endif    
-    
-#ifdef _PARAGUAI_60HZ_
-    sprintf(bufferLinha,"Pago (G$):%5.0f    ",valor);  
-#endif        
-   
     HD44780_2_posicionaTexto(0,1);
     HD44780_2_writeString(bufferLinha);      
   }
@@ -789,10 +741,8 @@ unsigned char IU_preparaPipoca(void){
   /*
   A DOSAGEM ESTAVA AQUI
   */
-  MU_setRPM(0);
-  vTaskDelay(160);
-  MU_setRPM(3000);//
-  //MU_setRPM(v1);    
+  //MU_setRPM(v1>>1);    
+  MU_setRPM(v1);    
   vTaskDelay(1000);
   // Se houver erro no dosador, 
   // marca com erro e encerra
@@ -802,9 +752,6 @@ unsigned char IU_preparaPipoca(void){
      MU_setTemperatura(0,0);
      return 1;
   }
-  
-  MU_setRPM(0);
-  vTaskDelay(160);  
   MU_setRPM(v1);      
       
   AL_setterEstado(LEDS_RETIRAR_COPO);   
@@ -871,21 +818,17 @@ unsigned char IU_preparaPipoca(void){
                
   MU_setTemperatura(0,1);
   
-  MU_setRPM(0);
-  vTaskDelay(160);    
-  
 #ifdef PORTUGUES
   HD44780_2_clearText(); 
   HD44780_2_writeString("    OBRIGADO    ");    
+  IU_servePipoca(inicial,final);
 #endif
 #ifdef ESPANHOL
   HD44780_2_clearText(); 
   HD44780_2_writeString("     GRACIAS    ");    
+  IU_servePipoca(inicial,final);  
 #endif
   
-  IU_servePipoca(inicial,final);
-  MU_setRPM(0);
-  while(MU_getRPMmedido());
   vTaskDelay(5000);
   
   // Toca o mensagem
@@ -899,8 +842,6 @@ unsigned char IU_preparaPipoca(void){
   
   if(resfriamento)
     IU_resfriamentoPanela();
-  
-  while(MU_getRPMmedido());  
   
   return 0;  
 }
@@ -1223,7 +1164,10 @@ void IU_escreveDinheiroSaldo(void){
 void IU_servePipoca(unsigned int inicial,unsigned int final){
   
   MU_setRPM(inicial);
-  vTaskDelay(5000);        
+  vTaskDelay(1500);      
+  
+  MU_setRPM(final);
+  vTaskDelay(2500);      
   
   MU_setRPM(0);  
 }
@@ -1284,13 +1228,17 @@ void IU_enviaTelemetria(void){
   flags |= MP_timeOutNoteiro()?0x08:0x00;
   flags |= IU_falhaMotor?0x04:0x00;
   flags |= IU_dosador?0x02:0x00;
+  
+  //IU_estadoConexaoTelemetria = TELET_escreveBlocoOperacao(0,12,15,45,12,15,45,10);
  
   IU_estadoConexaoTelemetria = TELET_escreveBlocoOperacao(0,
                                                           PARAMETROS_leContadorVendas(),
                                                           PARAMETROS_leContadorArrecadacao(),
                                                           PARAMETROS_leTotalizadorPermanente(),
                                                           flags,
-                                                          PARAMETROS_carregaOperacoesCartao()); 
+                                                          PARAMETROS_carregaOperacoesCartao(),
+                                                          PARAMETROS_leContadorVendasParcial(),
+                                                          PARAMETROS_carregaFaturamentoParcialCartao());
 }
 /***********************************************************************************
 *       Descrição       :       Stamp do estado da conexão com 
@@ -1318,7 +1266,6 @@ unsigned char IU_interfaceResfriamento(unsigned short int temperatura){
   unsigned int tempInt;
   unsigned short int ciclosMaximo = 600;
   
-  MU_setRPM(0);
   
   if(AA_calculaTemperatura()<temperatura)
     return 0;
@@ -1378,11 +1325,11 @@ void IU_processoSecagem(void){
   
   HD44780_2_clearText();
   HD44780_2_posicionaTexto(0,0);
-  HD44780_2_writeString(" Desumidificando");
+  HD44780_2_writeString("Desumidificando");
   HD44780_2_posicionaTexto(0,1);
 
-  MU_setTemperatura(50,0); 
-  MU_setRPM(6000); 
+  MU_setTemperatura(PARAMETROS_leTemperaturaDesumidificacao(),0);  
+  MU_setRPM(PARAMETROS_leVelocidadeDesumidificacao()); 
   
   for(unsigned char i=0;i<16;i++){
     HD44780_2_posicionaTexto(i,1);
@@ -1411,7 +1358,7 @@ unsigned char IU_verificacaoInicialResistencia(void){
   unsigned char timeout=250;
   
   
-  MU_setRPM(5000);       
+  MU_setRPM(4500);       
   HD44780_2_clearText();
   HD44780_2_writeString("Verificando");
   HD44780_2_posicionaTexto(0,1);
@@ -1486,11 +1433,6 @@ void IU_cicloCompensador(void){
 ***********************************************************************************/
 void IU_resfriamentoPanela(void){
       
-  MU_setRPM(0);
-  vTaskDelay(160);
-  while(MU_getRPMmedido());
-  vTaskDelay(3000);
-  
   MU_setRPM(6000);    
   
   HD44780_2_clearText();
@@ -1502,14 +1444,13 @@ void IU_resfriamentoPanela(void){
   HD44780_2_posicionaTexto(0,0);  
   HD44780_2_posicionaTexto(0,0);  
   
-  HD44780_2_writeString("  Resfriando");
+  HD44780_2_writeString("Resfriando");
   HD44780_2_posicionaTexto(0,1);
-  
   for(unsigned char i=0;i<16;i++){
     HD44780_2_writeChar('.');
     vTaskDelay(1500);    
   }           
-     
+  
   MU_setRPM(0);      
 }
 /***********************************************************************************

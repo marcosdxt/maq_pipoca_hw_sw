@@ -241,10 +241,6 @@ void PARAMETROS_gravaSenhaFaturamento(unsigned short int senha);
 
 unsigned short int PARAMETROS_leSenhaFaturamento(void);
 
-void PARAMETROS_gravaValorCredito(unsigned short int credito);
-
-unsigned short int PARAMETROS_leValorCredito(void);
-
 /***********************************************************************************
 *       Fim do arquivo
 ***********************************************************************************/

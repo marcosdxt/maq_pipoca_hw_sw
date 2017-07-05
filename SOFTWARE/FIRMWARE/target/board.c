@@ -43,7 +43,7 @@ extern unsigned int IU_ciclosPropaganda;
 unsigned int BOARD_tempoPiscadas=0;
 extern unsigned int CA_tempoAmostras;
 extern unsigned short int TELET_silentTime;
-unsigned int BOARD_lock_timer=0;
+
 /***********************************************************************************
 *       Funções locais
 ***********************************************************************************/
@@ -102,9 +102,6 @@ void BOARD_timerHook(void){
   
   if(TELET_silentTime)
     TELET_silentTime--;
-  
-  if(BOARD_lock_timer)
-    BOARD_lock_timer--;
   
   CA_tickTimer();
 }

@@ -54,8 +54,8 @@
 
 #define RELOAD_TIMEOUT_RRPM     1000    
 
-#define TAM_BUF_VELOCIDADE      4//16
-#define DIV_MEDIA_VEL           2//4      
+#define TAM_BUF_VELOCIDADE      4
+#define DIV_MEDIA_VEL           2       
 
 #define KP_MOTOR                92
 #define KD_MOTOR                250

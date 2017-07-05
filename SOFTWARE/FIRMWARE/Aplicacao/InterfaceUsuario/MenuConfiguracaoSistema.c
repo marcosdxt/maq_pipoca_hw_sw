@@ -21,10 +21,7 @@
 |       Data criação       :  11/03/2015
 |
 |       Revisões           :  1.0.0.0
-|                             1.1 - (23/06/2016) menus reagrupados, por Marcos
-|                             1.2 - (22/05/2017) Alterado para não pedir a senha
-|                                                com contrasenha para entrar no
-|                                                modo grátis
+|                             1.1 - (23/06/216) menus reagrupados, por Marcos
 |
 |
 | __________________________________________________________________________________
@@ -48,10 +45,10 @@
 #define TAM_MENU_OPERACAO                               6
 #define TAMANHO_OPCOES_DESUMI                           4
 #define TAM_LISTA_ARRECADACAO                           8
-#define TAM_MENU_PERIFERICOS                            5
+#define TAM_MENU_PERIFERICOS                            4
 #define TAM_LISTA_HARDWARE                              19
 #define TAM_LISTA_WIFI                                  7
-#define TAM_LISTA_AVANCADO                              12
+#define TAM_LISTA_AVANCADO                              11
 #define TAM_LISTA_CONTADORES                            5
 /************************************************************************************
 *       Constantes locais
@@ -135,7 +132,6 @@ const char *MCS_ocpoesPerifericos[TAM_MENU_PERIFERICOS]={
   "(1)Mod. impres. ",  
   "(2)Mod. noteiro ",
   "(3)Mod. moedeiro",
-  "(4)Cred. UCA    ",
   "  Voltar        "
 };
 
@@ -144,15 +140,7 @@ const char *MCS_testeHardware[TAM_LISTA_HARDWARE]={
   "(2) Sen. embal. ",
   "(3) Sen. dose   ",
   "(4) Sen. rotacao",
-  
-#ifdef FQ_REDE_60_HZ
   "(5) Sinal 60Hz  ",
-#endif
-
-#ifdef FQ_REDE_50_HZ  
-  "(5) Sinal 50Hz  ",
-#endif
-
   "(6) Motor emb.  ",
   "(7) Moedeiro    ",
   "(8) Noteiro     ",
@@ -190,7 +178,6 @@ const char *MCS_mensagemAvancado[TAM_LISTA_AVANCADO]={
   "(8) Vel. limpeza",
   "(9) Zeramento   ",
   "(10)Senha       ", 
-  "(11)Senha Mestre",
   "    Voltar      "
 };
 
@@ -249,19 +236,6 @@ const char *MCS_opcoesOperacao[TAM_MENU_OPERACAO]={
   " Volver         "
 };
 
-#ifdef _BRASIL_
-const char *MCS_opcoesConfiguraCedulas[]={
-  " [ ] R$ 2,00    ",
-  " [ ] R$ 5,00    ",
-  " [ ] R$ 10,00   ",
-  " [ ] R$ 20,00   ",
-  " [ ] R$ 50,00   ",
-  " [ ] R$ 100,00  ",
-  " Volver         ",
-};
-#endif
-
-#ifdef _URUGUAI_
 const char *MCS_opcoesConfiguraCedulas[]={
   " [ ] $U 20,00   ",
   " [ ] $U 50,00   ",
@@ -271,43 +245,6 @@ const char *MCS_opcoesConfiguraCedulas[]={
   " [ ] $U 1000,00 ",
   " Volver         ",
 };
-#endif
-
-#ifdef _PARAGUAI_
-const char *MCS_opcoesConfiguraCedulas[]={
-  " [ ] G$ 2000,00 ",
-  " [ ] G$ 5000,00 ",
-  " [ ] G$ 10000,00",
-  " [ ] G$ 20000,00",
-  " [ ] G$ 50000,00",
-  " [ ] G$ 100.000 ",
-  " Volver         ",
-};
-#endif 
-
-#ifdef _PARAGUAI_60HZ_
-const char *MCS_opcoesConfiguraCedulas[]={
-  " [ ] G$ 2000,00 ",
-  " [ ] G$ 5000,00 ",
-  " [ ] G$ 10000,00",
-  " [ ] G$ 20000,00",
-  " [ ] G$ 50000,00",
-  " [ ] G$ 100.000 ",
-  " Volver         ",
-};
-#endif 
-
-#ifdef _URUGUAI_60HZ_
-const char *MCS_opcoesConfiguraCedulas[]={
-  " [ ] G$ 2000,00 ",
-  " [ ] G$ 5000,00 ",
-  " [ ] G$ 10000,00",
-  " [ ] G$ 20000,00",
-  " [ ] G$ 50000,00",
-  " [ ] G$ 100.000 ",
-  " Volver         ",
-};
-#endif 
 
 const char *MCS_opcoesDesumidificacao[TAMANHO_OPCOES_DESUMI]={
   "(1) Permitir    ",
@@ -331,7 +268,6 @@ const char *MCS_ocpoesPerifericos[TAM_MENU_PERIFERICOS]={
   "(1)Mod. impres. ",  
   "(2)Mod. noteiro ",
   "(3)Mod. moedeiro",
-  "(4)Cred. UCA'   ",
   "  Voltar        "
 };
 
@@ -509,9 +445,6 @@ void MCS_menuConfigExibeCartao(void);
 void MCS_testeSaidaBloqueioP70(void);
 void MCS_cadastraSenhas(void);
 unsigned short int MCS_digitaSenha(char *titulo);
-void MCS_tela_reinicia_senha_root(void);
-void MCS_tela_reset_master(void);
-void MCS_configura_valor_credito_uca1(void);
 
 /************************************************************************************
 *       Descrição       
@@ -583,7 +516,6 @@ void(*const MCS_funcPerifericos[])(void)={
   MCS_menuConfiguraImpressora,
   MCS_selecionaTipoNoteiro,
   MCS_telaEscolheMoedeiro,
-  MCS_configura_valor_credito_uca1,
   NULL
 };
 
@@ -630,7 +562,6 @@ void(*const MCS_funcAvancado[])(void)={
   MCS_telaCadastroVelocidadeLimpeza,
   MCS_zeraContadores,
   MCS_cadastraSenhas,
-  MCS_tela_reset_master,
   NULL
 };
 
@@ -1016,91 +947,17 @@ void MCS_configuraValorPipoca(void){
      case TECLA_ESC: 
           HD44780_clearText();
           return;
-     case TECLA_DEC:        
-#ifdef _BRASIL_
-          if(valorPipoca>1)           
+     case TECLA_DEC:
+          if(valorPipoca>1)
             valorPipoca--;
-          else
-            valorPipoca = 0;
-#endif              
-          
-#ifdef _URUGUAI_
-          if(valorPipoca>10)              
-            valorPipoca-=10;
-          else
-            valorPipoca = 0;
-#endif  
-          
-#ifdef _URUGUAI_60HZ_
-          if(valorPipoca>10)              
-            valorPipoca-=10;
-          else
-            valorPipoca = 0;
-#endif           
-          
-#ifdef _PARAGUAI_
-          if(valorPipoca>100)              
-            valorPipoca-=100;
-          else
-            valorPipoca = 0;
-#endif   
-          
-#ifdef _PARAGUAI_60HZ_
-          if(valorPipoca>100)              
-            valorPipoca-=100;
-          else
-            valorPipoca = 0;
-#endif                
-                              
           break;
      case TECLA_INC:
-#ifdef _BRASIL_     
           if(valorPipoca<999)
             valorPipoca++;
-#endif
-          
-#ifdef _URUGUAI_
-          if(valorPipoca<65000)          
-            valorPipoca+=10;
-#endif
-          
-#ifdef _URUGUAI_60HZ_
-          if(valorPipoca<65000)          
-            valorPipoca+=10;
-#endif          
-
-#ifdef _PARAGUAI_
-          if(valorPipoca<65000)          
-            valorPipoca+=100;
-#endif       
-          
-#ifdef _PARAGUAI_60HZ_
-          if(valorPipoca<65000)          
-            valorPipoca+=100;
-#endif                  
           break;
     }    
     
-#ifdef _BRASIL_
     sprintf(bufferLinha,"R$ %03d.00 ",valorPipoca);
-#endif
-    
-#ifdef _URUGUAI_
-    sprintf(bufferLinha,"U$ %03d.00 ",valorPipoca);
-#endif
-
-#ifdef _URUGUAI_60HZ_
-    sprintf(bufferLinha,"U$ %03d.00 ",valorPipoca);
-#endif    
-    
-#ifdef _PARAGUAI_
-    sprintf(bufferLinha,"G$ %06d ",valorPipoca);
-#endif    
-    
-#ifdef _PARAGUAI_60HZ_
-    sprintf(bufferLinha,"G$ %06d ",valorPipoca);
-#endif        
-    
     HD44780_posicionaTexto(3,1);
     HD44780_writeString(bufferLinha);     
     vTaskDelay(50);
@@ -1394,7 +1251,6 @@ void MCS_desenhaOpcoesTipoCedulas(unsigned char indice,unsigned char flags){
 *       Retorno         :       nenhum
 ************************************************************************************/
 void MCS_telaPipocaGratis(void){
-  /*
   eTECLA tecla;
   char bufferLinha[17];
   char bufferTmp[17];
@@ -1481,35 +1337,6 @@ void MCS_telaPipocaGratis(void){
     
     vTaskDelay(50);
   }      
-  */
-  eTECLA tecla;
-  
-  
-  if(!MCS_telaSenha(SENHA_AMOSTRA_GRATIS))
-    return;  
-  
-  HD44780_clearText();
-  HD44780_writeString("  Pipoca Gratis ");
-  HD44780_posicionaTexto(0,1);
-  HD44780_writeString(" [Enter] 8 Hora ");
-  
-  for(;TECLADO_getContadorInatividade();){
-    
-    tecla = TECLADO_getch();
-    switch(tecla){
-      case TECLA_ENTER:
-           CA_setTempoAmostras(8);
-           HD44780_clearText();
-           HD44780_writeString(" Liberado p/ 8 h");
-           HD44780_posicionaTexto(0,1);
-           HD44780_writeString(" ou ate o RESET ");
-           vTaskDelay(5000);
-           break;
-      case TECLA_ESC:
-           return;
-    }        
-    
-  }  
 }
 /************************************************************************************
 *       Descrição       :       Ponto de entrada do menu de visualização
@@ -1714,11 +1541,6 @@ void MCS_telaConfiguraIntervaloPropaganda(void){
 void MCS_telaConfiguraFitaLed(void){
   eTECLA tecla;
   unsigned short int flag = PARAMETROS_leFlagPiscadaPropaganda();
-  
-  if(flag)
-    flag = 0xFFFF;
-  else
-    flag = 0;
   
   HD44780_clearText();
   HD44780_writeString("Fita led standby");
@@ -1938,7 +1760,7 @@ void MCS_volumeSom(void){
             volume--;
           break;
      case TECLA_INC:
-          if(volume<30)
+          if(volume<100)
             volume++;
           break;
     }
@@ -2273,7 +2095,7 @@ void MCS_testeRotacaoMotor(void){
   char bufferLinha[17];
   unsigned char flag=0;
   unsigned char tamanho;
-  unsigned short int rotacao=5000;
+  unsigned short int rotacao=4000;
   unsigned short int ultimaRotacao=1800;
   
   HD44780_clearText();
@@ -2295,12 +2117,12 @@ void MCS_testeRotacaoMotor(void){
                       return;
       case TECLA_INC:
                       BOARD_tempoPiscadas = 3000;
-                      if(rotacao<13000)
+                      if(rotacao<12000)
                         rotacao+=100;
                       break;
       case TECLA_DEC:
                       BOARD_tempoPiscadas = 3000;
-                      if(rotacao>5000)
+                      if(rotacao>600)
                         rotacao-=100;
                       break;
     }
@@ -2545,7 +2367,7 @@ void MCS_telaVolumeVoz(void){
             volume--;
           break;
      case TECLA_INC:
-          if(volume<30)
+          if(volume<100)
             volume++;
           break;
     }
@@ -2716,7 +2538,7 @@ void MCS_telaTesteTelemetria(void){
       return;
     
     HD44780_posicionaTexto(3,1);
-    if(TELET_escreveBlocoOperacao(1,0,0,0,0,0))
+    if(TELET_escreveBlocoOperacao(1,0,0,0,0,0,0,0))
       HD44780_writeString("[ONLINE ]");
     else
       HD44780_writeString("[OFFLINE]");
@@ -2825,21 +2647,20 @@ void MCS_configuracaoFabrica(void){
     return;
   }
   
-  PARAMETROS_escreveParametro(VALOR_PIPOCA,5);
   PARAMETROS_escreveParametro(TEMPO_PREPARO,80);
   PARAMETROS_escreveParametro(TEMPERATURA_PREPARO,100);
-  PARAMETROS_escreveParametro(VELOCIDADE_PREPARO,5500);
-  PARAMETROS_salvaTemperaturaPreProcesso(80);
+  PARAMETROS_escreveParametro(VELOCIDADE_PREPARO,5100);
+  PARAMETROS_salvaTemperaturaPreProcesso(65);
   PARAMETROS_escreveParametro(ATRASO_PACOTE,40);
-  PARAMETROS_salvaRotacaoInicialExpulsao (12000);
-  PARAMETROS_salvaVelocidadeFinalExpulsao(12000);
+  PARAMETROS_salvaRotacaoInicialExpulsao (12500);
+  PARAMETROS_salvaVelocidadeFinalExpulsao(13000);
   PARAMETROS_gravaFatorTrabalho(3);
-  PARAMETROS_gravaVelocidadeLimpeza(14000);
-  PARAMETROS_gravaVelocidadeAquecimento(5500);
-  PARAMETROS_gravaVolumeSom(15);
+  PARAMETROS_gravaVelocidadeLimpeza(15000);
+  PARAMETROS_gravaVelocidadeAquecimento(5450);
+  PARAMETROS_gravaVolumeSom(5);
   PARAMETROS_gravaVolumeVoz(20);
   HD44780_clearText();
-  PARAMETROS_gravaTemperaturaInicio(80);
+  PARAMETROS_gravaTemperaturaInicio(65);
   PARAMETROS_gravaTipoCedulas(1,1,0,0,0,0);
   PARAMETROS_gravaIntervaloPropaganda(10);
   PARAMETROS_gravaFlagPiscadaPropaganda(1);
@@ -3007,8 +2828,6 @@ void MCS_zeraContadores(void){
                HD44780_writeString("Reset");
                
                // Totalizador de unidades de pipoca vendidas
-               PARAMETROS_salvaContadorPipocaTeste(0);
-               
                PARAMETROS_salvaContadorVendas(0);
                PARAMETROS_salvaContadorArrecadacao(0);
                PARAMETROS_gravaTotalizadorPermanente(0);      
@@ -5054,7 +4873,7 @@ void MCS_testeAjusteVolumeMusica(void){
            HD44780_clearText();           
            return;
       case TECLA_INC:
-           if(volume<30)
+           if(volume<100)
              volume++;
            PLAYER_interrompeMusica();           
            break;
@@ -5103,7 +4922,7 @@ void MCS_interfaceConfiguraVolumeTesteVoz(void){
            HD44780_clearText();           
            return;
       case TECLA_INC:
-           if(volume<30)
+           if(volume<100)
              volume++;
            PLAYER_interrompeMusica();           
            break;
@@ -5341,168 +5160,6 @@ unsigned short int MCS_digitaSenha(char *titulo){
   }      
   
   return 65535;
-}
-/************************************************************************************
-*       Descrição       :       Tela para reiniar a senha de administrador
-*                               com zeros
-*       Parametros      :       nenhum
-*       Retorno         :       nenhum
-************************************************************************************/
-void MCS_tela_reinicia_senha_root(void){
-
-  HD44780_clearText();
-  HD44780_writeString("Reiniciando a ");
-  HD44780_posicionaTexto(0,1);
-  HD44780_writeString("senha root");
-                   
-  PARAMETROS_gravaSenhaRoot(0);
-  
-  vTaskDelay(5000);
-  
-  HD44780_clearText();
-  HD44780_writeString("Reiniciando  ");
-  HD44780_posicionaTexto(0,1);
-  HD44780_writeString("com sucesso");  
-  
-  vTaskDelay(5000);  
-}
-/************************************************************************************
-*       Descrição       :       Tela para realizar o reset da senha mestre
-*       Parametros      :       nenhum
-*       Retorno         :       nenhum
-************************************************************************************/
-void MCS_tela_reset_master(void){
-  eTECLA tecla;
-  char bufferLinha[17];
-  char bufferTmp[17];
-  unsigned char indice=0;
-  unsigned char toggle=0;
-  unsigned char ciclos=1;
-  unsigned char horas=0;
-  unsigned short int senha;
-  
-  srand(MCS_contadorSemente);
-  unsigned short int contraSenha = rand()%10000;
-    
-  HD44780_clearText();
-  sprintf(bufferLinha,"Gerada:%04d",contraSenha);
-  HD44780_writeString(bufferLinha);
-  
-  HD44780_posicionaTexto(0,1);
-  HD44780_writeString("Contra:");
-  
-  sprintf(bufferLinha,"000000");
-  
-  for(;TECLADO_getContadorInatividade();){
-    
-    tecla = TECLADO_getch();
-    switch(tecla){
-      case TECLA_ENTER:
-           if(indice>4){
-             
-             unsigned int recebido = ((bufferLinha[0]-'0')*100000) + 
-                                     ((bufferLinha[1]-'0')*10000) + 
-                                     ((bufferLinha[2]-'0')*1000) + 
-                                     ((bufferLinha[3]-'0')*100) + 
-                                     ((bufferLinha[4]-'0')*10) + 
-                                     ((bufferLinha[5]-'0'));
-             
-             recebido &= 0x3FFFF;             
-             horas = recebido>>14;
-             
-             senha = ((recebido&0x3FFF)^3004);
-               HD44780_clearText();             
-             if(senha==contraSenha){               
-               HD44780_writeString("Senha");
-               HD44780_posicionaTexto(0,1);
-               HD44780_writeString("Resetada");
-               
-               PARAMETROS_gravaSenhaRoot(0);
-               
-               vTaskDelay(5000);                                             
-             }
-             else{
-               HD44780_writeString("Senha");
-               HD44780_posicionaTexto(0,1);
-               HD44780_writeString("Invalida");               
-             }
-             vTaskDelay(3000);
-             return;
-           }
-           else{
-             indice++;
-             break;
-           }
-      case TECLA_ESC:
-           return;
-      case TECLA_INC:
-           bufferLinha[indice]++;
-           if(bufferLinha[indice]>'9')
-             bufferLinha[indice] = '0';
-           break;
-      case TECLA_DEC:    
-           bufferLinha[indice]--;
-           if(bufferLinha[indice]<'0')
-             bufferLinha[indice] = '9';
-           break;
-    }
-    
-    if(!--ciclos){
-      ciclos = 4;
-      toggle = ~toggle;
-      memcpy(bufferTmp,bufferLinha,17);
-      bufferTmp[7] = 0x00;
-      if(toggle)
-        bufferTmp[indice] = '_';
-      
-      HD44780_posicionaTexto(7,1);
-      HD44780_writeString(bufferTmp);
-    }       
-    
-    vTaskDelay(50);
-  }   
-}
-/************************************************************************************
-*       Descrição       :       Menu para configuração do valor do crédito
-*                               do moedeiro UCA-1
-*       Parametros      :       nenhum
-*       Retorno         :       nenhum
-************************************************************************************/
-void MCS_configura_valor_credito_uca1(void){
-  unsigned short int valor_credito;
-  eTECLA tecla;
-  char buffer_linha[17];
-  unsigned char tamanho;
-
-  HD44780_clearText();
-  HD44780_writeString("  Valor Credito");
-  valor_credito = PARAMETROS_leValorCredito();
-  
-  for(;TECLADO_getContadorInatividade();){
-    
-    tecla = TECLADO_getch();
-    switch(tecla){
-      case TECLA_ENTER:
-           PARAMETROS_gravaValorCredito(valor_credito);
-      case TECLA_ESC:
-           return;
-      case TECLA_INC:
-           if(valor_credito<10000)
-             valor_credito+=25;
-           break;
-      case TECLA_DEC:
-           if(valor_credito>0)
-             valor_credito-=25;
-           break;
-    }
-    
-    sprintf(buffer_linha,"R$ %02d,%02d",valor_credito/100,valor_credito%100);
-    tamanho = strlen(buffer_linha);
-    HD44780_posicionaTexto((16-tamanho)>>1,1);
-    HD44780_writeString(buffer_linha);    
-    
-    vTaskDelay(50);
-  }    
 }
 /************************************************************************************
 *       Fim do arquivo

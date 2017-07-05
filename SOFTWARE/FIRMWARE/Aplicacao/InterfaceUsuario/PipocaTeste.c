@@ -66,7 +66,7 @@ void PIPOCATESTE_prepara(void){
   IU_preparaPipoca();
   unsigned int valorPipoca = PARAMETROS_leParametro(VALOR_PIPOCA);
           
-  //IU_limpezaPipoqueira(valorPipoca);
+  IU_limpezaPipoqueira(valorPipoca);
 }
 /***********************************************************************************
 *       Fim do arquivo

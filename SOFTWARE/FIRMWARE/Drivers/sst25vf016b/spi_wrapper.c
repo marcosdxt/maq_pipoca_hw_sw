@@ -84,7 +84,7 @@ unsigned char dummy;
 void SPIWRAPPER_init(unsigned long int spiClk){
   unsigned int divisor;
     
-  divisor = 6;//4;//PCLK/spiClk;
+  divisor = 4;//PCLK/spiClk;
   divisor &=~(0x01); // Aham!!!! Me diga o que isso faz!!!!! Se souber, está contratado!!!!
     
   INIT_CHIP_SELECTS;
