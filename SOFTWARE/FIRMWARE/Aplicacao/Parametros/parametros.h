@@ -241,6 +241,8 @@ void PARAMETROS_gravaSenhaFaturamento(unsigned short int senha);
 
 unsigned short int PARAMETROS_leSenhaFaturamento(void);
 
+char* PARAMETROS_leVersaoCPU(void);
+
 /***********************************************************************************
 *       Fim do arquivo
 ***********************************************************************************/

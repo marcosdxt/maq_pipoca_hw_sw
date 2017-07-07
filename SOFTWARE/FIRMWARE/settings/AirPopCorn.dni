@@ -31,7 +31,7 @@ TypeViolation=1
 UnspecRange=1
 ActionState=1
 [DebugChecksum]
-Checksum=1625148992
+Checksum=-1933183879
 [Exceptions]
 StopOnUncaught=_ 0
 StopOnThrow=_ 0
@@ -114,8 +114,8 @@ Bp2=_ 0 "EMUL_CODE" "{$PROJ_DIR$\main.c}.169.3" 0 0 1 "" 0 "" 0
 Bp3=_ 0 "EMUL_CODE" "{$PROJ_DIR$\Aplicacao\InterfaceUsuario\MonitorPagamentos.c}.153.46" 0 0 1 "" 0 "" 0
 Bp4=_ 0 "EMUL_CODE" "{$PROJ_DIR$\Drivers\CCTALK\cctalk.c}.329.3" 0 0 1 "" 0 "" 0
 Bp5=_ 0 "EMUL_DATA" "STR_VERSAO_BOARD" 0 0 0 0 4294967295
-Bp6=_ 0 "EMUL_TRACE_START" "STR_VERSAO_BOARD" 0 0 0 0 4294967295 1779260995 0 0
-Bp7=_ 1 "EMUL_CODE" "{$PROJ_DIR$\Aplicacao\InterfaceUsuario\InterfaceUsuario.c}.449.8" 0 0 1 "" 0 "" 0
+Bp6=_ 0 "EMUL_TRACE_START" "STR_VERSAO_BOARD" 0 0 0 0 4294967295 1780702787 0 0
+Bp7=_ 1 "EMUL_CODE" "{$PROJ_DIR$\Aplicacao\TELET\TELET.C}.198.3" 0 0 1 "" 0 "" 0
 Count=8
 [Aliases]
 A0=_ "C:\Users\Mais\Dropbox\SoftwaresMaisPipoca\FirmwareAirPopcorn-Versão Sem preAquecimento\Kernel\list.c" ""

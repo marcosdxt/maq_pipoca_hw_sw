@@ -20,8 +20,10 @@
 |       Data criação       :  21/07/2015
 |
 |       Revisões           :  1.0.0.0
-|                             1.0.0.1 adição do envio do contador parcial no
-|                             pacote TELNET
+|                             1.0.0.1  
+|                               (06/07/2017) Corrigido envio dos flags de falha
+|                                            motor/dosador e CPU OFFLINE e do
+|                                            contador parcial e do cartão parcial.
 |                             
 |
 |
@@ -129,13 +131,17 @@ unsigned char TELET_escreveBlocoOperacao(unsigned int numeroSerie,
                                          unsigned char flags,
                                          unsigned int arrecadaoCartao,
                                          unsigned int contadorVendasParcial,
-                                         unsigned int arrecadacaoCartaoParcial){/*,
-                                         unsigned int valorPipoca,
-                                         unsigned int comissaoPonto){    */                                       
- TELET_bufferRX[1] = 255;  
+                                         unsigned int arrecadacaoCartaoParcial,
+                                         unsigned int comissaoPonto,
+                                         char* versaoCPU){/*,
+                                         unsigned int valorPipoca){    */                                       
+  
+  unsigned char tamanho = strlen(versaoCPU);                                         
+  
+  TELET_bufferRX[1] = 255;  
                                            
   TELET_bufferTX[0] = STX;
-  TELET_bufferTX[1] = 33;
+  TELET_bufferTX[1] = 37+tamanho;
   TELET_bufferTX[2] = ESCREVE_BLOCO_OPERACAO;
   
   TELET_bufferTX[3] = numeroSerie>>24;
@@ -173,10 +179,20 @@ unsigned char TELET_escreveBlocoOperacao(unsigned int numeroSerie,
   TELET_bufferTX[29] = arrecadacaoCartaoParcial>>8;
   TELET_bufferTX[30] = arrecadacaoCartaoParcial;
   
-  TELET_bufferTX[31]= flags;
-  TELET_bufferTX[32]= TELET_checksum(TELET_bufferTX,32);
+  TELET_bufferTX[31] = comissaoPonto>>24;
+  TELET_bufferTX[32] = comissaoPonto>>16;
+  TELET_bufferTX[33] = comissaoPonto>>8;
+  TELET_bufferTX[34] = comissaoPonto;
   
-  TELET_enviaPacote(33);
+  for(unsigned char i=0;i<tamanho;i++)
+    TELET_bufferTX[35+i] = versaoCPU[i] ;
+  
+  
+  TELET_bufferTX[35+tamanho]= flags;
+  TELET_bufferTX[36+tamanho]= TELET_checksum(TELET_bufferTX,36+tamanho);
+  
+  
+  TELET_enviaPacote(37+tamanho);
   
   TELET_silentTime = 200;
   while(TELET_silentTime) 

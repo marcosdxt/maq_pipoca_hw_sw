@@ -39,10 +39,12 @@
   #define PORTUGUES
   #define FQ_REDE_60_HZ
   #define STR_VERSAO_BOARD      "     1.9.60-BR  "
+  #define STR_VERSAO_TELEMETRIA   "1_9_60_BR"
 #else
   #define FQ_REDE_50_HZ
   #define ESPANHOL
   #define STR_VERSAO_BOARD      "     1.9.60-UY  "
+  #define STR_VERSAO_TELEMETRIA   "1_9_60_UY"
 #endif
 //----------------------------------------------------------------------------------
 //      Definições para os demais países da América Latina

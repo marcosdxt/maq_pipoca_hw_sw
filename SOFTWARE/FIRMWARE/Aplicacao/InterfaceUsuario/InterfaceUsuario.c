@@ -47,6 +47,7 @@
 #define CICLO_PRE_AQUECIMENTO                                   10000
 #define RELOAD_INATIVIDADE_UMIDADE                              30*60*1000
 
+
 #ifdef PORTUGUES
   #define STRING_EMPRESA                                          "  GRUPO ALTECH  "
   #define STRING_VERSAO                                           STR_VERSAO_BOARD//"     1.9.28-BR  "
@@ -1229,16 +1230,18 @@ void IU_enviaTelemetria(void){
   flags |= IU_falhaMotor?0x04:0x00;
   flags |= IU_dosador?0x02:0x00;
   
-  //IU_estadoConexaoTelemetria = TELET_escreveBlocoOperacao(0,12,15,45,12,15,45,10);
- 
-  IU_estadoConexaoTelemetria = TELET_escreveBlocoOperacao(0,
+  
+   
+  IU_estadoConexaoTelemetria = TELET_escreveBlocoOperacao(PARAMETROS_carregaNumeroSerie(),
                                                           PARAMETROS_leContadorVendas(),
                                                           PARAMETROS_leContadorArrecadacao(),
                                                           PARAMETROS_leTotalizadorPermanente(),
                                                           flags,
                                                           PARAMETROS_carregaOperacoesCartao(),
                                                           PARAMETROS_leContadorVendasParcial(),
-                                                          PARAMETROS_carregaFaturamentoParcialCartao());
+                                                          PARAMETROS_carregaFaturamentoParcialCartao(),
+                                                          PARAMETROS_leComissaoPonto(),
+                                                          PARAMETROS_leVersaoCPU());
 }
 /***********************************************************************************
 *       Descrição       :       Stamp do estado da conexão com 

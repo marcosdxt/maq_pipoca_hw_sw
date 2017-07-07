@@ -36,7 +36,7 @@
 /***********************************************************************************
 *       Definições
 ***********************************************************************************/
-
+#define VERSAO_CPU                                  1_9_28
 
 /***********************************************************************************
 *       Constantes
@@ -1748,6 +1748,16 @@ unsigned short int PARAMETROS_leSenhaRoot(void){
   }
    
   return 0;
+}
+/***********************************************************************************
+*       Descrição       :       Lê a senha de acesso ao modo root
+*       Parametros      :       nenhum
+*       Retorno         :       (unsigned short int) senha de root
+***********************************************************************************/
+char* PARAMETROS_leVersaoCPU(void){
+  static const char versao[]={STR_VERSAO_TELEMETRIA};
+  
+  return (char*)versao;
 }
 /***********************************************************************************
 *       Fim do arquivo

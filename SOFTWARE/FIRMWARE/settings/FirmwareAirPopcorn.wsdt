@@ -20,7 +20,7 @@
           
           
           
-        <Position>3</Position><ScreenPosX>0</ScreenPosX><ScreenPosY>0</ScreenPosY><Windows/></PreferedWindows>
+        <Position>3</Position><ScreenPosX>0</ScreenPosX><ScreenPosY>0</ScreenPosY><Windows><Window><Factory>Debug-Log</Factory></Window></Windows></PreferedWindows>
         
         
         
@@ -35,7 +35,7 @@
     <Windows>
       
       
-    <Wnd2>
+    <Wnd0>
         <Tabs>
           <Tab>
             <Identity>TabID-9904-20383</Identity>
@@ -43,24 +43,24 @@
             <Factory>Workspace</Factory>
             <Session>
               
-            <NodeDict><ExpandedNode>AirPopCorn</ExpandedNode><ExpandedNode>AirPopCorn/APLICACAO</ExpandedNode><ExpandedNode>AirPopCorn/APLICACAO/InterfaceUsuario</ExpandedNode><ExpandedNode>AirPopCorn/APLICACAO/RELATORIOVENDAS</ExpandedNode><ExpandedNode>AirPopCorn/APLICACAO/TELET</ExpandedNode><ExpandedNode>AirPopCorn/DRIVERS</ExpandedNode><ExpandedNode>AirPopCorn/DRIVERS/CCTALK</ExpandedNode><ExpandedNode>AirPopCorn/Output</ExpandedNode><ExpandedNode>AirPopCorn/SENHAS</ExpandedNode><ExpandedNode>AirPopCorn/TARGET</ExpandedNode><ExpandedNode>AirPopCorn/board</ExpandedNode></NodeDict></Session>
+            <NodeDict><ExpandedNode>AirPopCorn</ExpandedNode><ExpandedNode>AirPopCorn/APLICACAO</ExpandedNode><ExpandedNode>AirPopCorn/APLICACAO/InterfaceUsuario</ExpandedNode><ExpandedNode>AirPopCorn/APLICACAO/PARAMETROS</ExpandedNode><ExpandedNode>AirPopCorn/APLICACAO/RELATORIOVENDAS</ExpandedNode><ExpandedNode>AirPopCorn/APLICACAO/TELET</ExpandedNode><ExpandedNode>AirPopCorn/DRIVERS</ExpandedNode><ExpandedNode>AirPopCorn/DRIVERS/CCTALK</ExpandedNode><ExpandedNode>AirPopCorn/Output</ExpandedNode><ExpandedNode>AirPopCorn/SENHAS</ExpandedNode><ExpandedNode>AirPopCorn/TARGET</ExpandedNode><ExpandedNode>AirPopCorn/board</ExpandedNode></NodeDict></Session>
           </Tab>
         </Tabs>
         
-      <SelectedTab>0</SelectedTab></Wnd2><Wnd3><Tabs><Tab><Identity>TabID-32508-2616</Identity><TabName>Build</TabName><Factory>Build</Factory><Session/></Tab><Tab><Identity>TabID-31462-2636</Identity><TabName>Debug Log</TabName><Factory>Debug-Log</Factory><Session/></Tab></Tabs><SelectedTab>0</SelectedTab></Wnd3></Windows>
+      <SelectedTab>0</SelectedTab></Wnd0><Wnd1><Tabs><Tab><Identity>TabID-18783-32697</Identity><TabName>Build</TabName><Factory>Build</Factory><Session/></Tab><Tab><Identity>TabID-11130-1301</Identity><TabName>Debug Log</TabName><Factory>Debug-Log</Factory><Session/></Tab></Tabs><SelectedTab>0</SelectedTab></Wnd1></Windows>
     <Editor>
       
       
       
       
-    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Aplicacao\TELET\TELET.C</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>73</YPos2><SelStart2>3536</SelStart2><SelEnd2>3536</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Aplicacao\InterfaceUsuario\InterfaceUsuario.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>407</YPos2><SelStart2>15463</SelStart2><SelEnd2>15463</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\aplicacao\TELET\TELET.H</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>26</YPos2><SelStart2>1968</SelStart2><SelEnd2>1992</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\main.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>44</YPos2><SelStart2>2284</SelStart2><SelEnd2>2284</SelEnd2></Tab><ActiveTab>3</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Aplicacao\Parametros\Parametros.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>1633</YPos2><SelStart2>65832</SelStart2><SelEnd2>65832</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Kernel\tasks.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>1093</YPos2><SelStart2>36254</SelStart2><SelEnd2>36254</SelEnd2></Tab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
+    <Pane><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Aplicacao\TELET\TELET.C</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>187</YPos2><SelStart2>8217</SelStart2><SelEnd2>8217</SelEnd2></Tab><ActiveTab>0</ActiveTab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\aplicacao\telet\telet.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>34</YPos2><SelStart2>2121</SelStart2><SelEnd2>2121</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\main.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>44</YPos2><SelStart2>2372</SelStart2><SelEnd2>2372</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\aplicacao\parametros\parametros.h</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>223</YPos2><SelStart2>9301</SelStart2><SelEnd2>9301</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Aplicacao\InterfaceUsuario\MenuConfiguracaoSistema.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>4377</YPos2><SelStart2>140465</SelStart2><SelEnd2>140465</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Aplicacao\InterfaceUsuario\InterfaceUsuario.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>105</XPos2><YPos2>1218</YPos2><SelStart2>44511</SelStart2><SelEnd2>44511</SelEnd2></Tab><Tab><Factory>TextEditor</Factory><Filename>$WS_DIR$\Aplicacao\Parametros\Parametros.c</Filename><XPos>0</XPos><YPos>0</YPos><SelStart>0</SelStart><SelEnd>0</SelEnd><XPos2>0</XPos2><YPos2>1540</YPos2><SelStart2>61814</SelStart2><SelEnd2>61814</SelEnd2></Tab></Pane><ActivePane>0</ActivePane><Sizes><Pane><X>1000000</X><Y>1000000</Y></Pane></Sizes><SplitMode>1</SplitMode></Editor>
     <Positions>
       
       
       
       
       
-    <Top><Row0><Sizes><Toolbar-049941f8><key>iaridepm.enu1</key></Toolbar-049941f8></Sizes></Row0><Row1><Sizes/></Row1></Top><Left><Row0><Sizes><Wnd2><Rect><Top>-2</Top><Left>-2</Left><Bottom>442</Bottom><Right>274</Right><x>-2</x><y>-2</y><xscreen>-1600442</xscreen><yscreen>-680718</yscreen><sizeHorzCX>-1171626646</sizeHorzCX><sizeHorzCY>-993748904</sizeHorzCY><sizeVertCX>202050</sizeVertCX><sizeVertCY>648175</sizeVertCY></Rect></Wnd2></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes><Wnd3><Rect><Top>-2</Top><Left>-2</Left><Bottom>198</Bottom><Right>1368</Right><x>-2</x><y>-2</y><xscreen>1370</xscreen><yscreen>200</yscreen><sizeHorzCX>1002928</sizeHorzCX><sizeHorzCY>291971</sizeHorzCY><sizeVertCX>146413</sizeVertCX><sizeVertCY>291971</sizeVertCY></Rect></Wnd3></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
+    <Top><Row0><Sizes><Toolbar-05204fd8><key>iaridepm.enu1</key></Toolbar-05204fd8></Sizes></Row0><Row1><Sizes/></Row1></Top><Left><Row0><Sizes><Wnd0><Rect><Top>-2</Top><Left>-2</Left><Bottom>442</Bottom><Right>274</Right><x>-2</x><y>-2</y><xscreen>-1600430</xscreen><yscreen>-680706</yscreen><sizeHorzCX>-1171617861</sizeHorzCX><sizeHorzCY>-993731386</sizeHorzCY><sizeVertCX>202050</sizeVertCX><sizeVertCY>648175</sizeVertCY></Rect></Wnd0></Sizes></Row0></Left><Right><Row0><Sizes/></Row0></Right><Bottom><Row0><Sizes><Wnd1><Rect><Top>-2</Top><Left>-2</Left><Bottom>198</Bottom><Right>1368</Right><x>-2</x><y>-2</y><xscreen>1370</xscreen><yscreen>200</yscreen><sizeHorzCX>1002928</sizeHorzCX><sizeHorzCY>291971</sizeHorzCY><sizeVertCX>146413</sizeVertCX><sizeVertCY>291971</sizeVertCY></Rect></Wnd1></Sizes></Row0></Bottom><Float><Sizes/></Float></Positions>
   </Desktop>
 </Workspace>
 
