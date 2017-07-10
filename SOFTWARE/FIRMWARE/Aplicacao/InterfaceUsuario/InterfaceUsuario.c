@@ -205,7 +205,7 @@ void IU_entry(void*pPar){
   
   // Faz a verificação inicial da resistência
   // e trava o processo se não localizar     
-  if(!IU_verificacaoInicialResistencia()){
+  /*if(!IU_verificacaoInicialResistencia()){
     for(;;){
 #ifdef PORTUGUES
       HD44780_2_posicionaTexto(0,0);
@@ -234,7 +234,7 @@ void IU_entry(void*pPar){
       }
     }  
     MP_enviaSinal(BV20_INICIALIZACAO);  
-  }  
+  }  */
   
   
   vTaskDelay(2000);
@@ -357,7 +357,7 @@ void IU_entry(void*pPar){
       static unsigned char flagLocacao=0;      
       if(PARAMETROS_leFlagLocacao()){
         IU_propaganda();  // Faz a propaganda              
-        flagLocacao = 1; // Esse flag fica setado para indicar que precisar reiniciar o noteiro quando saida da locação
+        flagLocacao = 1;  // Esse flag fica setado para indicar que precisar reiniciar o noteiro quando saida da locação
         CA_setterLedGratis(1);
         MP_enviaSinal(BV20_BLOQUEADO);        
       }else{
@@ -1241,7 +1241,9 @@ void IU_enviaTelemetria(void){
                                                           PARAMETROS_leContadorVendasParcial(),
                                                           PARAMETROS_carregaFaturamentoParcialCartao(),
                                                           PARAMETROS_leComissaoPonto(),
-                                                          PARAMETROS_leVersaoCPU());
+                                                          PARAMETROS_leVersaoCPU(),
+                                                          PARAMETROS_leFlagLocacao(),
+                                                          PARAMETROS_leParametro(VALOR_PIPOCA)*100);
 }
 /***********************************************************************************
 *       Descrição       :       Stamp do estado da conexão com 

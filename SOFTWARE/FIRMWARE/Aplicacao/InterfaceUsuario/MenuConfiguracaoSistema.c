@@ -2538,7 +2538,7 @@ void MCS_telaTesteTelemetria(void){
       return;
     
     HD44780_posicionaTexto(3,1);
-    if(TELET_escreveBlocoOperacao(1,0,0,0,0,0,0,0,0,0))
+    if(TELET_escreveBlocoOperacao(1,0,0,0,0,0,0,0,0,0,0,0))
       HD44780_writeString("[ONLINE ]");
     else
       HD44780_writeString("[OFFLINE]");

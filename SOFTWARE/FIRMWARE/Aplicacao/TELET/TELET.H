@@ -52,7 +52,9 @@ unsigned char TELET_escreveBlocoOperacao(unsigned int numeroSerie,
                                          unsigned int contadorVendasParcial,
                                          unsigned int arrecadacaoCartaoParcial,
                                          unsigned int comissaoPonto,
-                                         char* versaoCPU);
+                                         char* versaoCPU,
+                                         unsigned char md_locacao,
+                                         unsigned int valorPipoca);
 unsigned char TELET_leSSID(char *ssid);
 unsigned char TELET_escreveSSID(char *ssid);
 unsigned char TELET_leSenhaWifi(char* senha);

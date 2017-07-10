@@ -133,15 +133,16 @@ unsigned char TELET_escreveBlocoOperacao(unsigned int numeroSerie,
                                          unsigned int contadorVendasParcial,
                                          unsigned int arrecadacaoCartaoParcial,
                                          unsigned int comissaoPonto,
-                                         char* versaoCPU){/*,
-                                         unsigned int valorPipoca){    */                                       
+                                         char* versaoCPU,
+                                         unsigned char md_locacao,
+                                         unsigned int valorPipoca){                                      
   
   unsigned char tamanho = strlen(versaoCPU);                                         
   
   TELET_bufferRX[1] = 255;  
                                            
   TELET_bufferTX[0] = STX;
-  TELET_bufferTX[1] = 37+tamanho;
+  TELET_bufferTX[1] = 42+tamanho;
   TELET_bufferTX[2] = ESCREVE_BLOCO_OPERACAO;
   
   TELET_bufferTX[3] = numeroSerie>>24;
@@ -184,19 +185,27 @@ unsigned char TELET_escreveBlocoOperacao(unsigned int numeroSerie,
   TELET_bufferTX[33] = comissaoPonto>>8;
   TELET_bufferTX[34] = comissaoPonto;
   
+  TELET_bufferTX[35] = valorPipoca>>24;
+  TELET_bufferTX[36] = valorPipoca>>16;
+  TELET_bufferTX[37] = valorPipoca>>8;
+  TELET_bufferTX[38] = valorPipoca;
+  
+  TELET_bufferTX[39] = md_locacao;
+  
+  TELET_bufferTX[40] = tamanho;
+  
   for(unsigned char i=0;i<tamanho;i++)
-    TELET_bufferTX[35+i] = versaoCPU[i] ;
+    TELET_bufferTX[41+i] = versaoCPU[i] ;
+  
+  TELET_bufferTX[41+tamanho]= flags;
+  TELET_bufferTX[42+tamanho]= TELET_checksum(TELET_bufferTX,42+tamanho);
   
   
-  TELET_bufferTX[35+tamanho]= flags;
-  TELET_bufferTX[36+tamanho]= TELET_checksum(TELET_bufferTX,36+tamanho);
+  TELET_enviaPacote(43+tamanho);
   
-  
-  TELET_enviaPacote(37+tamanho);
-  
-  TELET_silentTime = 200;
+  /*TELET_silentTime = 200;
   while(TELET_silentTime) 
-    vTaskDelay(1);
+    vTaskDelay(1);*/
   
   if( TELET_bytesRecebidos == TELET_bufferRX[1]){
     
