@@ -1791,5 +1791,110 @@ unsigned short int PARAMETROS_leValorCredito(void){
   return 25;
 }
 /***********************************************************************************
+*       Descrição       :      Gravao parâmetro Proporcional
+*       Parametros      :      (unsigned short int) ganho KP
+*       Retorno         :       nenhum
+***********************************************************************************/
+void PARAMETROS_grava_ganhoKP(unsigned short int kp){
+  unsigned char buffer[4];
+  unsigned short int crc;
+  
+  buffer[0] = kp>>8;
+  buffer[1] = kp;
+  crc = CCTALK_calculaCRC(buffer,0,2);   
+  buffer[2] = crc>>8;
+  buffer[3] = crc;
+  
+  MEMORYWRAPPER_writeBytes(ADR_GANHO_KP,buffer,4);
+}
+/***********************************************************************************
+*       Descrição       :       Lê o ganho proporcional
+*       parametros      :       nnehum
+*       Retorno         :       (unsigned short int) ganho KP
+***********************************************************************************/
+unsigned short int PARAMETROS_le_ganhoKP(void){
+  unsigned char buffer[4];
+  unsigned short int crc;
+  
+  MEMORYWRAPPER_readBytes(ADR_GANHO_KP,buffer,4);
+  crc = CCTALK_calculaCRC(buffer,0,2);
+  
+  if(crc==(buffer[2]<<8 | buffer[3])){
+    return (unsigned int)(buffer[0]<<8 | buffer[1]);
+  }
+   
+  return 4;  
+}
+/***********************************************************************************
+*       Descrição       :       Grava o ganho integral
+*       Parametros      :       (unsigned short int) ganho Ki
+*       Retorno         :       nenhum
+***********************************************************************************/
+void PARAMETROS_grava_ganho_KI(unsigned short int ki){
+  unsigned char buffer[4];
+  unsigned short int crc;
+  
+  buffer[0] = ki>>8;
+  buffer[1] = ki;
+  crc = CCTALK_calculaCRC(buffer,0,2);   
+  buffer[2] = crc>>8;
+  buffer[3] = crc;
+  
+  MEMORYWRAPPER_writeBytes(ADR_GANHO_KI,buffer,4);
+}
+/***********************************************************************************
+*       Descrição       :       Lê o ganho Ki
+*       Parametros      :       nenhum
+*       Retorno         :       (unsigned short int) ganho Ki
+***********************************************************************************/
+unsigned short int PARAMETROS_le_ganho_ki(void){
+  unsigned char buffer[4];
+  unsigned short int crc;
+  
+  MEMORYWRAPPER_readBytes(ADR_GANHO_KI,buffer,4);
+  crc = CCTALK_calculaCRC(buffer,0,2);
+  
+  if(crc==(buffer[2]<<8 | buffer[3])){
+    return (unsigned int)(buffer[0]<<8 | buffer[1]);
+  }
+   
+  return 2;  
+}
+/***********************************************************************************
+*       Descrição       :       Grava o ganho KD
+*       Parametros      :       (unsigned short int) grava o ganho derivativo
+*       Retorno         :       nenhum
+***********************************************************************************/
+void PARAMETROS_grava_ganho_KD(unsigned short int kd){
+  unsigned char buffer[4];
+  unsigned short int crc;
+  
+  buffer[0] = kd>>8;
+  buffer[1] = kd;
+  crc = CCTALK_calculaCRC(buffer,0,2);   
+  buffer[2] = crc>>8;
+  buffer[3] = crc;
+  
+  MEMORYWRAPPER_writeBytes(ADR_GANHO_KD,buffer,4);
+}
+/***********************************************************************************
+*       Descrição       :       Grava o ganho KD
+*       Parametros      :       nenhum
+*       Retorno         :       (unsigned short int) ganho KD
+***********************************************************************************/
+unsigned short int PARAMETROS_le_ganho_KD(void){
+  unsigned char buffer[4];
+  unsigned short int crc;
+  
+  MEMORYWRAPPER_readBytes(ADR_GANHO_KD,buffer,4);
+  crc = CCTALK_calculaCRC(buffer,0,2);
+  
+  if(crc==(buffer[2]<<8 | buffer[3])){
+    return (unsigned int)(buffer[0]<<8 | buffer[1]);
+  }
+   
+  return 2;  
+}
+/***********************************************************************************
 *       Fim do arquivo
 ***********************************************************************************/

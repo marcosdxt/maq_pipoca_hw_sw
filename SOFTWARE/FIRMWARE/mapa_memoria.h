@@ -97,5 +97,8 @@
 #define ADR_FAT_CARTAO_TOTAL            0x2040
 #define ADR_SENHA_ROOT                  0x2050
 #define ADR_VALOR_CREDITO_UCA           0x2060
+#define ADR_GANHO_KP                    0x2070
+#define ADR_GANHO_KI                    0x2080
+#define ADR_GANHO_KD                    0x2090
 
 #endif//_MAPA_MEMORIA_H_

@@ -51,8 +51,9 @@
 #define TAM_MENU_PERIFERICOS                            5
 #define TAM_LISTA_HARDWARE                              19
 #define TAM_LISTA_WIFI                                  7
-#define TAM_LISTA_AVANCADO                              12
+#define TAM_LISTA_AVANCADO                              13
 #define TAM_LISTA_CONTADORES                            5
+#define TAM_LISTA_PID                                   4
 /************************************************************************************
 *       Constantes locais
 ************************************************************************************/
@@ -191,6 +192,7 @@ const char *MCS_mensagemAvancado[TAM_LISTA_AVANCADO]={
   "(9) Zeramento   ",
   "(10)Senha       ", 
   "(11)Senha Mestre",
+  "(12)Ganhos PID  ",
   "    Voltar      "
 };
 
@@ -389,6 +391,13 @@ const char *MCS_mensagemMenuAjusteContadores[TAM_LISTA_CONTADORES]={
 };
 #endif
 
+const char *MCS_mensagem_configuraPID[]={
+  "(1) Ganho P     ",
+  "(2) Ganho I     ",
+  "(3) Ganho D     ",
+  "    Voltar      "
+};
+
 /************************************************************************************
 *       Funções locais
 ************************************************************************************/
@@ -513,6 +522,8 @@ void MCS_tela_reinicia_senha_root(void);
 void MCS_tela_reset_master(void);
 void MCS_configura_valor_credito_uca1(void);
 
+void MCS_tela_configura_PID(void);
+void MCS_menu_configura_ganhos(void);
 /************************************************************************************
 *       Descrição       
 ************************************************************************************/
@@ -631,6 +642,7 @@ void(*const MCS_funcAvancado[])(void)={
   MCS_zeraContadores,
   MCS_cadastraSenhas,
   MCS_tela_reset_master,
+  MCS_menu_configura_ganhos,
   NULL
 };
 
@@ -640,6 +652,13 @@ void(*const MCS_funcAjusteContadores[])(void)={
    MCS_ajustaArrecadacaoParcial,
    MCS_ajustaArrecadacaoTotal,
    NULL
+};
+
+void(*const MCS_funcAjustaPID[])(void)={
+  NULL,
+  NULL,
+  NULL,
+  NULL
 };
 /************************************************************************************
 *       Variaveis locais
@@ -5065,7 +5084,7 @@ void MCS_testeAjusteVolumeMusica(void){
            break;
     }
     
-    sprintf(buffer,"V:%03d \% (%s)",volume,PLAYERWAVE_verificaToque()?(tag[0]):(tag[1]));
+    sprintf(buffer,"V:%03d %% (%s)",volume,PLAYERWAVE_verificaToque()?(tag[0]):(tag[1]));
     HD44780_posicionaTexto(0,1);    
     HD44780_writeString(buffer);
     
@@ -5114,7 +5133,7 @@ void MCS_interfaceConfiguraVolumeTesteVoz(void){
            break;
     }
     
-    sprintf(buffer,"V:%03d \% (%s)",volume,PLAYERWAVE_verificaToque()?(tag[0]):(tag[1]));
+    sprintf(buffer,"V:%03d %% (%s)",volume,PLAYERWAVE_verificaToque()?(tag[0]):(tag[1]));
     HD44780_posicionaTexto(0,1);    
     HD44780_writeString(buffer);    
   }     
@@ -5503,6 +5522,121 @@ void MCS_configura_valor_credito_uca1(void){
     
     vTaskDelay(50);
   }    
+}
+/************************************************************************************
+*       Descrição       :       Tela de configuração de um valor inteiro
+*       Parametros      :       (char*) titutlo
+*                               (unsigned short int) valor
+*       Retorno         :       nenhum
+************************************************************************************/
+unsigned short int MCS_configura_valor_ganho(char* titulo,unsigned short int valor){
+  eTECLA tecla;
+  char buffer_linha[17];
+  unsigned char tamanho;
+
+  HD44780_clearText();
+  HD44780_writeString(titulo);
+  
+  for(;TECLADO_getContadorInatividade();){
+    
+    tecla = TECLADO_getch();
+    switch(tecla){
+      case TECLA_ENTER:
+      case TECLA_ESC:        
+           return valor;
+      case TECLA_INC:
+           if(valor<100)
+             valor+=1;
+           break;
+      case TECLA_DEC:
+           if(valor>0)
+             valor-=1;
+           break;
+    }
+    
+    sprintf(buffer_linha,"%03d",valor);
+    tamanho = strlen(buffer_linha);
+    HD44780_posicionaTexto((16-tamanho)>>1,1);
+    HD44780_writeString(buffer_linha);    
+    
+    vTaskDelay(50);
+  }  
+  
+  return valor;  
+}
+/************************************************************************************
+*       Descrição       :       Configura o ganho KP do controlador PID do 
+*                               motor
+*       Parametros      :       nenhum
+*       Retorno         :       nenhum
+************************************************************************************/
+void MCS_tela_configura_P(void){
+  
+  PARAMETROS_grava_ganhoKP(MCS_configura_valor_ganho("Ganho P",PARAMETROS_le_ganhoKP()));
+}
+/************************************************************************************
+*       Descrição       :       Configura o ganho KI do controlador PID
+*       Parametros      :       nenhum
+*       Retorno         :       nenhum
+************************************************************************************/
+void MCS_tela_configura_I(void){
+  
+  PARAMETROS_grava_ganho_KI(MCS_configura_valor_ganho("Ganho I",PARAMETROS_le_ganho_ki()));  
+}
+/************************************************************************************
+*       Descrição       :       Configura o ganho KD do controlador PID
+*       Parametros      :       nenhum
+*       Retorno         :       nenhum
+************************************************************************************/
+void MCS_tela_configura_D(void){
+  
+  PARAMETROS_grava_ganho_KD(MCS_configura_valor_ganho("Ganho D",PARAMETROS_le_ganho_KD()));    
+}
+/************************************************************************************
+*       Descrição       :       Desenha o fundo do menu de ajuste do PID
+*       Parametros      :       (unsigned char) linha
+*       Retorno                 nenhum
+************************************************************************************/
+void MCS_desenha_fundo(unsigned char indice){
+  
+  HD44780_posicionaTexto(0,0);
+  HD44780_writeString(" Ajuste PID");
+  HD44780_posicionaTexto(0,1);
+  HD44780_writeString((char*)MCS_mensagem_configuraPID[indice]);  
+}
+/************************************************************************************
+*       Descrição       :       Menu para configuração dos ganhos do PID
+*       Parametros      :       nenhum
+*       Retorno         :       nenhum
+************************************************************************************/
+void MCS_menu_configura_ganhos(void){
+  eTECLA tecla;  
+  unsigned char indice=0;
+  
+  HD44780_clearText();
+  MCS_desenha_fundo(indice);
+  
+  for(;TECLADO_getContadorInatividade();){
+    
+    
+    tecla = TECLADO_getch();
+    switch(tecla){
+      case TECLA_ENTER:
+           if(MCS_funcAjustaPID[indice]!=NULL)
+             MCS_funcAjustaPID[indice]();           
+           MCS_desenha_fundo(indice);
+           break;
+      case TECLA_ESC:
+           return;
+      case TECLA_INC:
+           indice = (indice+1) % TAM_LISTA_PID;
+           break;
+      case TECLA_DEC:
+           indice?(indice--):(indice=TAM_LISTA_PID-1);
+           break;
+    }
+    
+  }   
 }
 /************************************************************************************
 *       Fim do arquivo
