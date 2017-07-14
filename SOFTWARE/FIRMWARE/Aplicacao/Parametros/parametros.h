@@ -245,13 +245,13 @@ void PARAMETROS_gravaValorCredito(unsigned short int credito);
 
 unsigned short int PARAMETROS_leValorCredito(void);
 
-void PARAMETROS_grava_ganhoKP(unsigned short int kp);
+void PARAMETROS_grava_ganho_KP(unsigned short int kp);
 
-unsigned short int PARAMETROS_le_ganhoKP(void);
+unsigned short int PARAMETROS_le_ganho_KP(void);
 
 void PARAMETROS_grava_ganho_KI(unsigned short int ki);
 
-unsigned short int PARAMETROS_le_ganho_ki(void);
+unsigned short int PARAMETROS_le_ganho_KI(void);
 
 void PARAMETROS_grava_ganho_KD(unsigned short int kd);
 

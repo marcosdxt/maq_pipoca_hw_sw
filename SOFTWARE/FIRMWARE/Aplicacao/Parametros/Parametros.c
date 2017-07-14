@@ -1791,11 +1791,11 @@ unsigned short int PARAMETROS_leValorCredito(void){
   return 25;
 }
 /***********************************************************************************
-*       Descrição       :      Gravao parâmetro Proporcional
+*       Descrição       :      Grava o parâmetro ganho Proporcional
 *       Parametros      :      (unsigned short int) ganho KP
 *       Retorno         :       nenhum
 ***********************************************************************************/
-void PARAMETROS_grava_ganhoKP(unsigned short int kp){
+void PARAMETROS_grava_ganho_KP(unsigned short int kp){
   unsigned char buffer[4];
   unsigned short int crc;
   
@@ -1812,7 +1812,7 @@ void PARAMETROS_grava_ganhoKP(unsigned short int kp){
 *       parametros      :       nnehum
 *       Retorno         :       (unsigned short int) ganho KP
 ***********************************************************************************/
-unsigned short int PARAMETROS_le_ganhoKP(void){
+unsigned short int PARAMETROS_le_ganho_KP(void){
   unsigned char buffer[4];
   unsigned short int crc;
   
@@ -1843,11 +1843,11 @@ void PARAMETROS_grava_ganho_KI(unsigned short int ki){
   MEMORYWRAPPER_writeBytes(ADR_GANHO_KI,buffer,4);
 }
 /***********************************************************************************
-*       Descrição       :       Lê o ganho Ki
+*       Descrição       :       Lê o ganho KI
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned short int) ganho Ki
 ***********************************************************************************/
-unsigned short int PARAMETROS_le_ganho_ki(void){
+unsigned short int PARAMETROS_le_ganho_KI(void){
   unsigned char buffer[4];
   unsigned short int crc;
   

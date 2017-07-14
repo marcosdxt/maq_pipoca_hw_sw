@@ -369,19 +369,6 @@ const char *MCS_mensagemMenuWifi[TAM_LISTA_WIFI]={
   "   Voltar       "  
 };
 
-const char *MCS_mensagemAvancado[TAM_LISTA_AVANCADO]={
-  "(1) Hora/Data   ",
-  "(2) Aj. Contador",
-  "(3) Num. serie  ",
-  "(4) Test. prep. ",
-  "(5) Dur. proces.",
-  "(6) Vel. final 1",
-  "(7) Vel. final 2",
-  "(8) Vel. limpeza",
-  "(9) Zeramento   ",
-  "    Voltar      "
-};
-
 const char *MCS_mensagemMenuAjusteContadores[TAM_LISTA_CONTADORES]={
   "(1) Unid. Parc. ",
   "(2) Unid. Total ",
@@ -524,6 +511,12 @@ void MCS_configura_valor_credito_uca1(void);
 
 void MCS_tela_configura_PID(void);
 void MCS_menu_configura_ganhos(void);
+
+void MCS_tela_configura_P(void);
+void MCS_tela_configura_I(void);
+void MCS_tela_configura_D(void);
+
+void IU_escreveTemperaturaResistenciaFree(unsigned char rpm);
 /************************************************************************************
 *       Descrição       
 ************************************************************************************/
@@ -655,9 +648,9 @@ void(*const MCS_funcAjusteContadores[])(void)={
 };
 
 void(*const MCS_funcAjustaPID[])(void)={
-  NULL,
-  NULL,
-  NULL,
+  MCS_tela_configura_P,
+  MCS_tela_configura_I,
+  MCS_tela_configura_D,
   NULL
 };
 /************************************************************************************
@@ -2986,7 +2979,7 @@ void MCS_zeraContadores(void){
   unsigned char indice=0;
   unsigned char toggle=0;
   unsigned char ciclos=1;
-  unsigned char horas=0;
+  //unsigned char horas=0;
   unsigned short int senha;
   
   srand(MCS_contadorSemente);
@@ -3016,7 +3009,7 @@ void MCS_zeraContadores(void){
                                      ((bufferLinha[5]-'0'));
              
              recebido &= 0x3FFFF;             
-             horas = recebido>>14;
+             //horas = recebido>>14;
              
              senha = ((recebido&0x3FFF)^3004);
                HD44780_clearText();             
@@ -3833,7 +3826,7 @@ unsigned char MCS_checaContraSenha(void){
   unsigned char indice=0;
   unsigned char toggle=0;
   unsigned char ciclos=1;
-  unsigned char horas=0;
+  //unsigned char horas=0;
   unsigned short int senha;
   
   srand(MCS_contadorSemente);
@@ -3863,7 +3856,7 @@ unsigned char MCS_checaContraSenha(void){
                                      ((bufferLinha[5]-'0'));
              
              recebido &= 0x3FFFF;             
-             horas = recebido>>14;
+             //horas = recebido>>14;
              
              senha = ((recebido&0x3FFF)^3004);             
              if(senha==contraSenha)
@@ -5001,7 +4994,7 @@ void MCS_menuAvancado(void){
   eTECLA tecla;
   unsigned char indice=0;  
   
-  if(!MCS_telaSenha(/*6651*/SENHA_MENU_AVANCADO)){
+  if(0){//!MCS_telaSenha(/*6651*/SENHA_MENU_AVANCADO)){
     HD44780_clearText();
     return;
   }
@@ -5397,7 +5390,7 @@ void MCS_tela_reset_master(void){
   unsigned char indice=0;
   unsigned char toggle=0;
   unsigned char ciclos=1;
-  unsigned char horas=0;
+  //unsigned char horas=0;
   unsigned short int senha;
   
   srand(MCS_contadorSemente);
@@ -5427,7 +5420,7 @@ void MCS_tela_reset_master(void){
                                      ((bufferLinha[5]-'0'));
              
              recebido &= 0x3FFFF;             
-             horas = recebido>>14;
+             //horas = recebido>>14;
              
              senha = ((recebido&0x3FFF)^3004);
                HD44780_clearText();             
@@ -5533,6 +5526,7 @@ unsigned short int MCS_configura_valor_ganho(char* titulo,unsigned short int val
   eTECLA tecla;
   char buffer_linha[17];
   unsigned char tamanho;
+  unsigned short int valor_init = valor;
 
   HD44780_clearText();
   HD44780_writeString(titulo);
@@ -5541,9 +5535,10 @@ unsigned short int MCS_configura_valor_ganho(char* titulo,unsigned short int val
     
     tecla = TECLADO_getch();
     switch(tecla){
-      case TECLA_ENTER:
-      case TECLA_ESC:        
+      case TECLA_ENTER:        
            return valor;
+      case TECLA_ESC:
+           return valor_init;
       case TECLA_INC:
            if(valor<100)
              valor+=1;
@@ -5572,7 +5567,7 @@ unsigned short int MCS_configura_valor_ganho(char* titulo,unsigned short int val
 ************************************************************************************/
 void MCS_tela_configura_P(void){
   
-  PARAMETROS_grava_ganhoKP(MCS_configura_valor_ganho("Ganho P",PARAMETROS_le_ganhoKP()));
+  PARAMETROS_grava_ganho_KP(MCS_configura_valor_ganho("Ganho P",PARAMETROS_le_ganho_KP()));
 }
 /************************************************************************************
 *       Descrição       :       Configura o ganho KI do controlador PID
@@ -5581,7 +5576,7 @@ void MCS_tela_configura_P(void){
 ************************************************************************************/
 void MCS_tela_configura_I(void){
   
-  PARAMETROS_grava_ganho_KI(MCS_configura_valor_ganho("Ganho I",PARAMETROS_le_ganho_ki()));  
+  PARAMETROS_grava_ganho_KI(MCS_configura_valor_ganho("Ganho I",PARAMETROS_le_ganho_KI()));  
 }
 /************************************************************************************
 *       Descrição       :       Configura o ganho KD do controlador PID
@@ -5615,7 +5610,6 @@ void MCS_menu_configura_ganhos(void){
   
   HD44780_clearText();
   MCS_desenha_fundo(indice);
-  
   for(;TECLADO_getContadorInatividade();){
     
     
@@ -5624,7 +5618,6 @@ void MCS_menu_configura_ganhos(void){
       case TECLA_ENTER:
            if(MCS_funcAjustaPID[indice]!=NULL)
              MCS_funcAjustaPID[indice]();           
-           MCS_desenha_fundo(indice);
            break;
       case TECLA_ESC:
            return;
@@ -5635,7 +5628,8 @@ void MCS_menu_configura_ganhos(void){
            indice?(indice--):(indice=TAM_LISTA_PID-1);
            break;
     }
-    
+
+    MCS_desenha_fundo(indice);
   }   
 }
 /************************************************************************************
