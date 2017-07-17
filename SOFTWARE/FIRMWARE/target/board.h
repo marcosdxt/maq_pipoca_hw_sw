@@ -49,30 +49,35 @@
   #define PORTUGUES
   #define FQ_REDE_60_HZ
   #define STR_VERSAO_BOARD      "     1.11.2-BR  "
+  #define STR_VERSAO_BOARD_TELEMETRIA      "1.11.2-BR"
 #endif
 
 #ifdef _URUGUAI_
   #define FQ_REDE_50_HZ
   #define ESPANHOL
   #define STR_VERSAO_BOARD      "     1.11.2-UY  "
+  #define STR_VERSAO_BOARD_TELEMETRIA      "1.11.2-UY"
 #endif
 
 #ifdef _PARAGUAI_
   #define FQ_REDE_50_HZ
   #define ESPANHOL
   #define STR_VERSAO_BOARD      "     1.11.2-PY  "
+  #define STR_VERSAO_BOARD_TELEMETRIA      "1.11.2-PY"
 #endif
 
 #ifdef _PARAGUAI_60HZ_
   #define FQ_REDE_60_HZ
   #define ESPANHOL
   #define STR_VERSAO_BOARD      "  1.11.2-PYBR   "
+  #define STR_VERSAO_BOARD_TELEMETRIA      "1.11.2-PYBR"
 #endif
 
 #ifdef _URUGUAI_60HZ_
   #define FQ_REDE_60_HZ
   #define ESPANHOL
   #define STR_VERSAO_BOARD      "  1.11.2-UYBR   "
+  #define STR_VERSAO_BOARD_TELEMETRIA      "1.11.2-PYBR"
 #endif
 //----------------------------------------------------------------------------------
 //      Definições para os demais países da América Latina

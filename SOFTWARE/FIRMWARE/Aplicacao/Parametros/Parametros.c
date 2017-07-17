@@ -1896,5 +1896,15 @@ unsigned short int PARAMETROS_le_ganho_KD(void){
   return 2;  
 }
 /***********************************************************************************
+*       Descrição       :       Le versão da CPU
+*       Parametros      :       nenhum
+*       Retorno         :       vsCPU
+***********************************************************************************/
+char* PARAMETROS_leVersaoCPU(void){
+  static const char versao[]={STR_VERSAO_BOARD_TELEMETRIA};
+  
+  return (char*)versao;
+} 
+/***********************************************************************************
 *       Fim do arquivo
 ***********************************************************************************/

@@ -41,18 +41,32 @@ typedef enum{
   LE_SENHA_WIFI    
 }TELET_comandos;
 
+typedef enum{
+  ESTADO_BLOQUEADO,
+  ESTADO_MONITORACAO
+}TELET_estados;
+
 void TELET_ini(void);
 void TELET_vetor_interrupcao(void);
+void TELET_main(void*pPar);
 unsigned char TELET_escreveBlocoOperacao(unsigned int numeroSerie,
                                          unsigned int contadorVendas,
                                          unsigned int arrecadacaoParcial,
                                          unsigned int arrecadacaoTotal,
                                          unsigned char flags,
-                                         unsigned int arrecadaoCartao);
+                                         unsigned int arrecadaoCartao,
+                                         unsigned int contadorVendasParcial,
+                                         unsigned int arrecadacaoCartaoParcial,
+                                         unsigned int comissaoPonto,
+                                         char* versaoCPU,
+                                         unsigned char md_locacao,
+                                         unsigned int valorPipoca);
 unsigned char TELET_leSSID(char *ssid);
 unsigned char TELET_escreveSSID(char *ssid);
 unsigned char TELET_leSenhaWifi(char* senha);
 unsigned char TELET_escreveSenhaWifi(char* senha);
+void TELET_enviaEstado(TELET_estados estado_atual);
+unsigned char TELET_getEstadoConexaoTelemetria(void);
 
 /**********************************************************************************
 *       Fim do arquivo

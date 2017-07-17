@@ -64,6 +64,7 @@
 #include "aplicacao\interfaceusuario\monitorPagamentos.h"
 #include "aplicacao\interfaceUsuario\menuConfiguracaoSistema.h"
 #include "aplicacao\interfaceUsuario\animacaoLeds.h"
+#include "aplicacao\interfaceUsuario\interfaceusuario.h"
 #include "aplicacao\interfaceUsuario\controleAmostraGratis.h"
 #include "aplicacao\interfaceUsuario\pipocaTeste.h"
 #include "aplicacao\impressora\impressora.h"

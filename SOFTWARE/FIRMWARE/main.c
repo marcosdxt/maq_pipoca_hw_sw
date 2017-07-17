@@ -58,9 +58,10 @@ void main(void){
   BOARD_ini();
   
   //Criação das tarefas
-  xTaskCreate(IU_entry            ,"IU"    ,1024 ,NULL,1,NULL);  
+  xTaskCreate(IU_entry            ,"IU"    ,768 ,NULL,1,NULL);  
   xTaskCreate(MP_main             ,"MONEY" ,1024 ,NULL,1,NULL);  
-  xTaskCreate(PROTOCOLO_main      ,"SERIAL",512  ,NULL,1,NULL);  
+  xTaskCreate(PROTOCOLO_main      ,"SERIAL",512  ,NULL,1,NULL);
+  xTaskCreate(TELET_main          ,"TELET",256  ,NULL,1,NULL);  
   
   //Inicialização do escalonador, essa função nunca retornará
   vTaskStartScheduler();  

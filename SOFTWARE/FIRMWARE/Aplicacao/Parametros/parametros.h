@@ -257,6 +257,8 @@ void PARAMETROS_grava_ganho_KD(unsigned short int kd);
 
 unsigned short int PARAMETROS_le_ganho_KD(void);
 
+char* PARAMETROS_leVersaoCPU(void);
+
 /***********************************************************************************
 *       Fim do arquivo
 ***********************************************************************************/

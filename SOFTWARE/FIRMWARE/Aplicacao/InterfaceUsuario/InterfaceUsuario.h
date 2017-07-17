@@ -33,6 +33,8 @@ void IU_setterLeds(unsigned char led,unsigned char estado);
 void IU_exibeNumeroSerieMaquina(void);
 unsigned int IU_getNumeroSerie(void);
 void IU_escreveTemperaturaResistenciaFree(unsigned char rpm);
+unsigned char IU_getFalhaDosador(void);
+unsigned char IU_getFalhaMotor(void);
 
 #endif//_INTERFACE_USUARIO_H_
 /***********************************************************************************

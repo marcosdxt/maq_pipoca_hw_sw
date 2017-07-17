@@ -149,6 +149,8 @@ unsigned char IU_verificacaoInicialResistencia(void);
 void IU_cicloCompensador(void);
 void IU_resfriamentoPanela(void);
 void IU_exibeNumeroSerie(void);
+unsigned char IU_getFalhaDosador(void);
+unsigned char IU_getFalhaMotor(void);
 
 /***********************************************************************************
 *       Implementação das funções
@@ -208,7 +210,7 @@ void IU_entry(void*pPar){
 
   HD44780_clearText();
   HD44780_2_clearText();  
-  TELET_ini();  
+  //TELET_ini();  
         
   
   // Faz a verificação inicial da resistência
@@ -245,7 +247,7 @@ void IU_entry(void*pPar){
       MP_enviaSinal(BV20_BLOQUEADO);        
       IU_falhaMotor = 255;
       
-      IU_enviaTelemetria();
+      TELET_enviaEstado(ESTADO_MONITORACAO);
       
       if(tecla==TECLA_ENTER){
         MCS_entry();
@@ -263,7 +265,7 @@ void IU_entry(void*pPar){
   
   for(;;){
 
-    IU_enviaTelemetria();
+    TELET_enviaEstado(ESTADO_MONITORACAO);
     IU_processoSecagem();
          
     tecla = TECLADO_getch();
@@ -314,6 +316,7 @@ void IU_entry(void*pPar){
     
       unsigned char locacao = PARAMETROS_leFlagLocacao();
       
+	  TELET_enviaEstado(ESTADO_MONITORACAO);
       AL_setterEstado(LEDS_NORMAL);      
       
       if(!CA_getTempo() && !locacao){
@@ -403,14 +406,14 @@ void IU_entry(void*pPar){
                     HD44780_2_posicionaTexto(0,1);
                     HD44780_2_writeString("Chamar suporte  ");                       
                     IU_dosador = 255;
-                    for(;;);                    
+                    for(;;) TELET_enviaEstado(ESTADO_MONITORACAO);                    
                     break;
             case 2: 
                     HD44780_2_posicionaTexto(0,0);              
                     HD44780_2_writeString("Falha embalagem ");                    
                     HD44780_2_posicionaTexto(0,1);
                     HD44780_2_writeString("Chamar suporte  ");                                   
-                    for(;;);                    
+                    for(;;) TELET_enviaEstado(ESTADO_MONITORACAO);                    
                     break;       
             case 4: 
                     HD44780_2_posicionaTexto(0,0);                             
@@ -418,14 +421,14 @@ void IU_entry(void*pPar){
                     IU_falhaMotor = 255;
                     HD44780_2_posicionaTexto(0,1);
                     HD44780_2_writeString("Chamar suporte  ");                                           
-                    for(;;);                    
+                    for(;;) TELET_enviaEstado(ESTADO_MONITORACAO);                    
                     break;
             case 5: 
                     HD44780_2_posicionaTexto(0,0);                            
                     HD44780_2_writeString("Falha pre-aquec.");                    
                     HD44780_2_posicionaTexto(0,1);
                     HD44780_2_writeString("Chamar suporte  ");                                   
-                    for(;;);                    
+                    for(;;) TELET_enviaEstado(ESTADO_MONITORACAO);                    
                     break;
           }    
           
@@ -433,7 +436,8 @@ void IU_entry(void*pPar){
           eTECLA tecla;          
           do {
             tecla = TECLADO_getch();
-            IU_enviaTelemetria();
+            TELET_enviaEstado(ESTADO_MONITORACAO);
+
           }
           while(tecla!=TECLA_ESC);          
           
@@ -463,6 +467,7 @@ void IU_entry(void*pPar){
      // Falha no teste de verificação 
      // funcional     
      for(;;){
+       TELET_enviaEstado(ESTADO_MONITORACAO);
        IU_escreveErros(codigo);          
        AL_setterEstado(LEDS_FORA_SERVICO);     
        tecla = TECLADO_getch();
@@ -611,6 +616,24 @@ void IU_escreveTemperaturaResistencia(unsigned char rpm){
   IU_stampEstadoConexaoModuloTelemetria();
 }
 /***********************************************************************************
+*       Descrição       :       Getter para o IU_falhaDosador
+*       Parametros      :       nenhum
+*       Retorno         :       nenhum
+***********************************************************************************/
+unsigned char IU_getFalhaDosador(void){
+  
+    return IU_dosador;
+}
+/***********************************************************************************
+*       Descrição       :       Getter para o IU_falhaMotor
+*       Parametros      :       nenhum
+*       Retorno         :       nenhum
+***********************************************************************************/
+unsigned char IU_getFalhaMotor(void){
+
+  return IU_falhaMotor;
+}
+/***********************************************************************************
 *       Descrição       :       Escreve a temperatura de preparo no lcd interno
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -705,6 +728,8 @@ unsigned char IU_preparaPipoca(void){
   
   if(AA_calculaTemperaturaInteira()>40)
     resfriamento = 255;    
+  
+  TELET_enviaEstado(ESTADO_BLOQUEADO);
   
   IU_cicloCompensador();
   
@@ -950,6 +975,7 @@ void IU_mensagensAguardaAquecimento(unsigned char indice){
 ***********************************************************************************/
 void IU_limpezaPipoqueira(unsigned short int velocidade){
   
+  TELET_enviaEstado(ESTADO_BLOQUEADO);
   MU_setRPM(velocidade);
   vTaskDelay(5000);  
   MU_setRPM(0);    
@@ -988,6 +1014,7 @@ void IU_propaganda(void){
     
     if(tempoPropaganda){    
       IU_ciclosPropaganda = tempoPropaganda;
+      TELET_enviaEstado(ESTADO_BLOQUEADO);
       
       PLAYERWAVE_iniciaMusica(3,0);
       while(PLAYERWAVE_verificaToque());   
@@ -1089,7 +1116,9 @@ void IU_atualizaTotalizadores(unsigned int valorPipoca){
     total = PARAMETROS_carregaFaturamentoTotalCartao();
     total += valorPipoca;    
     PARAMETROS_salvaFaturamentoTotalCartao(total);    
-  } 
+  }
+  TELET_enviaEstado(ESTADO_MONITORACAO);
+
 }
 /***********************************************************************************
 *       Descrição       :       Verificação ciclica
@@ -1285,12 +1314,12 @@ void IU_enviaTelemetria(void){
   flags |= IU_falhaMotor?0x04:0x00;
   flags |= IU_dosador?0x02:0x00;
  
-  IU_estadoConexaoTelemetria = TELET_escreveBlocoOperacao(0,
+  /*IU_estadoConexaoTelemetria = TELET_escreveBlocoOperacao(0,
                                                           PARAMETROS_leContadorVendas(),
                                                           PARAMETROS_leContadorArrecadacao(),
                                                           PARAMETROS_leTotalizadorPermanente(),
                                                           flags,
-                                                          PARAMETROS_carregaOperacoesCartao()); 
+                                                          PARAMETROS_carregaOperacoesCartao()); */
 }
 /***********************************************************************************
 *       Descrição       :       Stamp do estado da conexão com 
@@ -1301,7 +1330,7 @@ void IU_enviaTelemetria(void){
 void IU_stampEstadoConexaoModuloTelemetria(void){
   
   HD44780_posicionaTexto(8,1);
-  if(IU_estadoConexaoTelemetria)
+  if(TELET_getEstadoConexaoTelemetria())
     HD44780_writeString("[TON ]");
   else
     HD44780_writeString("[TOFF]");  
@@ -1376,6 +1405,12 @@ void IU_processoSecagem(void){
     return;
   }    
   
+  TELET_enviaEstado(ESTADO_BLOQUEADO);
+
+  HD44780_clearText();
+  HD44780_posicionaTexto(0,0);
+  HD44780_writeString(" Desumidificando");
+  HD44780_posicionaTexto(0,1);
   HD44780_2_clearText();
   HD44780_2_posicionaTexto(0,0);
   HD44780_2_writeString(" Desumidificando");
@@ -1385,7 +1420,9 @@ void IU_processoSecagem(void){
   MU_setRPM(6000); 
   
   for(unsigned char i=0;i<16;i++){
-    HD44780_2_posicionaTexto(i,1);
+    HD44780_posicionaTexto(i,1);
+    HD44780_writeString(".");
+	HD44780_2_posicionaTexto(i,1);
     HD44780_2_writeString(".");
       
     IU_escreveTemperaturaResistencia(0);

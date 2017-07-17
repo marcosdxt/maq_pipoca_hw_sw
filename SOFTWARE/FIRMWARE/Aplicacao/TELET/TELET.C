@@ -20,6 +20,10 @@
 |       Data criação       :  21/07/2015
 |
 |       Revisões           :  1.0.0.0
+|							  1.0.0.1  
+|                               (06/07/2017) Corrigido envio dos flags de falha
+|                                            motor/dosador e CPU OFFLINE e do
+|                                            contador parcial e do cartão parcial.
 |
 |
 | __________________________________________________________________________________
@@ -50,17 +54,92 @@ unsigned char TELET_bufferRX[TAM_BUF_RX];
 unsigned char TELET_bytesRecebidos;
 unsigned char TELET_bytesEnviados;
 unsigned char TELET_bytesParaEnviar;
+unsigned char TELET_estadoConexaoTelemetria = SILENT_TIME_RELOAD;
 unsigned short TELET_silentTime=0;
+xQueueHandle filaEstados;
 
 /***********************************************************************************
 *       Funções locais
 ***********************************************************************************/
 unsigned char TELET_checksum(unsigned char *pData,unsigned char tamanho);
+void TELET_ini(void);
+void TELET_vetor_interrupcao(void);
+void TELET_main(void*pPar);
+unsigned char TELET_escreveBlocoOperacao(unsigned int numeroSerie,
+                                         unsigned int contadorVendas,
+                                         unsigned int arrecadacaoParcial,
+                                         unsigned int arrecadacaoTotal,
+                                         unsigned char flags,
+                                         unsigned int arrecadaoCartao,
+                                         unsigned int contadorVendasParcial,
+                                         unsigned int arrecadacaoCartaoParcial,
+                                         unsigned int comissaoPonto,
+                                         char* versaoCPU,
+                                         unsigned char md_locacao,
+                                         unsigned int valorPipoca);
+unsigned char TELET_leSSID(char *ssid);
+unsigned char TELET_escreveSSID(char *ssid);
+unsigned char TELET_leSenhaWifi(char* senha);
+unsigned char TELET_escreveSenhaWifi(char* senha);
+void TELET_enviaEstado(TELET_estados estado_atual);
+unsigned char TELET_getEstadoConexaoTelemetria(void);
 
 /***********************************************************************************
-*       Implementação das funções
+*       Implementação das funções 
+***********************************************************************************
+*       Descrição       :       main do TELET
+*       Parametros      :       nenhum
+*       Retorno         :       nenhum
 ***********************************************************************************/
-
+void TELET_main(void*pPar){
+  
+  unsigned char flags=0;
+  
+  TELET_estados estadoAtualTelet = ESTADO_BLOQUEADO;
+  filaEstados = xQueueCreate(1,sizeof(TELET_estados));
+  TELET_ini();  
+  
+  for(;;){
+    if(xQueueReceive(filaEstados,&estadoAtualTelet,500)){
+      if(estadoAtualTelet==ESTADO_MONITORACAO){
+        flags=0;
+        flags |= CE_sensorEmbalagem()?0x80:0x00;
+        flags |= TECLADO_getChavePorta()?0x40:0x00;
+        flags |= TECLADO_getChaveReservaPapel()?0x20:0x00;
+        flags |= AA_verificaConexaoTermistor()?0x10:0x20;
+        flags |= MP_timeOutNoteiro()?0x08:0x00;
+        flags |= IU_getFalhaMotor()?0x04:0x00;
+        flags |= IU_getFalhaDosador()?0x02:0x00;
+ 
+        if(TELET_escreveBlocoOperacao(PARAMETROS_carregaNumeroSerie(),
+                                      PARAMETROS_leContadorVendas(),
+                                      PARAMETROS_leContadorArrecadacao()*100,
+                                      PARAMETROS_leTotalizadorPermanente()*100,
+                                      flags,
+                                      PARAMETROS_carregaOperacoesCartao()*100,
+                                      PARAMETROS_leContadorVendasParcial(),
+                                      PARAMETROS_carregaFaturamentoParcialCartao()*100,
+                                      PARAMETROS_leComissaoPonto(),
+                                      PARAMETROS_leVersaoCPU(),
+                                      PARAMETROS_leFlagLocacao(),
+                                      PARAMETROS_leParametro(VALOR_PIPOCA)*100)){
+          TELET_estadoConexaoTelemetria = SILENT_TIME_RELOAD;
+        }else{
+          TELET_estadoConexaoTelemetria--;
+        }
+      }  
+    }  
+  }  
+}
+/***********************************************************************************
+*       Descrição       :       Envio do estado para a pilha
+*       Parametros      :       nenhum
+*       Retorno         :       nenhum
+***********************************************************************************/
+void TELET_enviaEstado(TELET_estados estado_enviado){
+  
+  xQueueSend(filaEstados,&estado_enviado,500);
+}
 /***********************************************************************************
 *       Descrição       :       Inicialização do módulo
 *       Parametros      :       nenhum
@@ -124,16 +203,20 @@ unsigned char TELET_escreveBlocoOperacao(unsigned int numeroSerie,
                                          unsigned int arrecadacaoParcial,
                                          unsigned int arrecadacaoTotal,
                                          unsigned char flags,
-                                         unsigned int arrecadaoCartao){/*
+                                         unsigned int arrecadaoCartao,
                                          unsigned int contadorVendasParcial,
                                          unsigned int arrecadacaoCartaoParcial,
-                                         unsigned int arrecadacaoCartaoTotal,
-                                         unsigned int valorPipoca,
-                                         unsigned int comissaoPonto){    */                                       
- TELET_bufferRX[1] = 255;  
+                                         unsigned int comissaoPonto,
+                                         char* versaoCPU,
+                                         unsigned char md_locacao,
+                                         unsigned int valorPipoca){                                      
+  
+  unsigned char tamanho = strlen(versaoCPU);                                         
+  
+  TELET_bufferRX[1] = 255;  
                                            
   TELET_bufferTX[0] = STX;
-  TELET_bufferTX[1] = 25;
+  TELET_bufferTX[1] = 43+tamanho;
   TELET_bufferTX[2] = ESCREVE_BLOCO_OPERACAO;
   
   TELET_bufferTX[3] = numeroSerie>>24;
@@ -161,10 +244,37 @@ unsigned char TELET_escreveBlocoOperacao(unsigned int numeroSerie,
   TELET_bufferTX[21] = arrecadaoCartao>>8;
   TELET_bufferTX[22] = arrecadaoCartao;
   
-  TELET_bufferTX[23]= flags;
-  TELET_bufferTX[24]= TELET_checksum(TELET_bufferTX,24);
+  TELET_bufferTX[23] = contadorVendasParcial>>24;
+  TELET_bufferTX[24] = contadorVendasParcial>>16;
+  TELET_bufferTX[25] = contadorVendasParcial>>8;
+  TELET_bufferTX[26] = contadorVendasParcial;
   
-  TELET_enviaPacote(25);
+  TELET_bufferTX[27] = arrecadacaoCartaoParcial>>24;
+  TELET_bufferTX[28] = arrecadacaoCartaoParcial>>16;
+  TELET_bufferTX[29] = arrecadacaoCartaoParcial>>8;
+  TELET_bufferTX[30] = arrecadacaoCartaoParcial;
+  
+  TELET_bufferTX[31] = comissaoPonto>>24;
+  TELET_bufferTX[32] = comissaoPonto>>16;
+  TELET_bufferTX[33] = comissaoPonto>>8;
+  TELET_bufferTX[34] = comissaoPonto;
+  
+  TELET_bufferTX[35] = valorPipoca>>24;
+  TELET_bufferTX[36] = valorPipoca>>16;
+  TELET_bufferTX[37] = valorPipoca>>8;
+  TELET_bufferTX[38] = valorPipoca;
+  
+  TELET_bufferTX[39] = md_locacao;
+  
+  TELET_bufferTX[40] = tamanho;
+  
+  for(unsigned char i=0;i<tamanho;i++)
+    TELET_bufferTX[41+i] = versaoCPU[i] ;
+  
+  TELET_bufferTX[41+tamanho]= flags;
+  TELET_bufferTX[42+tamanho]= TELET_checksum(TELET_bufferTX,42+tamanho);
+  
+  TELET_enviaPacote(43+tamanho);
   
   TELET_silentTime = 200;
   while(TELET_silentTime) 
@@ -176,8 +286,7 @@ unsigned char TELET_escreveBlocoOperacao(unsigned int numeroSerie,
        TELET_bufferRX[1] == TELET_bytesRecebidos && 
        TELET_bytesRecebidos < TAM_BUF_RX && 
        TELET_bufferRX[TELET_bufferRX[1]-1] == TELET_checksum(TELET_bufferRX,TELET_bufferRX[1]-1)){
-     
-          
+      
        return 255; 
      }        
   }    
@@ -199,6 +308,15 @@ unsigned char TELET_checksum(unsigned char *pData,unsigned char tamanho){
     soma += pData[i];
   
   return (unsigned char)(256 - soma);
+}
+/***********************************************************************************
+*       Descrição       :       Faz o envio do estado da conexão
+*       Parametros      :       Nenhum
+*       Retorno         :       (unsigned char) estados
+***********************************************************************************/
+unsigned char TELET_getEstadoConexaoTelemetria(void){
+
+  return (unsigned char)TELET_estadoConexaoTelemetria;
 }
 /***********************************************************************************
 *       Descrição       :       Faz a leitura do SSID configurado para a 
