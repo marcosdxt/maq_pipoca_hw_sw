@@ -50,7 +50,7 @@
 #define TAM_LISTA_ARRECADACAO                           8
 #define TAM_MENU_PERIFERICOS                            5
 #define TAM_LISTA_HARDWARE                              19
-#define TAM_LISTA_WIFI                                  7
+#define TAM_LISTA_WIFI                                  9
 #define TAM_LISTA_AVANCADO                              13
 #define TAM_LISTA_CONTADORES                            5
 #define TAM_LISTA_PID                                   4
@@ -177,6 +177,8 @@ const char *MCS_mensagemMenuWifi[TAM_LISTA_WIFI]={
   "(4)Exibir senha ",
   "(5)Alterar senha",
   "(6)Excluir senha",
+  "(7)MAC Wi-Fi    ",
+  "(8)MAC Servidor ",
   "   Voltar       "  
 };
 
@@ -489,6 +491,8 @@ void MCS_telaSalvaSSID(char *ssid);
 void MCS_removeEspacosFinalString(char*string);
 void MCS_removeSSID(void);
 void MCS_menuVisualizaSenhaWiFi(void);
+void MCS_menuVisualizaMACAddress(void);
+void MCS_menuVisualizaMACTelemetria(void);
 void MCS_telaSalvaSenhaWiFi(char *senha);
 void MCS_telaEditaSenhaWifi(void);
 void MCS_removeEspacosFinalString(char*string);
@@ -627,6 +631,8 @@ void(*const MCS_funcWifi[])(void)={
   MCS_menuVisualizaSenhaWiFi,
   MCS_telaEditaSenhaWifi,
   MCS_apagaSenhaWifi,
+  MCS_menuVisualizaMACAddress,
+  MCS_menuVisualizaMACTelemetria,
   NULL  
 };
 
@@ -4284,6 +4290,103 @@ void MCS_menuVisualizaSenhaWiFi(void){
   HD44780_posicionaTexto(0,1);
   bufferSenha[16] = 0;
   HD44780_writeString(bufferSenha);
+ 
+  for(;TECLADO_getContadorInatividade();){
+    
+    tecla = TECLADO_getch();
+    switch(tecla){
+      case TECLA_ENTER:
+      case TECLA_ESC:
+      case TECLA_INC:
+      case TECLA_DEC:
+           return;
+    }    
+        
+    vTaskDelay(50);
+  }      
+}
+/************************************************************************************
+*       Descrição       :       Tela para visualizar o MAC Address
+*       Parametros      :       nenhum
+*       Retorno         :       nenhum
+************************************************************************************/
+void MCS_menuVisualizaMACAddress(void){
+  eTECLA tecla;
+  char MAC[12];
+  unsigned char tentativas=10;
+  unsigned char flag;
+  
+    HD44780_posicionaTexto(0,0);
+    HD44780_writeString("   Lendo MAC    ");
+    HD44780_posicionaTexto(0,1);
+    HD44780_writeString(" no mod. WiFi   ");      
+  
+  do flag = TELET_leMACAddress(MAC);
+  while(!flag && tentativas--);
+  
+  if(!flag){
+    HD44780_posicionaTexto(0,0);
+    HD44780_writeString(" Falha ao ler   ");
+    HD44780_posicionaTexto(0,1);
+    HD44780_writeString(" o mod WiFi     ");    
+    vTaskDelay(3000);
+    return;
+  }
+  
+  HD44780_clearText();
+  HD44780_posicionaTexto(0,0);  
+  HD44780_writeString("MAC Wi-Fi");
+  HD44780_posicionaTexto(0,1);
+  HD44780_writeString(MAC);
+ 
+  for(;TECLADO_getContadorInatividade();){
+    
+    tecla = TECLADO_getch();
+    switch(tecla){
+      case TECLA_ENTER:
+      case TECLA_ESC:
+      case TECLA_INC:
+      case TECLA_DEC:
+           return;
+    }    
+        
+    vTaskDelay(50);
+  }      
+}
+/************************************************************************************
+*       Descrição       :       Tela para visualizar o MAC Telemetria
+*       Parametros      :       nenhum
+*       Retorno         :       nenhum
+************************************************************************************/
+void MCS_menuVisualizaMACTelemetria(void){
+  eTECLA tecla;
+  char dummy[16];
+  unsigned char tentativas=10;
+  unsigned int flag;
+  
+    HD44780_posicionaTexto(0,0);
+    HD44780_writeString("   Lendo MAC    ");
+    HD44780_posicionaTexto(0,1);
+    HD44780_writeString(" no mod. WiFi   ");      
+  
+  do flag = TELET_leMACTelemetria();
+  while(!flag && tentativas--);
+  
+  if(!flag){
+    HD44780_posicionaTexto(0,0);
+    HD44780_writeString(" Falha ao ler   ");
+    HD44780_posicionaTexto(0,1);
+    HD44780_writeString(" o mod WiFi     ");    
+    vTaskDelay(3000);
+    return;
+  }
+  
+  sprintf(dummy,"%d",flag);
+  HD44780_clearText();
+  HD44780_posicionaTexto(0,0);  
+  HD44780_writeString("MAC Telemetria");
+  HD44780_posicionaTexto(0,1);
+  HD44780_writeString(dummy);
  
   for(;TECLADO_getContadorInatividade();){
     

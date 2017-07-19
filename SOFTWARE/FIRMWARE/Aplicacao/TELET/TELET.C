@@ -81,6 +81,8 @@ unsigned char TELET_leSSID(char *ssid);
 unsigned char TELET_escreveSSID(char *ssid);
 unsigned char TELET_leSenhaWifi(char* senha);
 unsigned char TELET_escreveSenhaWifi(char* senha);
+unsigned char TELET_leMACAddress(char *MAC);
+unsigned int TELET_leMACTelemetria();
 void TELET_enviaEstado(TELET_estados estado_atual);
 unsigned char TELET_getEstadoConexaoTelemetria(void);
 
@@ -100,6 +102,7 @@ void TELET_main(void*pPar){
   TELET_ini();  
   
   for(;;){
+
     if(xQueueReceive(filaEstados,&estadoAtualTelet,500)){
       if(estadoAtualTelet==ESTADO_MONITORACAO){
         flags=0;
@@ -110,6 +113,8 @@ void TELET_main(void*pPar){
         flags |= MP_timeOutNoteiro()?0x08:0x00;
         flags |= IU_getFalhaMotor()?0x04:0x00;
         flags |= IU_getFalhaDosador()?0x02:0x00;
+
+
  
         if(TELET_escreveBlocoOperacao(PARAMETROS_carregaNumeroSerie(),
                                       PARAMETROS_leContadorVendas(),
@@ -269,7 +274,7 @@ unsigned char TELET_escreveBlocoOperacao(unsigned int numeroSerie,
   TELET_bufferTX[40] = tamanho;
   
   for(unsigned char i=0;i<tamanho;i++)
-    TELET_bufferTX[41+i] = versaoCPU[i] ;
+    TELET_bufferTX[41+i] = versaoCPU[i];
   
   TELET_bufferTX[41+tamanho]= flags;
   TELET_bufferTX[42+tamanho]= TELET_checksum(TELET_bufferTX,42+tamanho);
@@ -352,6 +357,80 @@ unsigned char TELET_leSSID(char *ssid){
        memcpy(ssid,&TELET_bufferRX[3],64);
           
        return 255; 
+     }        
+  }    
+  
+  return 0;
+}
+/***********************************************************************************
+*       Descrição       :       Faz a leitura do MAC da TELEMETRIA
+*       Parametros      :       nenhum
+*       Retorno         :       (unsigned int) MAC da Telemetria, se for zero falhou
+***********************************************************************************/
+unsigned int TELET_leMACTelemetria(){              
+  
+  TELET_bufferRX[1] = 255;
+                                           
+  TELET_bufferTX[0] = STX;
+  TELET_bufferTX[1] = 4;
+  TELET_bufferTX[2] = LE_MAC_TELEMETRIA;  
+  TELET_bufferTX[3]= TELET_checksum(TELET_bufferTX,3);
+  
+  TELET_enviaPacote(4);
+  
+  TELET_silentTime = RELOAD_TIME_OUT;
+  while(TELET_silentTime) //TELET_silentTime && TELET_bufferRX[1] != TELET_bytesRecebidos && timeout--)
+    vTaskDelay(1);
+  
+  //vTaskDelay(200);
+  
+  if( TELET_bytesRecebidos == TELET_bufferRX[1]){
+    
+    if(TELET_bufferRX[0] == 0x02 && 
+       TELET_bufferRX[1] == TELET_bytesRecebidos && 
+       TELET_bytesRecebidos < TAM_BUF_RX && 
+       TELET_bufferRX[TELET_bufferRX[1]-1] == TELET_checksum(TELET_bufferRX,TELET_bufferRX[1]-1)){
+     
+       unsigned int MAC = TELET_bufferRX[3]<<24  | TELET_bufferRX[4]<<16  | TELET_bufferRX[5]<<8  | TELET_bufferRX[6];
+          
+       return MAC; 
+     }        
+  }    
+  
+  return 0;
+}
+/***********************************************************************************
+*       Descrição       :       Faz a leitura do MAC Address
+*       Parametros      :       (char) MAC
+*       Retorno         :       (unsigned char) maior do que zero
+*                                              se conseguir realizar a operação
+***********************************************************************************/
+unsigned char TELET_leMACAddress(char *MAC){              
+  
+  TELET_bufferRX[1] = 255;
+                                           
+  TELET_bufferTX[0] = STX;
+  TELET_bufferTX[1] = 4;
+  TELET_bufferTX[2] = LE_MAC_ADDRESS;  
+  TELET_bufferTX[3]= TELET_checksum(TELET_bufferTX,3);
+  
+  TELET_enviaPacote(4);
+  
+  TELET_silentTime = RELOAD_TIME_OUT;
+  while(TELET_silentTime) //TELET_silentTime && TELET_bufferRX[1] != TELET_bytesRecebidos && timeout--)
+    vTaskDelay(1);
+  
+  //vTaskDelay(200);
+  
+  if( TELET_bytesRecebidos == TELET_bufferRX[1]){
+    
+    if(TELET_bufferRX[0] == 0x02 && 
+       TELET_bufferRX[1] == TELET_bytesRecebidos && 
+       TELET_bytesRecebidos < TAM_BUF_RX && 
+       TELET_bufferRX[TELET_bufferRX[1]-1] == TELET_checksum(TELET_bufferRX,TELET_bufferRX[1]-1)){
+     
+       memcpy(MAC,&TELET_bufferRX[4],TELET_bufferRX[3]);
+       return 255;
      }        
   }    
   

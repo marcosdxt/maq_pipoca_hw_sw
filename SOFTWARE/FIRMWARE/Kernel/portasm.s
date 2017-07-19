@@ -1,6 +1,5 @@
 /*__________________________________________________________________________________
-|	Quark Tecnologia Eletrônica Embarcada
-|       
+|	Quark Tecnologia Eletrï¿½nica Embarcad|       
 |       Itapema - SC
 |       www.quarktee.com.br
 | __________________________________________________________________________________
@@ -9,19 +8,15 @@
 |       or in whole, or used, except when legally licensed by Quark 
 |       or its distributors.
 |
-|       Este código é propriedade da Quark  e não pode ser copiado, em parte 
-|       ou em todo, ou utilizado, exceto quando for legalmente licenciado pela 
+|       Este cï¿½digo ï¿½ propriedade da Quark  e nï¿½o pode ser copiado, em p|       ou em todo, ou utilizado, exceto quando for legalmente licenciado pela 
 |       Quark  ou por um de seus distribuidores.
 | __________________________________________________________________________________
 |
 |       Arquivo            :
-|       Descrição          :
-| 
+|       Descriï¿½ï¿½o        | 
 |       Autor              :
-|       Data criação       :
-|
-|       Revisões           :
-|
+|       Data criaï¿½ï¿½o     |
+|       Revisï¿½es           |
 |
 | __________________________________________________________________________________
 */
@@ -125,4 +120,3 @@ vPortStartFirstTask
 	svc 0
 
 	END
-	

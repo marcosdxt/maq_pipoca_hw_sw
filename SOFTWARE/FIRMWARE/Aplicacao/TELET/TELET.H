@@ -38,7 +38,9 @@ typedef enum{
   ESCREVE_SSID,
   LE_SSID,
   ESCREVE_SENHA_WIFI,
-  LE_SENHA_WIFI    
+  LE_SENHA_WIFI,
+  LE_MAC_ADDRESS,
+  LE_MAC_TELEMETRIA
 }TELET_comandos;
 
 typedef enum{
@@ -65,6 +67,8 @@ unsigned char TELET_leSSID(char *ssid);
 unsigned char TELET_escreveSSID(char *ssid);
 unsigned char TELET_leSenhaWifi(char* senha);
 unsigned char TELET_escreveSenhaWifi(char* senha);
+unsigned char TELET_leMACAddress(char *MAC);
+unsigned int TELET_leMACTelemetria();
 void TELET_enviaEstado(TELET_estados estado_atual);
 unsigned char TELET_getEstadoConexaoTelemetria(void);
 
