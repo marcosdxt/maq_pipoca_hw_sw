@@ -4994,7 +4994,7 @@ void MCS_menuAvancado(void){
   eTECLA tecla;
   unsigned char indice=0;  
   
-  if(0){//!MCS_telaSenha(/*6651*/SENHA_MENU_AVANCADO)){
+  if(!MCS_telaSenha(/*6651*/SENHA_MENU_AVANCADO)){
     HD44780_clearText();
     return;
   }
