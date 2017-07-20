@@ -93,6 +93,7 @@ extern unsigned int BOARD_lock_timer;
 unsigned int kp_const = 0;
 unsigned int kd_const = 0;
 unsigned int ki_const = 0;
+unsigned short int CM_correcao_erro = 0;
 
 /***********************************************************************************
 *       Funções locais
@@ -180,6 +181,7 @@ void MU_ini(void){
   
   IP4_bit.PRI_19 = 0; 
   
+  CM_correcao_erro = PARAMETROS_le_correcao_erro();
   kp_const = (unsigned int)( (PARAMETROS_le_ganho_KP()*(KP/100))*256);
   ki_const = (unsigned int)(((PARAMETROS_le_ganho_KI()*(KI-0.01)/100)+0.01)*32768);
   kd_const = (unsigned int)(((PARAMETROS_le_ganho_KD()*(KD-0.01)/100)+0.01)*32768);
@@ -281,36 +283,45 @@ void MU_controleVelocidade(void){
           else
             referencia_rampa+=25;//50;
         }      
-        
         if(ciclos){
           // Nos primeiros ciclos trabalha apenas com o erro
           // proporcional
-          ciclos--;
-          erro = referencia_rampa - MU_getRPMmedido();
-          erro*= kp_const;
-          erro>>= 8;   
-          CM_calcula_derivada_erro(referencia_rampa);
-          
-          SET_ATRASO(MU_calculaAtrasoGate(erro));
+          if(CM_correcao_erro){
+            ciclos--;
+            erro = referencia_rampa - MU_getRPMmedido();
+            erro*= kp_const;
+            erro>>= 8;   
+            CM_calcula_derivada_erro(referencia_rampa);
+            
+            SET_ATRASO(MU_calculaAtrasoGate(erro));
+          }
+          else{
+            SET_ATRASO(MU_calculaAtrasoGate(referencia_rampa));
+          }
         }
         else{
-          // Calcula o erro entre a referência e a rotação medida pelo sensor
-          erro = referencia_rampa - MU_getRPMmedido();
-          // Calcula a integral do erro
-          erro_i = MU_calcula_integral_erro(erro,0);                     
-          erro_i *= ki_const;
-          erro_i >>= 15;
-          
-          erro_d = CM_calcula_derivada_erro(erro);
-          erro_d *= kd_const;
-          erro_d >>= 15;
-          
-          erro*= kp_const;
-          erro>>= 8;          
-          erro += erro_i;
-          erro += erro_d;
-          
-          SET_ATRASO(MU_calculaAtrasoGate(erro));          
+          if(CM_correcao_erro){
+            // Calcula o erro entre a referência e a rotação medida pelo sensor
+            erro = referencia_rampa - MU_getRPMmedido();
+            // Calcula a integral do erro
+            erro_i = MU_calcula_integral_erro(erro,0);                     
+            erro_i *= ki_const;
+            erro_i >>= 15;
+            
+            erro_d = CM_calcula_derivada_erro(erro);
+            erro_d *= kd_const;
+            erro_d >>= 15;
+            
+            erro*= kp_const;
+            erro>>= 8;          
+            erro += erro_i;
+            erro += erro_d;
+            
+            SET_ATRASO(MU_calculaAtrasoGate(erro));
+          }
+          else{
+            SET_ATRASO(MU_calculaAtrasoGate(referencia_rampa));
+          }
         }
   }
   else{
@@ -485,7 +496,7 @@ unsigned int MU_calculaAtrasoGate(int rotacao_rpm){
 #ifdef FQ_REDE_60_HZ  
   long long int valor;
   
-  valor = rotacao_rpm*4404;
+  valor = rotacao_rpm*2800;
   valor>>= 15;
   valor = 2499 - valor; 
   

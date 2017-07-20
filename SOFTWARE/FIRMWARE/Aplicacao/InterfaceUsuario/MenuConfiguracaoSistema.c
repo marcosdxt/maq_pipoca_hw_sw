@@ -51,7 +51,7 @@
 #define TAM_MENU_PERIFERICOS                            5
 #define TAM_LISTA_HARDWARE                              19
 #define TAM_LISTA_WIFI                                  9
-#define TAM_LISTA_AVANCADO                              13
+#define TAM_LISTA_AVANCADO                              14
 #define TAM_LISTA_CONTADORES                            5
 #define TAM_LISTA_PID                                   4
 /************************************************************************************
@@ -193,6 +193,7 @@ const char *MCS_mensagemAvancado[TAM_LISTA_AVANCADO]={
   "(10)Senha       ", 
   "(11)Senha Mestre",
   "(12)Ganhos PID  ",
+  "(13)Cor. erro   ",
   "    Voltar      "
 };
 
@@ -513,6 +514,7 @@ void MCS_configura_valor_credito_uca1(void);
 void MCS_tela_configura_PID(void);
 void MCS_menu_configura_ganhos(void);
 
+void MCS_tela_correcao_erro(void);
 void MCS_tela_configura_P(void);
 void MCS_tela_configura_I(void);
 void MCS_tela_configura_D(void);
@@ -637,6 +639,7 @@ void(*const MCS_funcAvancado[])(void)={
   MCS_cadastraSenhas,
   MCS_tela_reset_master,
   MCS_menu_configura_ganhos,
+  MCS_tela_correcao_erro,
   NULL
 };
 
@@ -5648,6 +5651,38 @@ void MCS_menu_configura_ganhos(void){
     }
 
     MCS_desenha_fundo(indice);
+  }   
+}
+/************************************************************************************
+*       Descri��o       :       Menu para habilitar correcao erro (PID)
+*       Parametros      :       nenhum
+*       Retorno         :       nenhum
+************************************************************************************/
+void MCS_tela_correcao_erro(void){
+  eTECLA tecla;  
+  unsigned char habilita=PARAMETROS_le_correcao_erro();
+  
+  HD44780_clearText();
+  HD44780_writeString("Correcao Erro");
+  
+  for(;TECLADO_getContadorInatividade();){
+    
+    tecla = TECLADO_getch();
+    switch(tecla){
+      case TECLA_ENTER:
+           PARAMETROS_grava_correcao_erro(habilita);         
+           return;
+      case TECLA_ESC:
+           return;
+      case TECLA_INC:
+           habilita = (++habilita) % 2;
+           break;
+      case TECLA_DEC:
+           habilita = (++habilita) % 2;
+           break;
+    }
+    HD44780_posicionaTexto(6,1);
+    HD44780_writeString(habilita?"ON ":"OFF");
   }   
 }
 /************************************************************************************

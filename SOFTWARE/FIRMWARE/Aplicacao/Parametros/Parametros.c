@@ -1823,7 +1823,7 @@ unsigned short int PARAMETROS_le_ganho_KP(void){
     return (unsigned int)(buffer[0]<<8 | buffer[1]);
   }
    
-  return 4;  
+  return 20;  
 }
 /***********************************************************************************
 *       Descri��o       :       Grava o ganho integral
@@ -1843,7 +1843,7 @@ void PARAMETROS_grava_ganho_KI(unsigned short int ki){
   MEMORYWRAPPER_writeBytes(ADR_GANHO_KI,buffer,4);
 }
 /***********************************************************************************
-*       Descri��o       :       L� o ganho KI
+*       Descri��o       :       Le o ganho KI
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned short int) ganho Ki
 ***********************************************************************************/
@@ -1858,7 +1858,7 @@ unsigned short int PARAMETROS_le_ganho_KI(void){
     return (unsigned int)(buffer[0]<<8 | buffer[1]);
   }
    
-  return 2;  
+  return 1;  
 }
 /***********************************************************************************
 *       Descri��o       :       Grava o ganho KD
@@ -1878,7 +1878,7 @@ void PARAMETROS_grava_ganho_KD(unsigned short int kd){
   MEMORYWRAPPER_writeBytes(ADR_GANHO_KD,buffer,4);
 }
 /***********************************************************************************
-*       Descri��o       :       Grava o ganho KD
+*       Descri��o       :       Le o ganho KD
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned short int) ganho KD
 ***********************************************************************************/
@@ -1893,10 +1893,10 @@ unsigned short int PARAMETROS_le_ganho_KD(void){
     return (unsigned int)(buffer[0]<<8 | buffer[1]);
   }
    
-  return 2;  
+  return 50;  
 }
 /***********************************************************************************
-*       Descri��o       :       Le vers�o da CPU
+*       Descri��o       :       Le versao da CPU
 *       Parametros      :       nenhum
 *       Retorno         :       vsCPU
 ***********************************************************************************/
@@ -1905,6 +1905,40 @@ char* PARAMETROS_leVersaoCPU(void){
   
   return (char*)versao;
 } 
+/***********************************************************************************
+*       Descri��o       :       Grava correcao de erro
+*       Parametros      :       (unsigned short int) grava o ganho derivativo
+*       Retorno         :       nenhum
+***********************************************************************************/
+void PARAMETROS_grava_correcao_erro(unsigned short int correcao_erro){
+  unsigned char buffer[3];
+  unsigned short int crc;
+  
+  buffer[0] = correcao_erro;
+  crc = CCTALK_calculaCRC(buffer,0,1);   
+  buffer[1] = crc>>8;
+  buffer[2] = crc;
+  
+  MEMORYWRAPPER_writeBytes(ADR_CORRECAO_ERRO,buffer,3);
+}
+/***********************************************************************************
+*       Descri��o       :       le correcao de erro
+*       Parametros      :       nenhum
+*       Retorno         :       (unsigned short int) ganho KD
+***********************************************************************************/
+unsigned short int PARAMETROS_le_correcao_erro(void){
+  unsigned char buffer[3];
+  unsigned short int crc;
+  
+  MEMORYWRAPPER_readBytes(ADR_CORRECAO_ERRO,buffer,3);
+  crc = CCTALK_calculaCRC(buffer,0,1);
+  
+  if(crc==(buffer[1]<<8 | buffer[2])){
+    return (unsigned int)buffer[0];
+  }
+   
+  return 1;  
+}
 /***********************************************************************************
 *       Fim do arquivo
 ***********************************************************************************/
