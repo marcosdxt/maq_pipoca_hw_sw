@@ -43,7 +43,7 @@
 *       Defini��es
 ************************************************************************************/
 #define TAM_MENU_PRINCIPAL                              9
-#define TAM_MENU_PREPARACAO                             8
+#define TAM_MENU_PREPARACAO                             6
 #define TAM_MENU_EXIBICAO                               10
 #define TAM_MENU_OPERACAO                               6
 #define TAMANHO_OPCOES_DESUMI                           4
@@ -72,13 +72,11 @@ const char *MCS_opcoesMenuPrincipal[TAM_MENU_PRINCIPAL]={
 };
 
 const char *MCS_opcoesMenuPreparacao[TAM_MENU_PREPARACAO]={
-  "(1)Temp. inicial",    
-  "(2)Temp. Final  ",
-  "(3)Rampa aquec. ",
-  "(4)Veloc. prep. ",
-  "(5)Atraso emb.  ",
-  "(6)Teste prep.  ",
-  "(7)Conf. fabrica",
+  "(1)Temperatura  ",
+  "(2)Veloc. prep. ",
+  "(3)Atraso emb.  ",
+  "(4)Teste prep.  ",
+  "(5)Conf. fabrica",
   " Voltar         "
 };
 
@@ -416,7 +414,6 @@ void MCS_telaPreProcesso(void);
 void MCS_menuConfiguraVelocidadeExpulsaoPipocas(void);
 void MCS_menuConfiguraVelocidadeFinalExpulsao(void);
 void MCS_volumeSom(void);
-void MCS_ajusteFatorTemperatura(void);
 void MCS_telaCadastroVelocidadeLimpeza(void);
 void MCS_telaConfiguraVelocidadePreAquecimento(void);
 void MCS_menuTesteHardware(void);
@@ -538,8 +535,6 @@ void(*const MCS_funcMenuPrincipal[])(void)={
 
 void(*const MCS_funcMenuPreparo[])(void)={  
   MCS_configuraTemperaturaInicial,
-  MCS_configTemperaturaPipocas,
-  MCS_ajusteFatorTemperatura,
   MCS_configuraVelocidadePreparacao,
   MCS_configuraTesteTempoEmbalagem,
   PIPOCATESTE_prepara,
@@ -831,46 +826,6 @@ void MCS_configTempoPreparoPipocas(void){
     
     vTaskDelay(50);
   }   
-}
-/************************************************************************************
-*       Descri��o       :       Tela para o usu�rio configurar a temperatura
-*                               de prepara��o das pipocas
-*       Parametros      :       nenhum
-*       Retorno         :       nenhum
-************************************************************************************/
-void MCS_configTemperaturaPipocas(void){
-  eTECLA tecla;  
-  char bufferLinha[17];
-  unsigned short int temperatura = PARAMETROS_leParametro(TEMPERATURA_PREPARO);
-  
-  HD44780_clearText();
-  HD44780_writeString("  Temp. maxima  ");
-  
-  for(;TECLADO_getContadorInatividade();){
-    
-    tecla = TECLADO_getch();
-    switch(tecla){
-     case TECLA_ENTER:
-          PARAMETROS_escreveParametro(TEMPERATURA_PREPARO,temperatura);
-     case TECLA_ESC:
-          HD44780_clearText();
-          return;
-     case TECLA_DEC:
-          if(temperatura>60)
-            temperatura--;       
-          break;
-     case TECLA_INC:
-          if(temperatura<200)
-            temperatura++;
-          break;
-    }
-           
-    sprintf(bufferLinha,"%03d oC",temperatura);
-    HD44780_posicionaTexto(6,1);
-    HD44780_writeString(bufferLinha);
-    
-    vTaskDelay(50);
-  }    
 }
 /************************************************************************************
 *       Descri��o       :       Tela para o usu�rio configurar a velocidade
@@ -1967,46 +1922,6 @@ void MCS_volumeSom(void){
     
     vTaskDelay(50);
   }  
-}
-/************************************************************************************
-*       Descri��o       :       Tela para o usu�rio 
-*                               cadastrar o fator de opera��o da temperatura
-*       Parametros      :       nenhum
-*       Retorno         :       nenhum
-************************************************************************************/
-void MCS_ajusteFatorTemperatura(void){
-  eTECLA tecla;
-  char bufferLinha[17];
-  unsigned short int volume = PARAMETROS_leFatorTrabalho();
-
-  HD44780_clearText();
-  HD44780_writeString(" Tempo de subida");
-  
-  for(;TECLADO_getContadorInatividade();){
-    
-    tecla = TECLADO_getch();
-    switch(tecla){
-     case TECLA_ENTER:
-          PARAMETROS_gravaFatorTrabalho(volume);
-     case TECLA_ESC: 
-          HD44780_clearText();
-          return;
-     case TECLA_DEC:
-          if(volume>1)
-            volume--;
-          break;
-     case TECLA_INC:
-          if(volume<120)
-            volume++;
-          break;
-    }
-        
-    sprintf(bufferLinha,"%02d oC/s",volume);
-    HD44780_posicionaTexto(6,1);
-    HD44780_writeString(bufferLinha);              
-    
-    vTaskDelay(50);
-  } 
 }
 /************************************************************************************
 *       Descri��o       :       Tela para cadastrar a velocidade da limpeza

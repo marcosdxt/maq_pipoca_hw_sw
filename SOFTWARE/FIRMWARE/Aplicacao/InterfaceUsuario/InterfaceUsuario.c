@@ -734,12 +734,12 @@ unsigned char IU_preparaPipoca(void){
   IU_cicloCompensador();
   
   unsigned short int temperatura,tempo,v1,atrasoPacote,inicial,final;
-  unsigned short int fator = PARAMETROS_leFatorTrabalho();
+  unsigned short int fator = 3; //PARAMETROS_leFatorTrabalho();
   unsigned short int velocidadeAquecimento = PARAMETROS_leParametro(VELOCIDADE_PREPARO);
   unsigned short int animacaoPreparo = PARAMETROS_leFitaPreparo();
-  unsigned short int rampa = PARAMETROS_leFatorTrabalho();
+  unsigned short int rampa = 3; //PARAMETROS_leFatorTrabalho();
       
-  temperatura = PARAMETROS_leParametro(TEMPERATURA_PREPARO);
+  temperatura = PARAMETROS_leTemperaturaInicio() + 20; //PARAMETROS_leParametro(TEMPERATURA_PREPARO);
   tempo = PARAMETROS_leParametro(TEMPO_PREPARO);
   if(IU_compensadorRotacao)
     v1 = PARAMETROS_leParametro(VELOCIDADE_PREPARO) + ((IU_compensadorRotacao-1)>>1);
