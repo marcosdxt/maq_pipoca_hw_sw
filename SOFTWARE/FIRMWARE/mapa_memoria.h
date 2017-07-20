@@ -100,5 +100,6 @@
 #define ADR_GANHO_KP                    0x2070
 #define ADR_GANHO_KI                    0x2080
 #define ADR_GANHO_KD                    0x2090
+#define ADR_CORRECAO_ERRO               0x2100
 
 #endif//_MAPA_MEMORIA_H_
