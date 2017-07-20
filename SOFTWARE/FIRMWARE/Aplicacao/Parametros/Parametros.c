@@ -1,5 +1,5 @@
 /*__________________________________________________________________________________
-|	Quark Tecnologia Eletrônica Embarcada
+|	Quark Tecnologia Eletrï¿½nica Embarcada
 |       
 |       Itapema - SC
 |       www.quarktee.com.br
@@ -9,7 +9,7 @@
 |       or in whole, or used, except when legally licensed by Quark 
 |       or its distributors.
 |
-|       Este código é propriedade da Quark  e não pode ser copiado, em parte 
+|       Este cï¿½digo ï¿½ propriedade da Quark  e nï¿½o pode ser copiado, em parte 
 |       ou em todo, ou utilizado, exceto quando for legalmente licenciado pela 
 |       Quark  ou por um de seus distribuidores.
 | __________________________________________________________________________________
@@ -17,9 +17,9 @@
 |       Arquivo            :  Parametros.c
 | 
 |       Autor              :  Marcos Aquino
-|       Data criação       :  11/03/2014
+|       Data criaï¿½ï¿½o       :  11/03/2014
 |
-|       Revisões           :  1.0.0.0
+|       Revisï¿½es           :  1.0.0.0
 |
 |
 | __________________________________________________________________________________
@@ -34,7 +34,7 @@
 #include "..\..\includes.h"
 
 /***********************************************************************************
-*       Definições
+*       Definiï¿½ï¿½es
 ***********************************************************************************/
 
 
@@ -54,20 +54,20 @@ const unsigned int PARAMETROS_enderecoTabela[4]={
 
 
 /***********************************************************************************
-*       Funções locais
+*       Funï¿½ï¿½es locais
 ***********************************************************************************/
 extern unsigned short int CCTALK_calculaCRC(unsigned char *pData,unsigned short int offset,
                                             unsigned short int tamanho);
 
 /***********************************************************************************
-*       Implementação das funções
+*       Implementaï¿½ï¿½o das funï¿½ï¿½es
 ***********************************************************************************/
 
 /***********************************************************************************
-*       Descrição       :      Altera os dados de uma das posições da tabela
-*                              de indexação dos arquivos de audio
-*       Parametros      :      (unsigned char) indice da música
-*                              (unsigned long int) endereço inicial da musica
+*       Descriï¿½ï¿½o       :      Altera os dados de uma das posiï¿½ï¿½es da tabela
+*                              de indexaï¿½ï¿½o dos arquivos de audio
+*       Parametros      :      (unsigned char) indice da mï¿½sica
+*                              (unsigned long int) endereï¿½o inicial da musica
 *                              (unsigned long int) tamanho da musica
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -89,11 +89,11 @@ void PARAMETROS_alteraTabelaIndiceMusicas(unsigned char musica,
   MEMORYWRAPPER_writeBytes(PARAMETROS_enderecoTabela[musica],buffer,8);                                                                                                                                     
 }
 /***********************************************************************************
-*       Descrição       :       Lê os dados de uma das posições da tabela
-*                               de indexação dos arquivos de audio
-*       Parametros      :       (unsigned char) indice da música
-*                               (unsigned long int*) endereço inicial da música
-*                               (unsigned long int*) tamanho da música
+*       Descriï¿½ï¿½o       :       Lï¿½ os dados de uma das posiï¿½ï¿½es da tabela
+*                               de indexaï¿½ï¿½o dos arquivos de audio
+*       Parametros      :       (unsigned char) indice da mï¿½sica
+*                               (unsigned long int*) endereï¿½o inicial da mï¿½sica
+*                               (unsigned long int*) tamanho da mï¿½sica
 *       Retorno         :       (unsigned char) maior do que zero se os
 *                                               dados forem consistentes
 ***********************************************************************************/
@@ -118,7 +118,7 @@ unsigned char PARAMETROS_carregaDadosIndiceMusicas(unsigned char musica,
   return 0;
 }
 /***********************************************************************************
-*       Descrição       :       Escreve na tabela de parametros do sistema
+*       Descriï¿½ï¿½o       :       Escreve na tabela de parametros do sistema
 *       Parametros      :       (unsigned char) indice do parametro
 *                               (unsigned short int) valor do parametro
 *       Retorno         :       nenhum
@@ -155,7 +155,7 @@ void PARAMETROS_escreveParametro(unsigned char indice,unsigned short int valor){
   }
 }
 /***********************************************************************************
-*       Descrição       :       Lê um parametro a partir da tabela de parametros
+*       Descriï¿½ï¿½o       :       Lï¿½ um parametro a partir da tabela de parametros
 *                               do sistema
 *       Parametros      :       (unsigned char) indice do parametro
 *                               (unsigned short int) valor do parametro
@@ -215,7 +215,7 @@ unsigned short int PARAMETROS_leParametro(unsigned char indice){
     return limiteInferior;   
 }
 /***********************************************************************************
-*       Descrição       :       Grava o beta do termistor
+*       Descriï¿½ï¿½o       :       Grava o beta do termistor
 *       Parametros      :       (unsigned int) beta
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -236,7 +236,7 @@ void PARAMETROS_salvaBetaTermistor(unsigned int beta){
   MEMORYWRAPPER_writeBytes(ADR_BETA,buffer,6);    
 }
 /***********************************************************************************
-*       Descrição       :       Carrega o beta do transistor 
+*       Descriï¿½ï¿½o       :       Carrega o beta do transistor 
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned int) beta
 ***********************************************************************************/
@@ -251,10 +251,10 @@ unsigned int PARAMETROS_carregaBetaTermistor(void){
   if(crc == buffer[4]<<8 | buffer[5])       
     return buffer[0]<<24 | buffer[1]<<16 | buffer[2]<<8 | buffer[3];
   
-  return 4750; // valor padrão para o termistor utilizado no projeto
+  return 4750; // valor padrï¿½o para o termistor utilizado no projeto
 }
 /***********************************************************************************
-*       Descrição       :       Grava o parametro RT na flash
+*       Descriï¿½ï¿½o       :       Grava o parametro RT na flash
 *       Parametros      :       (unsigned int) RT do termistor 
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -275,7 +275,7 @@ void PARAMETROS_salvaRTtermistor(unsigned int rt){
   MEMORYWRAPPER_writeBytes(ADR_RT,buffer,6);    
 }
 /***********************************************************************************
-*       Descrição       :       Lê o parametro RT a partir da flash
+*       Descriï¿½ï¿½o       :       Lï¿½ o parametro RT a partir da flash
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned int) valor do rt
 ***********************************************************************************/
@@ -290,10 +290,10 @@ unsigned int PARAMETROS_carregaRTtermistor(void){
   if(crc== buffer[4]<<8 | buffer[5])
     return buffer[0]<<24 | buffer[1]<<16 | buffer[2]<<8 | buffer[3];
   
-  return 120505; // Valor padrão para o termistor escolhido no projeto                   
+  return 120505; // Valor padrï¿½o para o termistor escolhido no projeto                   
 }
 /***********************************************************************************
-*       Descrição       :       Configura quais cédulas serão aceitas pelo 
+*       Descriï¿½ï¿½o       :       Configura quais cï¿½dulas serï¿½o aceitas pelo 
 *                               noteiro
 *       Parametros      :       (unsigned char) R$ 2,00
 *                               (unsigned char) R$ 5,00
@@ -322,8 +322,8 @@ void PARAMETROS_gravaTipoCedulas(unsigned char f2,unsigned char f5,unsigned char
   MEMORYWRAPPER_writeBytes(ADR_TIPO_CEDULAS,buffer,3);                                                                      
 }
 /***********************************************************************************
-*       Descrição       :       Verifica quais cédulas estão habilitadas
-*                               para uso na máquina
+*       Descriï¿½ï¿½o       :       Verifica quais cï¿½dulas estï¿½o habilitadas
+*                               para uso na mï¿½quina
 *       Parametros      :       (unsigned char*) R$ 2,00
 *                               (unsigned char*) R$ 5,00
 *                               (unsigned char*) R$ 10,00
@@ -358,7 +358,7 @@ void PARAMETROS_carregaTipoCedulas(unsigned char *f2,unsigned char *f5,unsigned 
   }                                                                         
 }
 /***********************************************************************************
-*       Descrição       :       Lê o valor do contador de vendas
+*       Descriï¿½ï¿½o       :       Lï¿½ o valor do contador de vendas
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned int) contador de vendas
 ***********************************************************************************/
@@ -376,7 +376,7 @@ unsigned int PARAMETROS_leContadorVendas(void){
   return 0; 
 }
 /***********************************************************************************
-*       Descrição       :       Salva o valor do contador de vendas
+*       Descriï¿½ï¿½o       :       Salva o valor do contador de vendas
 *       Parametros      :       (unsigned int) contador de vendas
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -395,9 +395,9 @@ void PARAMETROS_salvaContadorVendas(unsigned int contador){
   MEMORYWRAPPER_writeBytes(ADR_CONTADOR_VENDAS,buffer,6);
 }
 /***********************************************************************************
-*       Descrição       :      Lê o contador de arrecadação
+*       Descriï¿½ï¿½o       :      Lï¿½ o contador de arrecadaï¿½ï¿½o
 *       Parametros      :       nenhum
-*       Retorno         :       (unsigned int) contador de arrecadação financeira
+*       Retorno         :       (unsigned int) contador de arrecadaï¿½ï¿½o financeira
 ***********************************************************************************/
 unsigned int PARAMETROS_leContadorArrecadacao(void){
   unsigned char buffer[6];
@@ -413,7 +413,7 @@ unsigned int PARAMETROS_leContadorArrecadacao(void){
   return 0; 
 }
 /***********************************************************************************
-*       Descrição       :       Salva o contador de arrecadacao
+*       Descriï¿½ï¿½o       :       Salva o contador de arrecadacao
 *       Parametros      :       (unsigned int) valores do contador de arrecadacao
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -432,7 +432,7 @@ void PARAMETROS_salvaContadorArrecadacao(unsigned int arrecadacao){
   MEMORYWRAPPER_writeBytes(ADR_CONTADOR_DINHEIRO,buffer,6);
 }
 /***********************************************************************************
-*       Descrição       :       Lê o contador de dinheiro permanente
+*       Descriï¿½ï¿½o       :       Lï¿½ o contador de dinheiro permanente
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned int) totalizador
 ***********************************************************************************/
@@ -450,7 +450,7 @@ unsigned int PARAMETROS_leTotalizadorPermanente(void){
   return 0; 
 }
 /***********************************************************************************
-*       Descrição       :       Escreve no contador de dinheiro permanente
+*       Descriï¿½ï¿½o       :       Escreve no contador de dinheiro permanente
 *       Parametros      :       (unsigned int) totalizador
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -469,7 +469,7 @@ void PARAMETROS_gravaTotalizadorPermanente(unsigned int totalizador){
   MEMORYWRAPPER_writeBytes(ADR_CONTADOR_PERMANENTE,buffer,6);
 }
 /***********************************************************************************
-*       Descrição       :       Lê o parâmetro tempo de propaganda
+*       Descriï¿½ï¿½o       :       Lï¿½ o parï¿½metro tempo de propaganda
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned short int) intervalo 
 *                                                    das propagandas
@@ -489,7 +489,7 @@ unsigned short int PARAMETROS_leIntervaloPropaganda(void){
   return 0;  
 }
 /***********************************************************************************
-*       Descrição       :       Escreve no parâmetro tempo de propaganda
+*       Descriï¿½ï¿½o       :       Escreve no parï¿½metro tempo de propaganda
 *       Parametros      :       (unsigned short int) tempo para propaganda
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -506,11 +506,11 @@ void PARAMETROS_gravaIntervaloPropaganda(unsigned short int intervalo){
   MEMORYWRAPPER_writeBytes(ADR_TEMPO_PROPAGANDA,buffer,4);       
 }
 /***********************************************************************************
-*       Descrição       :       Lê o parâmetro que indica se as fitas de led
-*                               frontais ficam piscando ou não
+*       Descriï¿½ï¿½o       :       Lï¿½ o parï¿½metro que indica se as fitas de led
+*                               frontais ficam piscando ou nï¿½o
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned short int) maior do que zero sim
-*                                                    igual a zero não
+*                                                    igual a zero nï¿½o
 ***********************************************************************************/
 unsigned short int PARAMETROS_leFlagPiscadaPropaganda(void){
   unsigned char buffer[4];
@@ -526,10 +526,10 @@ unsigned short int PARAMETROS_leFlagPiscadaPropaganda(void){
   return 0;
 }
 /***********************************************************************************
-*       Descrição       :       Escreve o parâmetro que indica se as fitas de led
-*                               devem piscar ou não
+*       Descriï¿½ï¿½o       :       Escreve o parï¿½metro que indica se as fitas de led
+*                               devem piscar ou nï¿½o
 *       Parametros      :       (unsigned short int) maior do que zero sim
-*                                                    igual a zero não
+*                                                    igual a zero nï¿½o
 *       Retorno         :       nenhum
 ***********************************************************************************/
 void PARAMETROS_gravaFlagPiscadaPropaganda(unsigned short int flag){
@@ -545,9 +545,9 @@ void PARAMETROS_gravaFlagPiscadaPropaganda(unsigned short int flag){
   MEMORYWRAPPER_writeBytes(ADR_FITA_LED,buffer,4);      
 }
 /***********************************************************************************
-*       Descrição       :       Lê o parâmetro temperatura de pré-processo
+*       Descriï¿½ï¿½o       :       Lï¿½ o parï¿½metro temperatura de prï¿½-processo
 *       Parametros      :       nenhum
-*       Retorno         :       (unsigned short int) temperatura de pré-processo
+*       Retorno         :       (unsigned short int) temperatura de prï¿½-processo
 ***********************************************************************************/
 unsigned short int PARAMETROS_leTemperaturaPreProcesso(void){
   unsigned char buffer[4];
@@ -570,7 +570,7 @@ unsigned short int PARAMETROS_leTemperaturaPreProcesso(void){
   return 60;
 }
 /***********************************************************************************
-*       Descrição       :       Salva a temperatura de pré-processo
+*       Descriï¿½ï¿½o       :       Salva a temperatura de prï¿½-processo
 *       Parametros      :       (unsigned short int) temperatura
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -587,9 +587,9 @@ void PARAMETROS_salvaTemperaturaPreProcesso(unsigned short int temperatura){
   MEMORYWRAPPER_writeBytes(ADR_TEMPERATURA_PRE_PROCESSO,buffer,4);    
 }
 /***********************************************************************************
-*       Descrição       :       Salva o parâmetro velocidade inicial
-*                               da expulsão da pipoca
-*       Parametros      :       (unsigned short int) rotação inicial
+*       Descriï¿½ï¿½o       :       Salva o parï¿½metro velocidade inicial
+*                               da expulsï¿½o da pipoca
+*       Parametros      :       (unsigned short int) rotaï¿½ï¿½o inicial
 *       Retorno         :       nenhum
 ***********************************************************************************/
 void PARAMETROS_salvaRotacaoInicialExpulsao(unsigned short int rpm){
@@ -605,9 +605,9 @@ void PARAMETROS_salvaRotacaoInicialExpulsao(unsigned short int rpm){
   MEMORYWRAPPER_writeBytes(ADR_VELOCIDADE_INICIAL_EXP,buffer,4);      
 }
 /***********************************************************************************
-*       Descrição       :       Lê o parâmetro velocidade inicial
+*       Descriï¿½ï¿½o       :       Lï¿½ o parï¿½metro velocidade inicial
 *       Parametros      :       nenhum
-*       Retorno         :       (unsigned short int) rotação inicial
+*       Retorno         :       (unsigned short int) rotaï¿½ï¿½o inicial
 ***********************************************************************************/
 unsigned short int PARAMETROS_leRotacaoInicialExpulsao(void){
   unsigned char buffer[4];
@@ -630,8 +630,8 @@ unsigned short int PARAMETROS_leRotacaoInicialExpulsao(void){
   return 5000;
 }
 /***********************************************************************************
-*       Descrição       :       Salva o parâmetro velocidade final
-*                               de expulsão
+*       Descriï¿½ï¿½o       :       Salva o parï¿½metro velocidade final
+*                               de expulsï¿½o
 *       Parametros      :       (unsigned short int) velocidade
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -648,7 +648,7 @@ void PARAMETROS_salvaVelocidadeFinalExpulsao(unsigned short int rpm){
   MEMORYWRAPPER_writeBytes(ADR_VELOCIDADE_FINAL_EXP,buffer,4);   
 }
 /***********************************************************************************
-*       Descrição       :       Lê o parâmetro velocidade final de expulsão
+*       Descriï¿½ï¿½o       :       Lï¿½ o parï¿½metro velocidade final de expulsï¿½o
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned short int) velocidade
 ***********************************************************************************/
@@ -673,7 +673,7 @@ unsigned short int PARAMETROS_leVelocidadeFinalExpulsao(void){
   return 5000;
 }
 /***********************************************************************************
-*       Descrição       :       Lê o parametro do volume do som
+*       Descriï¿½ï¿½o       :       Lï¿½ o parametro do volume do som
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned short int) volume do som
 ***********************************************************************************/
@@ -696,7 +696,7 @@ unsigned short int PARAMETROS_leVolumeSom(void){
   return 100;
 }
 /***********************************************************************************
-*       Descrição       :       Escreve no parametro volume do som
+*       Descriï¿½ï¿½o       :       Escreve no parametro volume do som
 *       Parametros      :       (unsigned short int) volume do som
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -713,7 +713,7 @@ void PARAMETROS_gravaVolumeSom(unsigned short int volume){
   MEMORYWRAPPER_writeBytes(ADR_VOLUME_SOM,buffer,4);  
 }
 /***********************************************************************************
-*       Descrição       :       Lê o fato de trabalho do ajuste da temperatura
+*       Descriï¿½ï¿½o       :       Lï¿½ o fato de trabalho do ajuste da temperatura
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned short int) fator de trabaho
 ***********************************************************************************/
@@ -738,7 +738,7 @@ unsigned short int PARAMETROS_leFatorTrabalho(void){
   return 1; 
 }
 /***********************************************************************************
-*       Descrição       :       Salva o fator de trabalho da temperatura
+*       Descriï¿½ï¿½o       :       Salva o fator de trabalho da temperatura
 *       Parametros      :       (unsigned short int) fator de trabalho
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -755,7 +755,7 @@ void PARAMETROS_gravaFatorTrabalho(unsigned short int fator){
   MEMORYWRAPPER_writeBytes(ADR_FATOR_TEMP,buffer,4);  
 }
 /***********************************************************************************
-*       Descrição       :       Lê o parâmetro velocidade da limpeza
+*       Descriï¿½ï¿½o       :       Lï¿½ o parï¿½metro velocidade da limpeza
 *       Parametros:     :       nenhum
 *       Retorno         :       (unsigned short int) velocidade da limpeza
 ***********************************************************************************/
@@ -780,7 +780,7 @@ unsigned short int PARAMETROS_leVelocidadeLimpeza(void){
   return 1; 
 }
 /***********************************************************************************
-*       Descrição       :       Grava a velocidade da limpeza
+*       Descriï¿½ï¿½o       :       Grava a velocidade da limpeza
 *       Parametros      :       (unsigned short int) velocidade da limpeza
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -797,9 +797,9 @@ void PARAMETROS_gravaVelocidadeLimpeza(unsigned short int velocidade){
   MEMORYWRAPPER_writeBytes(ADR_VELOCIDADE_LIMPEZA,buffer,4);        
 }
 /***********************************************************************************
-*       Descrição       :       Lê a velocidade do pré-aquecimento
+*       Descriï¿½ï¿½o       :       Lï¿½ a velocidade do prï¿½-aquecimento
 *       Parametros      :       nenhum
-*       Retorno         :       (unsigned short int) velocidade pré-aquecimento
+*       Retorno         :       (unsigned short int) velocidade prï¿½-aquecimento
 ***********************************************************************************/
 unsigned short int PARAMETROS_leVelocidadeAquecimento(void){
   unsigned char buffer[4];
@@ -822,7 +822,7 @@ unsigned short int PARAMETROS_leVelocidadeAquecimento(void){
   return 1;   
 }
 /***********************************************************************************
-*       Descrição       :       Grava a velocidade de pré-aquecimento
+*       Descriï¿½ï¿½o       :       Grava a velocidade de prï¿½-aquecimento
 *       Parametros      :       (unsigned short int) velocidade
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -839,7 +839,7 @@ void PARAMETROS_gravaVelocidadeAquecimento(unsigned short int velocidade){
   MEMORYWRAPPER_writeBytes(ADR_VELOCIDADE_AQUECIMENTO,buffer,4);              
 }
 /***********************************************************************************
-*       Descrição       :       Lê o volume da voz na flash
+*       Descriï¿½ï¿½o       :       Lï¿½ o volume da voz na flash
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned short int) volume para as faixas de voz
 ***********************************************************************************/
@@ -861,7 +861,7 @@ unsigned short int PARAMETROS_leVolumeVoz(void){
   return 100;   
 }
 /***********************************************************************************
-*       Descrição       :      Grava o volume da voz na flash 
+*       Descriï¿½ï¿½o       :      Grava o volume da voz na flash 
 *       Parametros      :       (unsigned short int) volume
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -878,7 +878,7 @@ void PARAMETROS_gravaVolumeVoz(unsigned short int volume){
   MEMORYWRAPPER_writeBytes(ADR_VOLUME_VOZ,buffer,4);       
 }
 /***********************************************************************************
-*       Descrição       :       Lê o parâmetro que indica se a fita deve
+*       Descriï¿½ï¿½o       :       Lï¿½ o parï¿½metro que indica se a fita deve
 *                               ser ligada durante o preparo da pipoca
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned short int) valor 
@@ -901,7 +901,7 @@ unsigned short int PARAMETROS_leFitaPreparo(void){
   return 1;    
 }
 /***********************************************************************************
-*       Descrição       :       Grava o parâmetro que indica se a fita
+*       Descriï¿½ï¿½o       :       Grava o parï¿½metro que indica se a fita
 *                               deve ser ligada durante o preparo da pipoca
 *       Parametros      :       (unsigned short int) valor
 *       Retorno         :       nenhum
@@ -919,7 +919,7 @@ void PARAMETROS_gravaFitaPreparo(unsigned short int fita){
   MEMORYWRAPPER_writeBytes(ADR_FITA_PREPARO,buffer,4);  
 }
 /***********************************************************************************
-*       Descrição       :       Lê o parâmetro que diz qual a comissão para
+*       Descriï¿½ï¿½o       :       Lï¿½ o parï¿½metro que diz qual a comissï¿½o para
 *                               o ponto
 *       Parametros      :       (unsigned short int) valor
 *       Retorno         :       nenhum
@@ -937,7 +937,7 @@ void PARAMETROS_gravaComissaoPonto(unsigned short int valor){
   MEMORYWRAPPER_writeBytes(ADR_COMISSAO_PONTO,buffer,4);    
 }
 /***********************************************************************************
-*       Descrição       :       Lê o parâmetro que indica a comissão 
+*       Descriï¿½ï¿½o       :       Lï¿½ o parï¿½metro que indica a comissï¿½o 
 *                               do ponto
 *       Parametros      :       void
 *       Retorno         :       (unsigned short int) valor 
@@ -960,7 +960,7 @@ unsigned short int PARAMETROS_leComissaoPonto(void){
   return 1;   
 }
 /***********************************************************************************
-*       Descrição       :       Grava um valor no contador de vendas
+*       Descriï¿½ï¿½o       :       Grava um valor no contador de vendas
 *                               parcial
 *       Parametros      :       (unsigned int) valor
 *       Retorno         :       nenhum
@@ -980,7 +980,7 @@ void PARAMETROS_gravaContadorVendasParcial(unsigned int contador){
   MEMORYWRAPPER_writeBytes(ADR_CONTADOR_VENDAS_PARCIAL,buffer,6);
 }
 /***********************************************************************************
-*       Descrição       :       Lê o valor do contador de vendas parcial
+*       Descriï¿½ï¿½o       :       Lï¿½ o valor do contador de vendas parcial
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned int) valor
 ***********************************************************************************/
@@ -998,14 +998,14 @@ unsigned int PARAMETROS_leContadorVendasParcial(void){
   return 0; 
 }
 /***********************************************************************************
-*       Descrição       :       Grava os parametros padrão de fábrica na memória
+*       Descriï¿½ï¿½o       :       Grava os parametros padrï¿½o de fï¿½brica na memï¿½ria
 *       Parametros      :       (unsigned short int) tempo e preparo
 *                               (unsigned short int) temperatura preparo
 *                               (unsigned short int) velocidade preparo
 *                               (unsigned short int) temperaturaPreProcesso
 *                               (unsigned short int) atraso do pacote
 *                               (unsigned short int) velocidade inicial expulsao
-*                               (unsigned short int) velocidade final expulsão
+*                               (unsigned short int) velocidade final expulsï¿½o
 *                               (unsigned short int) fator rampa temperatura
 *                               (unsigned short int) velocidade de limpeza
 *                               (unsigned short int) velocidade aquecimento
@@ -1074,15 +1074,15 @@ unsigned char PARAMETROS_gravaConfigFabrica(unsigned short int tempoPreparo,
   return 0;
 }
 /***********************************************************************************
-*       Descrição       :       Faz a leitura do parametros de configuração
+*       Descriï¿½ï¿½o       :       Faz a leitura do parametros de configuraï¿½ï¿½o
 *                               de fabrica que foram capturados no menu
 *       Parametros      :       (unsigned short int*) tempo de prepraro
 *                               (unsigned short int*) temperatura de preparo
 *                               (unsigned short int*) velocidade de preparo
-*                               (unsigned short int*) temperatura de pré-processo
+*                               (unsigned short int*) temperatura de prï¿½-processo
 *                               (unsigned short int*) atraso do pacote
-*                               (unsigned short int*) rotação inicio da expulsão
-*                               (unsigned short int*) rotação final da expulsão
+*                               (unsigned short int*) rotaï¿½ï¿½o inicio da expulsï¿½o
+*                               (unsigned short int*) rotaï¿½ï¿½o final da expulsï¿½o
 *                               (unsigned short int*) fator de rampa de temperatura
 *                               (unsigned short int*) velocidade de limpeza
 *                               (unsigned short int*) velocidade pre aquecimento
@@ -1145,7 +1145,7 @@ unsigned char PARAMETROS_carregaCopiaConfigFabrica(unsigned short int* tempoPrep
   return 0;
 }
 /***********************************************************************************
-*       Descrição       :      Grava o flag locação na flash
+*       Descriï¿½ï¿½o       :      Grava o flag locaï¿½ï¿½o na flash
 *       Parametros      :       (unsigned char) flag locacao
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1163,7 +1163,7 @@ void PARAMETROS_gravaFlagLocacao(unsigned char flag){
   MEMORYWRAPPER_writeBytes(ADR_FLAG_LOCACAO,buffer,3);      
 }
 /***********************************************************************************
-*       Descrição       :       Lê o flag locação da placa
+*       Descriï¿½ï¿½o       :       Lï¿½ o flag locaï¿½ï¿½o da placa
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned char) flag locacao
 ***********************************************************************************/
@@ -1180,8 +1180,8 @@ unsigned char PARAMETROS_leFlagLocacao(void){
   return 0;
 }
 /***********************************************************************************
-*       Descrição       :       Grava o parâmetro de temperatura para
-*                               início do preparo
+*       Descriï¿½ï¿½o       :       Grava o parï¿½metro de temperatura para
+*                               inï¿½cio do preparo
 *       Parametros      :       (unsigned short int) temperatura de inicio do 
 *                                                    preparo
 *       Retorno         :       nenhum
@@ -1198,7 +1198,7 @@ void PARAMETROS_gravaTemperaturaInicio(unsigned short int temperatura){
   MEMORYWRAPPER_writeBytes(ADR_TEMP_INICIAL,buffer,4);    
 }
 /***********************************************************************************
-*       Descrição       :       Lê o parâmetro de temperatura para fim
+*       Descriï¿½ï¿½o       :       Lï¿½ o parï¿½metro de temperatura para fim
 *                               do preparo
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned short int) temperatura
@@ -1216,7 +1216,7 @@ unsigned short int PARAMETROS_leTemperaturaInicio(void){
   return 65;      
 }
 /***********************************************************************************
-*       Descrição       :       grava o parâmetro tempo de preaquecimento
+*       Descriï¿½ï¿½o       :       grava o parï¿½metro tempo de preaquecimento
 *       Parametros      :       (unsigned shor int) tempo de pre aquecimento
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1232,7 +1232,7 @@ void PARAMETROS_gravaTempoPreAquecimento(unsigned short int tempo){
   MEMORYWRAPPER_writeBytes(ADR_TEMPO_PRE_AQUECIMENTO,buffer,4);    
 }
 /***********************************************************************************
-*       Descrição       :       Lê o parâmetro tempo de preaquecimento
+*       Descriï¿½ï¿½o       :       Lï¿½ o parï¿½metro tempo de preaquecimento
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned short int) tempo de pre aquecimento
 ***********************************************************************************/
@@ -1249,7 +1249,7 @@ unsigned short int PARAMETROS_leTempoPreaquecimento(void){
   return 5;      
 }
 /***********************************************************************************
-*       Descrição       :       Grava uma das mensagens de cliente
+*       Descriï¿½ï¿½o       :       Grava uma das mensagens de cliente
 *       Parametros      :       (unsigned char) indice
 *                               (char*) mensagem
 *       Retorno         :       nenhum
@@ -1265,7 +1265,7 @@ void PARAMETROS_gravaMensagemCliente(unsigned char indice,char *mensagem){
   MEMORYWRAPPER_writeBytes(ADR_MENSAGENS_TEXTO + 19*indice,bufferMensagem,19);
 }
 /***********************************************************************************
-*       Descrição       :       Lê uma das mensagens de cliente
+*       Descriï¿½ï¿½o       :       Lï¿½ uma das mensagens de cliente
 *       Parametros      :       (unsigned char) indice
 *                               (char*) mensagem
 *       Retorno         :       nenhum
@@ -1287,7 +1287,7 @@ void PARAMETROS_leMensagemCliente(unsigned char indice,char *mensagem){
     memcpy(mensagem,mensagens[indice],17);  
 }
 /***********************************************************************************
-*       Descrição       :       Grava o parâmetro ciclo de desumificação
+*       Descriï¿½ï¿½o       :       Grava o parï¿½metro ciclo de desumificaï¿½ï¿½o
 *       Parametros      :       (unsigned char) maior do que zero para ativa
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1305,7 +1305,7 @@ void PARAMETROS_gravaCicloDesumificacao(unsigned char ciclo){
   MEMORYWRAPPER_writeBytes(ADR_FLAG_DESUMIDIFICACAO,buffer,3);  
 }
 /***********************************************************************************
-*       Descrição       :       Lê o parâmetro ciclo de desumificacação 
+*       Descriï¿½ï¿½o       :       Lï¿½ o parï¿½metro ciclo de desumificacaï¿½ï¿½o 
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned char) maior do que zero se for 
 *                               para ativar o ciclo
@@ -1323,9 +1323,9 @@ unsigned char PARAMETROS_leCicloDesumidificacao(void){
   return 0;
 }
 /***********************************************************************************
-*       Descrição       :       Salva o parâmetro velocidade inicial
-*                               da expulsão da pipoca
-*       Parametros      :       (unsigned short int) rotação inicial
+*       Descriï¿½ï¿½o       :       Salva o parï¿½metro velocidade inicial
+*                               da expulsï¿½o da pipoca
+*       Parametros      :       (unsigned short int) rotaï¿½ï¿½o inicial
 *       Retorno         :       nenhum
 ***********************************************************************************/
 void PARAMETROS_salvaVelocidadeDesumidificacao(unsigned short int rpm){
@@ -1341,9 +1341,9 @@ void PARAMETROS_salvaVelocidadeDesumidificacao(unsigned short int rpm){
   MEMORYWRAPPER_writeBytes(ADR_VEL_DESUMIDIFICACAO,buffer,4);      
 }
 /***********************************************************************************
-*       Descrição       :       Lê o parâmetro velocidade inicial
+*       Descriï¿½ï¿½o       :       Lï¿½ o parï¿½metro velocidade inicial
 *       Parametros      :       nenhum
-*       Retorno         :       (unsigned short int) rotação inicial
+*       Retorno         :       (unsigned short int) rotaï¿½ï¿½o inicial
 ***********************************************************************************/
 unsigned short int PARAMETROS_leVelocidadeDesumidificacao(void){
   unsigned char buffer[4];
@@ -1366,7 +1366,7 @@ unsigned short int PARAMETROS_leVelocidadeDesumidificacao(void){
   return 6000;
 }
 /***********************************************************************************
-*       Descrição       :       Lê a temperatura de desumidificação
+*       Descriï¿½ï¿½o       :       Lï¿½ a temperatura de desumidificaï¿½ï¿½o
 *       Parametros      :       (unsigned short int) temperatura
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1391,7 +1391,7 @@ unsigned short int PARAMETROS_leTemperaturaDesumidificacao(void){
   return 80;
 }
 /***********************************************************************************
-*       Descrição       :       Salva a temperatura de desumidificação
+*       Descriï¿½ï¿½o       :       Salva a temperatura de desumidificaï¿½ï¿½o
 *       Parametros      :       (unsigned short int) temperatura
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1408,7 +1408,7 @@ void PARAMETROS_salvaTemperaturaDesumidificacao(unsigned short int temperatura){
   MEMORYWRAPPER_writeBytes(ADR_TEMP_DESUMIDIFICACAO,buffer,4);    
 }
 /***********************************************************************************
-*       Descrição       :       Salva o contador de pipoca feitas pelo menu
+*       Descriï¿½ï¿½o       :       Salva o contador de pipoca feitas pelo menu
 *                               de teste
 *       Parametros      :       (unsigned short int) total
 *       Retorno         :       nenhum
@@ -1426,7 +1426,7 @@ void PARAMETROS_salvaContadorPipocaTeste(unsigned short int pipocaTeste){
   MEMORYWRAPPER_writeBytes(ADR_CONTADOR_PIPOCAS_TESTE,buffer,4);     
 }
 /***********************************************************************************
-*       Descrição       :       Lê o contador de pipocas feitas no menu
+*       Descriï¿½ï¿½o       :       Lï¿½ o contador de pipocas feitas no menu
 *                               de teste
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned short int) quantidade de pipocas
@@ -1448,7 +1448,7 @@ unsigned short int PARAMETROS_leContadorPipocasTeste(void){
   return 0;
 }
 /***********************************************************************************
-*       Descrição       :       Salva o tipo do noteiro na memória flash
+*       Descriï¿½ï¿½o       :       Salva o tipo do noteiro na memï¿½ria flash
 *       Parametros      :       (eTIPO_NOTEIRO) tipo do noteiro
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1464,8 +1464,8 @@ void PARAMETROS_salvaTipoNoteiro(eTIPO_NOTEIRO tipo){
   MEMORYWRAPPER_writeBytes(ADR_TIPO_NOTEIRO,buffer,4);         
 }
 /***********************************************************************************
-*       Descrição       :       Lê o tipo do noteiro configurado para a 
-*                               aplicação
+*       Descriï¿½ï¿½o       :       Lï¿½ o tipo do noteiro configurado para a 
+*                               aplicaï¿½ï¿½o
 *       Parametros      :       nenhum
 *       Retorno         :       (eTIPO_NOTEIRO) tipo do noteiro
 ***********************************************************************************/
@@ -1483,7 +1483,7 @@ eTIPO_NOTEIRO PARAMETROS_leTipoNoteiro(void){
   return BV20;
 }
 /***********************************************************************************
-*       Descrição       :       Salva o tipo da impressora na memória
+*       Descriï¿½ï¿½o       :       Salva o tipo da impressora na memï¿½ria
 *       Parametros      :       (eTIPO_IMPRESSORA) tipo da impressora
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1499,7 +1499,7 @@ void PARAMETROS_salvaTipoImpressora(eTIPO_IMPRESSORA tipo){
   MEMORYWRAPPER_writeBytes(ADR_TIPO_IMPRESSORA,buffer,4);           
 }
 /***********************************************************************************
-*       Descrição       :       Carrega o tipo da impressora
+*       Descriï¿½ï¿½o       :       Carrega o tipo da impressora
 *       Parametros      :       nenhum
 *       Retorno         :       (eTIPO_IMPRESSORA) tipo da impressora
 ***********************************************************************************/
@@ -1517,9 +1517,9 @@ eTIPO_IMPRESSORA PARAMETROS_carregaTipoImpressora(void){
   return EXTECH;
 }
 /***********************************************************************************
-*       Descrição       :       Salva o contador de operação realizadas
-*                               com o cartão de crédito
-*       Parametros      :       (unsigned int) transações
+*       Descriï¿½ï¿½o       :       Salva o contador de operaï¿½ï¿½o realizadas
+*                               com o cartï¿½o de crï¿½dito
+*       Parametros      :       (unsigned int) transaï¿½ï¿½es
 *       Retorno         :       nenhum
 ***********************************************************************************/
 void PARAMETROS_salvaContadorOperacoesCartao(unsigned int operacoes){
@@ -1539,11 +1539,11 @@ void PARAMETROS_salvaContadorOperacoesCartao(unsigned int operacoes){
   MEMORYWRAPPER_writeBytes(ADR_OPERACOES_CARTAO,buffer,6); 
 }
 /***********************************************************************************
-*       Descrição       :       Carrega o contador de operações realizadas
-*                               com o cartão de crédito
+*       Descriï¿½ï¿½o       :       Carrega o contador de operaï¿½ï¿½es realizadas
+*                               com o cartï¿½o de crï¿½dito
 *       Parametros      :       nenhum
-*       Retorno         :       (unsigned int) operações realizada com o 
-*                               cartão de crédito
+*       Retorno         :       (unsigned int) operaï¿½ï¿½es realizada com o 
+*                               cartï¿½o de crï¿½dito
 ***********************************************************************************/
 unsigned int PARAMETROS_carregaOperacoesCartao(void){
   unsigned char buffer[6];
@@ -1556,11 +1556,11 @@ unsigned int PARAMETROS_carregaOperacoesCartao(void){
   if(crc == buffer[4]<<8 | buffer[5])       
     return buffer[0]<<24 | buffer[1]<<16 | buffer[2]<<8 | buffer[3];
   
-  return 0; // valor de operações 
+  return 0; // valor de operaï¿½ï¿½es 
 }
 /***********************************************************************************
-*       Descrição       :       Lê o tipo do moedeiro configurado para
-*                               a máquina
+*       Descriï¿½ï¿½o       :       Lï¿½ o tipo do moedeiro configurado para
+*                               a mï¿½quina
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1578,7 +1578,7 @@ eTIPO_MOEDEIRO PARAMETROS_carregaTipoMoedeiro(void){
   return UCA1;    
 }
 /***********************************************************************************
-*       Descrição       :       Salva o tipo do moedeiro na memória
+*       Descriï¿½ï¿½o       :       Salva o tipo do moedeiro na memï¿½ria
 *       Parametros      :       (eTIPO_MOEDEIRO) tipo do moedeiro
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1594,10 +1594,10 @@ void PARAMETROS_salvaTipoMoedeiro(eTIPO_MOEDEIRO tipo){
   MEMORYWRAPPER_writeBytes(ADR_TIPO_MOEDEIRO,buffer,4);    
 }
 /***********************************************************************************
-*       Descrição       :       Lê o valor salvo para o número de série da 
-*                               máquina
+*       Descriï¿½ï¿½o       :       Lï¿½ o valor salvo para o nï¿½mero de sï¿½rie da 
+*                               mï¿½quina
 *       Parametros      :       nenhum
-*       Retorno         :       (unsigned int) número de série
+*       Retorno         :       (unsigned int) nï¿½mero de sï¿½rie
 ***********************************************************************************/
 unsigned int PARAMETROS_carregaNumeroSerie(void){
   unsigned char buffer[6];
@@ -1613,9 +1613,9 @@ unsigned int PARAMETROS_carregaNumeroSerie(void){
   return 100;  
 }
 /***********************************************************************************
-*       Descrição       :       Salva o valr para o número de série
-*                               da máquina
-*       Parametros      :       (unsigned int) número de série da máquina
+*       Descriï¿½ï¿½o       :       Salva o valr para o nï¿½mero de sï¿½rie
+*                               da mï¿½quina
+*       Parametros      :       (unsigned int) nï¿½mero de sï¿½rie da mï¿½quina
 *       Retorno         :       nenhum
 ***********************************************************************************/
 void PARAMETROS_setNumeroSerie(unsigned int numeroSerie){
@@ -1632,10 +1632,10 @@ void PARAMETROS_setNumeroSerie(unsigned int numeroSerie){
   MEMORYWRAPPER_writeBytes(ADR_NUMERO_SERIE,buffer,6);     
 }
 /***********************************************************************************
-*       Descrição       :       Carrega o faturamento parcial do cartão
-*                               a partir da memória flash de dados
+*       Descriï¿½ï¿½o       :       Carrega o faturamento parcial do cartï¿½o
+*                               a partir da memï¿½ria flash de dados
 *       Parametros      :       nenhum
-*       Retorno         :      (unsigned int) faturamento parcial do cartão
+*       Retorno         :      (unsigned int) faturamento parcial do cartï¿½o
 ***********************************************************************************/
 unsigned int PARAMETROS_carregaFaturamentoParcialCartao(void){
   unsigned char buffer[6];
@@ -1651,7 +1651,7 @@ unsigned int PARAMETROS_carregaFaturamentoParcialCartao(void){
   return 0;
 }
 /***********************************************************************************
-*       Descrição       :       Salva o faturamento parcial do cartão
+*       Descriï¿½ï¿½o       :       Salva o faturamento parcial do cartï¿½o
 *       Parametros      :       (unsigned int) faturamento parcial
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1672,9 +1672,9 @@ void PARAMETROS_salvaFaturamentoParcialCartao(unsigned int faturamento){
   MEMORYWRAPPER_writeBytes(ADR_FAT_CARTAO_PARCIAL,buffer,6);    
 }
 /***********************************************************************************
-*       Descrição       :       Carrega o faturamento 
+*       Descriï¿½ï¿½o       :       Carrega o faturamento 
 *       Parametros      :       nenhum
-*       Retorno         :       (unsigned int) faturamento total com o cartão
+*       Retorno         :       (unsigned int) faturamento total com o cartï¿½o
 ***********************************************************************************/
 unsigned int PARAMETROS_carregaFaturamentoTotalCartao(void){  
   unsigned char buffer[6];
@@ -1690,8 +1690,8 @@ unsigned int PARAMETROS_carregaFaturamentoTotalCartao(void){
   return 0;
 }
 /***********************************************************************************
-*       Descrição       :       Salva o faturamento total
-*                               com o cartão
+*       Descriï¿½ï¿½o       :       Salva o faturamento total
+*                               com o cartï¿½o
 *       Parametros      :       (unsigned int) faturamento
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1712,7 +1712,7 @@ void PARAMETROS_salvaFaturamentoTotalCartao(unsigned int faturamento){
   MEMORYWRAPPER_writeBytes(ADR_FAT_CARTAO_TOTAL,buffer,6); 
 }
 /***********************************************************************************
-*       Descrição       :       Grava a senha de acesso ao modo root
+*       Descriï¿½ï¿½o       :       Grava a senha de acesso ao modo root
 *       Parametros      :       (unsigned short int ) senha de root
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1732,7 +1732,7 @@ void PARAMETROS_gravaSenhaRoot(unsigned short int senha){
   MEMORYWRAPPER_writeBytes(ADR_SENHA_ROOT,buffer,4); 
 }
 /***********************************************************************************
-*       Descrição       :       Lê a senha de acesso ao modo root
+*       Descriï¿½ï¿½o       :       Lï¿½ a senha de acesso ao modo root
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned short int) senha de root
 ***********************************************************************************/
@@ -1750,7 +1750,7 @@ unsigned short int PARAMETROS_leSenhaRoot(void){
   return 0;
 }
 /***********************************************************************************
-*       Descrição       :       Grava o valor do crédito salvo para o modeiro
+*       Descriï¿½ï¿½o       :       Grava o valor do crï¿½dito salvo para o modeiro
 *                               UCA-1
 *       Parametros      :       (unsigned short int) valor configurado
 *                                                    para o pulso do UCA1
@@ -1772,7 +1772,7 @@ void PARAMETROS_gravaValorCredito(unsigned short int credito){
   MEMORYWRAPPER_writeBytes(ADR_VALOR_CREDITO_UCA,buffer,4);  
 }
 /***********************************************************************************
-*       Descrição       :       Lê o valor do crédito salvo para o moedeiro
+*       Descriï¿½ï¿½o       :       Lï¿½ o valor do crï¿½dito salvo para o moedeiro
 *                               UCA-1
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned short int) valor do pulso
@@ -1791,11 +1791,11 @@ unsigned short int PARAMETROS_leValorCredito(void){
   return 25;
 }
 /***********************************************************************************
-*       Descrição       :      Gravao parâmetro Proporcional
+*       Descriï¿½ï¿½o       :      Grava o parï¿½metro ganho Proporcional
 *       Parametros      :      (unsigned short int) ganho KP
 *       Retorno         :       nenhum
 ***********************************************************************************/
-void PARAMETROS_grava_ganhoKP(unsigned short int kp){
+void PARAMETROS_grava_ganho_KP(unsigned short int kp){
   unsigned char buffer[4];
   unsigned short int crc;
   
@@ -1808,11 +1808,11 @@ void PARAMETROS_grava_ganhoKP(unsigned short int kp){
   MEMORYWRAPPER_writeBytes(ADR_GANHO_KP,buffer,4);
 }
 /***********************************************************************************
-*       Descrição       :       Lê o ganho proporcional
+*       Descriï¿½ï¿½o       :       Lï¿½ o ganho proporcional
 *       parametros      :       nnehum
 *       Retorno         :       (unsigned short int) ganho KP
 ***********************************************************************************/
-unsigned short int PARAMETROS_le_ganhoKP(void){
+unsigned short int PARAMETROS_le_ganho_KP(void){
   unsigned char buffer[4];
   unsigned short int crc;
   
@@ -1826,7 +1826,7 @@ unsigned short int PARAMETROS_le_ganhoKP(void){
   return 4;  
 }
 /***********************************************************************************
-*       Descrição       :       Grava o ganho integral
+*       Descriï¿½ï¿½o       :       Grava o ganho integral
 *       Parametros      :       (unsigned short int) ganho Ki
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1843,11 +1843,11 @@ void PARAMETROS_grava_ganho_KI(unsigned short int ki){
   MEMORYWRAPPER_writeBytes(ADR_GANHO_KI,buffer,4);
 }
 /***********************************************************************************
-*       Descrição       :       Lê o ganho Ki
+*       Descriï¿½ï¿½o       :       Lï¿½ o ganho KI
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned short int) ganho Ki
 ***********************************************************************************/
-unsigned short int PARAMETROS_le_ganho_ki(void){
+unsigned short int PARAMETROS_le_ganho_KI(void){
   unsigned char buffer[4];
   unsigned short int crc;
   
@@ -1861,7 +1861,7 @@ unsigned short int PARAMETROS_le_ganho_ki(void){
   return 2;  
 }
 /***********************************************************************************
-*       Descrição       :       Grava o ganho KD
+*       Descriï¿½ï¿½o       :       Grava o ganho KD
 *       Parametros      :       (unsigned short int) grava o ganho derivativo
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1878,7 +1878,7 @@ void PARAMETROS_grava_ganho_KD(unsigned short int kd){
   MEMORYWRAPPER_writeBytes(ADR_GANHO_KD,buffer,4);
 }
 /***********************************************************************************
-*       Descrição       :       Grava o ganho KD
+*       Descriï¿½ï¿½o       :       Grava o ganho KD
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned short int) ganho KD
 ***********************************************************************************/
@@ -1896,7 +1896,7 @@ unsigned short int PARAMETROS_le_ganho_KD(void){
   return 2;  
 }
 /***********************************************************************************
-*       Descrição       :       Le versão da CPU
+*       Descriï¿½ï¿½o       :       Le versï¿½o da CPU
 *       Parametros      :       nenhum
 *       Retorno         :       vsCPU
 ***********************************************************************************/

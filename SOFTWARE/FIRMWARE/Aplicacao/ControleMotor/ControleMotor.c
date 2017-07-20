@@ -57,18 +57,17 @@
 #endif
 
 
-
 /***********************************************************************************
 *       Ganhos do PID
 ***********************************************************************************/
 #ifdef FQ_REDE_60_HZ
-  #define KP                      4
-  #define KI                      0.2
-  #define KD                      0.2
+  #define KP                      10.0
+  #define KI                      1.0
+  #define KD                      1.0
 #else
-  #define KP                      4
-  #define KI                      0.2
-  #define KD                      0.2
+  #define KP                      10.0
+  #define KI                      1.0
+  #define KD                      1.0
 #endif
 
 
@@ -91,6 +90,9 @@ unsigned char CM_cntCtrlMotor=CICLOS_INICIO_MOTOR;
 unsigned int CM_atrasoGateMotor=500;
 unsigned short int CM_set_point=0;
 extern unsigned int BOARD_lock_timer;
+unsigned int kp_const = 0;
+unsigned int kd_const = 0;
+unsigned int ki_const = 0;
 
 /***********************************************************************************
 *       Funções locais
@@ -177,6 +179,10 @@ void MU_ini(void){
       
   
   IP4_bit.PRI_19 = 0; 
+  
+  kp_const = (unsigned int)( (PARAMETROS_le_ganho_KP()*(KP/100))*256);
+  ki_const = (unsigned int)(((PARAMETROS_le_ganho_KI()*(KI-0.01)/100)+0.01)*32768);
+  kd_const = (unsigned int)(((PARAMETROS_le_ganho_KD()*(KD-0.01)/100)+0.01)*32768);
 }
 /***********************************************************************************
 *       Descrição       :       Interrupção do timer 2
@@ -256,10 +262,6 @@ int CM_calcula_derivada_erro(int erro){
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
-const unsigned int kp_const = KP*256;
-const unsigned int kd_const = KD*32768;
-const unsigned int ki_const = KI*32768;
-
 #pragma inline
 void MU_controleVelocidade(void){
   long long int erro;
@@ -306,7 +308,8 @@ void MU_controleVelocidade(void){
           erro*= kp_const;
           erro>>= 8;          
           erro += erro_i;
-                                 
+          erro += erro_d;
+          
           SET_ATRASO(MU_calculaAtrasoGate(erro));          
         }
   }

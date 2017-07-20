@@ -1,7 +1,7 @@
 /*__________________________________________________________________________________
 |	Chave Digital Tecnologia Eletronica Ltda. 
 |       
-|       Balenário Camboriú - SC
+|       Balenï¿½rio Camboriï¿½ - SC
 |       www.chavedigital.com.br
 | __________________________________________________________________________________
 |
@@ -9,7 +9,7 @@
 |       or in whole, or used, except when legally licensed by Chave Digital
 |       or its distributors.
 |
-|       Este código é propriedade da Chave Digital e não pode ser copiado, em parte 
+|       Este cï¿½digo ï¿½ propriedade da Chave Digital e nï¿½o pode ser copiado, em parte 
 |       ou em todo, ou utilizado, exceto quando for legalmente licenciado pela 
 |       Chave Digital ou por um de seus distribuidores.
 | __________________________________________________________________________________
@@ -17,9 +17,9 @@
 |       Arquivo            :  Parametros.h
 | 
 |       Autor              :  Marcos Aquino
-|       Data criação       :  11/03/2014
+|       Data criaï¿½ï¿½o       :  11/03/2014
 |
-|       Revisões           :  1.0.0.0
+|       Revisï¿½es           :  1.0.0.0
 |
 |
 | __________________________________________________________________________________
@@ -245,13 +245,13 @@ void PARAMETROS_gravaValorCredito(unsigned short int credito);
 
 unsigned short int PARAMETROS_leValorCredito(void);
 
-void PARAMETROS_grava_ganhoKP(unsigned short int kp);
+void PARAMETROS_grava_ganho_KP(unsigned short int kp);
 
-unsigned short int PARAMETROS_le_ganhoKP(void);
+unsigned short int PARAMETROS_le_ganho_KP(void);
 
 void PARAMETROS_grava_ganho_KI(unsigned short int ki);
 
-unsigned short int PARAMETROS_le_ganho_ki(void);
+unsigned short int PARAMETROS_le_ganho_KI(void);
 
 void PARAMETROS_grava_ganho_KD(unsigned short int kd);
 

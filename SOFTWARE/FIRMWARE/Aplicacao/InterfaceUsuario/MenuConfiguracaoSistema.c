@@ -1,5 +1,5 @@
 /*__________________________________________________________________________________
-|	Quark Tecnologia Eletrônica Embarcada
+|	Quark Tecnologia Eletrï¿½nica Embarcada
 |       
 |       Itapema - SC
 |       www.quarktee.com.br
@@ -9,22 +9,22 @@
 |       or in whole, or used, except when legally licensed by Quark 
 |       or its distributors.
 |
-|       Este código é propriedade da Quark  e não pode ser copiado, em parte 
+|       Este cï¿½digo ï¿½ propriedade da Quark  e nï¿½o pode ser copiado, em parte 
 |       ou em todo, ou utilizado, exceto quando for legalmente licenciado pela 
 |       Quark  ou por um de seus distribuidores.
 | __________________________________________________________________________________
 |
 |       Arquivo            :  MenuConfiguracaoSistema.c
-|       Descrição          :  Telas para o usuário
+|       Descriï¿½ï¿½o          :  Telas para o usuï¿½rio
 | 
 |       Autor              :  Marcos Aquino
-|       Data criação       :  11/03/2015
+|       Data criaï¿½ï¿½o       :  11/03/2015
 |
-|       Revisões           :  1.0.0.0
+|       Revisï¿½es           :  1.0.0.0
 |                             1.1 - (23/06/2016) menus reagrupados, por Marcos
-|                             1.2 - (22/05/2017) Alterado para não pedir a senha
+|                             1.2 - (22/05/2017) Alterado para nï¿½o pedir a senha
 |                                                com contrasenha para entrar no
-|                                                modo grátis
+|                                                modo grï¿½tis
 |
 |
 | __________________________________________________________________________________
@@ -40,7 +40,7 @@
 #include "interfacAjusteRelogio.h"
 
 /************************************************************************************
-*       Definições
+*       Definiï¿½ï¿½es
 ************************************************************************************/
 #define TAM_MENU_PRINCIPAL                              9
 #define TAM_MENU_PREPARACAO                             8
@@ -371,19 +371,6 @@ const char *MCS_mensagemMenuWifi[TAM_LISTA_WIFI]={
   "   Voltar       "  
 };
 
-const char *MCS_mensagemAvancado[TAM_LISTA_AVANCADO]={
-  "(1) Hora/Data   ",
-  "(2) Aj. Contador",
-  "(3) Num. serie  ",
-  "(4) Test. prep. ",
-  "(5) Dur. proces.",
-  "(6) Vel. final 1",
-  "(7) Vel. final 2",
-  "(8) Vel. limpeza",
-  "(9) Zeramento   ",
-  "    Voltar      "
-};
-
 const char *MCS_mensagemMenuAjusteContadores[TAM_LISTA_CONTADORES]={
   "(1) Unid. Parc. ",
   "(2) Unid. Total ",
@@ -401,7 +388,7 @@ const char *MCS_mensagem_configuraPID[]={
 };
 
 /************************************************************************************
-*       Funções locais
+*       Funï¿½ï¿½es locais
 ************************************************************************************/
 void MCS_desenhaOpcoes(unsigned char indice);
 void MCS_menuParametrosPreparacao(void);
@@ -528,8 +515,14 @@ void MCS_configura_valor_credito_uca1(void);
 
 void MCS_tela_configura_PID(void);
 void MCS_menu_configura_ganhos(void);
+
+void MCS_tela_configura_P(void);
+void MCS_tela_configura_I(void);
+void MCS_tela_configura_D(void);
+
+void IU_escreveTemperaturaResistenciaFree(unsigned char rpm);
 /************************************************************************************
-*       Descrição       
+*       Descriï¿½ï¿½o       
 ************************************************************************************/
 void(*const MCS_funcMenuPrincipal[])(void)={
   MCS_menuParametrosPreparacao,
@@ -661,9 +654,9 @@ void(*const MCS_funcAjusteContadores[])(void)={
 };
 
 void(*const MCS_funcAjustaPID[])(void)={
-  NULL,
-  NULL,
-  NULL,
+  MCS_tela_configura_P,
+  MCS_tela_configura_I,
+  MCS_tela_configura_D,
   NULL
 };
 /************************************************************************************
@@ -673,19 +666,19 @@ unsigned int MCS_contadorSemente=0;
 extern unsigned int BOARD_tempoPiscadas;
 
 /************************************************************************************
-*       Funções locais
+*       Funï¿½ï¿½es locais
 ************************************************************************************/
 void MCS_desenhaOpcoes(unsigned char indice);
 void MCS_desenhaOpcoesPreparacao(unsigned char indice);
 
 
 /************************************************************************************
-*       Implementação das funções
+*       Implementaï¿½ï¿½o das funï¿½ï¿½es
 ************************************************************************************/
 
 /************************************************************************************
-*       Descrição       :       Ponto de entrada do menu de configuração
-*                               dos parametros da máquina
+*       Descriï¿½ï¿½o       :       Ponto de entrada do menu de configuraï¿½ï¿½o
+*                               dos parametros da mï¿½quina
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -729,9 +722,9 @@ void MCS_entry(void){
   HD44780_clearText();      
 } 
 /************************************************************************************
-*       Descrição       :       Desenha as opções do menu de configuração
+*       Descriï¿½ï¿½o       :       Desenha as opï¿½ï¿½es do menu de configuraï¿½ï¿½o
 *                               do sistema
-*       Parametros      :       (unsigned char) indice da opção
+*       Parametros      :       (unsigned char) indice da opï¿½ï¿½o
 *       Retorno         :       nenhum
 ************************************************************************************/
 void MCS_desenhaOpcoes(unsigned char indice){
@@ -745,8 +738,8 @@ void MCS_desenhaOpcoes(unsigned char indice){
   HD44780_writeChar(0x7E);
 }
 /************************************************************************************
-*       Descrição       :       Menu com as opções do menu para
-*                               ajuste dos parametros de preparação da pipoca
+*       Descriï¿½ï¿½o       :       Menu com as opï¿½ï¿½es do menu para
+*                               ajuste dos parametros de preparaï¿½ï¿½o da pipoca
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -785,8 +778,8 @@ void MCS_menuParametrosPreparacao(void){
   }
 }
 /************************************************************************************
-*       Descrição       :       Menu com as opções do menu de configuração
-*                               da preparação
+*       Descriï¿½ï¿½o       :       Menu com as opï¿½ï¿½es do menu de configuraï¿½ï¿½o
+*                               da preparaï¿½ï¿½o
 *       Parametros      :       (unsigned char) indice
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -800,8 +793,8 @@ void MCS_desenhaOpcoesPreparacao(unsigned char indice){
   HD44780_writeChar(0x7E);
 }
 /************************************************************************************
-*       Descrição       :       Tela para o usuário configurar o tempo
-*                               de preparação das pipocas
+*       Descriï¿½ï¿½o       :       Tela para o usuï¿½rio configurar o tempo
+*                               de preparaï¿½ï¿½o das pipocas
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -840,8 +833,8 @@ void MCS_configTempoPreparoPipocas(void){
   }   
 }
 /************************************************************************************
-*       Descrição       :       Tela para o usuário configurar a temperatura
-*                               de preparação das pipocas
+*       Descriï¿½ï¿½o       :       Tela para o usuï¿½rio configurar a temperatura
+*                               de preparaï¿½ï¿½o das pipocas
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -880,8 +873,8 @@ void MCS_configTemperaturaPipocas(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Tela para o usuário configurar a velocidade
-*                               de preparação das pipocas
+*       Descriï¿½ï¿½o       :       Tela para o usuï¿½rio configurar a velocidade
+*                               de preparaï¿½ï¿½o das pipocas
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -935,8 +928,8 @@ void MCS_configuraVelocidadePreparacao(void){
   }      
 }
 /***********************************************************************************
-*       Descrição       :       Tela para o usuário configurar a velocidade
-*                               de explusão das pipocas
+*       Descriï¿½ï¿½o       :       Tela para o usuï¿½rio configurar a velocidade
+*                               de explusï¿½o das pipocas
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -975,9 +968,9 @@ void MCS_configuraVelocidadeExpulsao(void){
   }  
 }
 /************************************************************************************
-*       Descrição       :       Tela para o usuário configurar o atraso
+*       Descriï¿½ï¿½o       :       Tela para o usuï¿½rio configurar o atraso
 *                               entre iniciar a preparar a pipoca e 
-*                               a liberação do pacote
+*                               a liberaï¿½ï¿½o do pacote
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -1020,7 +1013,7 @@ void MCS_configuraAtrasoPacote(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Configura o valor da pipoca
+*       Descriï¿½ï¿½o       :       Configura o valor da pipoca
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -1132,7 +1125,7 @@ void MCS_configuraValorPipoca(void){
   }        
 }
 /************************************************************************************
-*       Descrição       :       Tela para o usuário informar uma senha
+*       Descriï¿½ï¿½o       :       Tela para o usuï¿½rio informar uma senha
 *       Parametros      :       (unsigned int) senha de acesso
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -1206,7 +1199,7 @@ unsigned char MCS_telaSenha(unsigned short int senha){
   return 0;
 }
 /************************************************************************************
-*       Descrição       :       Tela para configuração do beta do termistor
+*       Descriï¿½ï¿½o       :       Tela para configuraï¿½ï¿½o do beta do termistor
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -1273,7 +1266,7 @@ void MCS_telaConfiguraBeta(void){
   }//for(.... 
 }
 /************************************************************************************
-*       Descrição       :       Configura o rt do termistor
+*       Descriï¿½ï¿½o       :       Configura o rt do termistor
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -1351,8 +1344,8 @@ void MCS_telaConfiguracaoRT(void){
   }      
 }
 /************************************************************************************
-*       Descrição       :       Tela para configuração das cédulas que 
-*                               serão aceitas pelo noteiro
+*       Descriï¿½ï¿½o       :       Tela para configuraï¿½ï¿½o das cï¿½dulas que 
+*                               serï¿½o aceitas pelo noteiro
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -1373,7 +1366,7 @@ void MCS_telaConfiguraTipoCedulas(void){
     switch(tecla){
       case TECLA_ENTER:
            if(indice==6){
-            //salva na opção voltar          
+            //salva na opï¿½ï¿½o voltar          
             PARAMETROS_gravaTipoCedulas(flags[0],flags[1],flags[2],flags[3],flags[4],flags[5]); 
             return;
            }
@@ -1398,7 +1391,7 @@ void MCS_telaConfiguraTipoCedulas(void){
   }      
 }
 /************************************************************************************
-*       Descrição       :       Desenha as opções das cédulas
+*       Descriï¿½ï¿½o       :       Desenha as opï¿½ï¿½es das cï¿½dulas
 *       Parametros      :       (unsigned char) indice
 *                               (unsigned char) flag
 *       Retorno         :       nenhum
@@ -1413,8 +1406,8 @@ void MCS_desenhaOpcoesTipoCedulas(unsigned char indice,unsigned char flags){
   }
 }
 /************************************************************************************
-*       Descrição       :       Tela para o usuário gerar a senha
-*                               de pipoca grátis
+*       Descriï¿½ï¿½o       :       Tela para o usuï¿½rio gerar a senha
+*                               de pipoca grï¿½tis
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -1537,7 +1530,7 @@ void MCS_telaPipocaGratis(void){
   }  
 }
 /************************************************************************************
-*       Descrição       :       Ponto de entrada do menu de visualização
+*       Descriï¿½ï¿½o       :       Ponto de entrada do menu de visualizaï¿½ï¿½o
 *                               da arrecadacao
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -1579,7 +1572,7 @@ void MCS_menuArrecadacao(void){
   }  
 }
 /************************************************************************************
-*       Descrição       :       Desenha os textos do menu de arrecadação
+*       Descriï¿½ï¿½o       :       Desenha os textos do menu de arrecadaï¿½ï¿½o
 *       Parametros      :       (unsigned char) indice
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -1594,7 +1587,7 @@ void MCS_desenhaOpcoesArrecadacao(unsigned char indice){
   HD44780_writeChar(0x7E);   
 }
 /************************************************************************************
-*       Descrição       :       Tela para o usuário realizar a visualização
+*       Descriï¿½ï¿½o       :       Tela para o usuï¿½rio realizar a visualizaï¿½ï¿½o
 *                               do totalizador 
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -1624,7 +1617,7 @@ void MCS_visualizaArrecadacao(void){
   }      
 }
 /************************************************************************************
-*       Descrição       :       Tela para o usuário realizar o zeramento
+*       Descriï¿½ï¿½o       :       Tela para o usuï¿½rio realizar o zeramento
 *                               do contador de faturamento
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -1662,7 +1655,7 @@ void MCS_telaZeraContadorArrecadacao(void){
   }  
 }
 /************************************************************************************
-*       Descrição       :       Tela para exibição do total permanente
+*       Descriï¿½ï¿½o       :       Tela para exibiï¿½ï¿½o do total permanente
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -1690,7 +1683,7 @@ void MCS_telaExibeTotalPermanente(void){
   }      
 }
 /************************************************************************************
-*       Descrição       :       Tela para o usuário configurar o intervalo
+*       Descriï¿½ï¿½o       :       Tela para o usuï¿½rio configurar o intervalo
 *                               da propaganda falada
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -1730,8 +1723,8 @@ void MCS_telaConfiguraIntervaloPropaganda(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Tela para o usuário configurar se a fita
-*                               led pisca ou não enquanto a máquina está em 
+*       Descriï¿½ï¿½o       :       Tela para o usuï¿½rio configurar se a fita
+*                               led pisca ou nï¿½o enquanto a mï¿½quina estï¿½ em 
 *                               stand by
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -1773,8 +1766,8 @@ void MCS_telaConfiguraFitaLed(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Interface para o usuário configurar a temperatura
-*                               de pré-processo
+*       Descriï¿½ï¿½o       :       Interface para o usuï¿½rio configurar a temperatura
+*                               de prï¿½-processo
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -1813,7 +1806,7 @@ void MCS_telaPreProcesso(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Interface para a visualização dos totalizadores
+*       Descriï¿½ï¿½o       :       Interface para a visualizaï¿½ï¿½o dos totalizadores
 *                               de dinheiro
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -1827,8 +1820,8 @@ void MCS_menuLeiturista(void){
   HD44780_clearText();  
 }
 /************************************************************************************
-*       Descrição       :       Configura a velocidade inicial
-*                               da expulsão das pipocas
+*       Descriï¿½ï¿½o       :       Configura a velocidade inicial
+*                               da expulsï¿½o das pipocas
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -1882,7 +1875,7 @@ void MCS_menuConfiguraVelocidadeExpulsaoPipocas(void){
   }        
 }
 /************************************************************************************
-*       Descrição       :       Configura a velocidade final da expulsão
+*       Descriï¿½ï¿½o       :       Configura a velocidade final da expulsï¿½o
 *                               das pipocas
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -1937,7 +1930,7 @@ void MCS_menuConfiguraVelocidadeFinalExpulsao(void){
   }  
 }
 /************************************************************************************
-*       Descrição       :       Tela para configurar o volume do som
+*       Descriï¿½ï¿½o       :       Tela para configurar o volume do som
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -1976,8 +1969,8 @@ void MCS_volumeSom(void){
   }  
 }
 /************************************************************************************
-*       Descrição       :       Tela para o usuário 
-*                               cadastrar o fator de operação da temperatura
+*       Descriï¿½ï¿½o       :       Tela para o usuï¿½rio 
+*                               cadastrar o fator de operaï¿½ï¿½o da temperatura
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -2016,7 +2009,7 @@ void MCS_ajusteFatorTemperatura(void){
   } 
 }
 /************************************************************************************
-*       Descrição       :       Tela para cadastrar a velocidade da limpeza
+*       Descriï¿½ï¿½o       :       Tela para cadastrar a velocidade da limpeza
 *       Parametros      :       nenhun
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -2070,7 +2063,7 @@ void MCS_telaCadastroVelocidadeLimpeza(void){
   } 
 }
 /************************************************************************************
-*       Descrição       :       Tela para o usuário configurar a velocidade
+*       Descriï¿½ï¿½o       :       Tela para o usuï¿½rio configurar a velocidade
 *                               de aquecimento
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -2125,7 +2118,7 @@ void MCS_telaConfiguraVelocidadePreAquecimento(void){
   }   
 }
 /************************************************************************************
-*       Descrição       :       Menu para teste do hardware
+*       Descriï¿½ï¿½o       :       Menu para teste do hardware
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -2163,7 +2156,7 @@ void MCS_menuTesteHardware(void){
   }
 }
 /************************************************************************************
-*       Descrição       :       Desenha o menu para o teste do hardware
+*       Descriï¿½ï¿½o       :       Desenha o menu para o teste do hardware
 *       Parametros      :       (unsigned char) indice
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -2177,7 +2170,7 @@ void MCS_desenhaOpcoesHardware(unsigned char indice){
   HD44780_writeChar(0x7e);
 }
 /************************************************************************************
-*       Descrição       :       Tela para exibição da leitura do sensor
+*       Descriï¿½ï¿½o       :       Tela para exibiï¿½ï¿½o da leitura do sensor
 *                               de temperatura
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -2206,7 +2199,7 @@ void MCS_telaTesteSensorTemperatura(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Tela para exibição da leitura do sensor de papel
+*       Descriï¿½ï¿½o       :       Tela para exibiï¿½ï¿½o da leitura do sensor de papel
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -2251,7 +2244,7 @@ void MCS_telaTesteSensorPapel(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Tela para o teste do sensor de dose
+*       Descriï¿½ï¿½o       :       Tela para o teste do sensor de dose
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -2289,7 +2282,7 @@ void MCS_testeSensorDose(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Tela para teste do sensor de rotação do motor
+*       Descriï¿½ï¿½o       :       Tela para teste do sensor de rotaï¿½ï¿½o do motor
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -2345,7 +2338,7 @@ void MCS_testeRotacaoMotor(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Tela para verificar a frequência da rede elétrica
+*       Descriï¿½ï¿½o       :       Tela para verificar a frequï¿½ncia da rede elï¿½trica
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -2373,7 +2366,7 @@ void MCS_teste60Hz(void){
   }   
 }
 /************************************************************************************
-*       Descrição       :       Teste do motor da embalagem
+*       Descriï¿½ï¿½o       :       Teste do motor da embalagem
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -2423,7 +2416,7 @@ void MCS_testeMotorEmbalagem(void){
   }       
 }
 /************************************************************************************
-*       Descrição       :       Tela para teste do moedeiro
+*       Descriï¿½ï¿½o       :       Tela para teste do moedeiro
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -2472,7 +2465,7 @@ void MCS_testeMoedeiro(void){
   }  
 }
 /************************************************************************************
-*       Descrição       :       Tela para teste da saída de audio
+*       Descriï¿½ï¿½o       :       Tela para teste da saï¿½da de audio
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -2505,7 +2498,7 @@ void MCS_telaTesteAudio(void){
   }      
 }
 /************************************************************************************
-*       Descrição       :       Tela de teste para as saídas de led
+*       Descriï¿½ï¿½o       :       Tela de teste para as saï¿½das de led
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -2543,7 +2536,7 @@ void MCS_telaTesteFitaLed(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Menu para configuração do parâmetro
+*       Descriï¿½ï¿½o       :       Menu para configuraï¿½ï¿½o do parï¿½metro
 *                               volume da voz
 *       Parametros      :       nenhmn
 *       Retorno         :       nenhum
@@ -2583,7 +2576,7 @@ void MCS_telaVolumeVoz(void){
   }  
 }
 /************************************************************************************
-*       Descrição       :       Menu para configuração da fita de led
+*       Descriï¿½ï¿½o       :       Menu para configuraï¿½ï¿½o da fita de led
 *                               durante o preparo da pipoca
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -2623,7 +2616,7 @@ void MCS_telaFitaPreparo(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Tela para configuração da comissão do ponto
+*       Descriï¿½ï¿½o       :       Tela para configuraï¿½ï¿½o da comissï¿½o do ponto
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -2670,7 +2663,7 @@ void MCS_telaConfiguracaoComissaoPonto(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Tela para teste do sinal da chave de fim do
+*       Descriï¿½ï¿½o       :       Tela para teste do sinal da chave de fim do
 *                               papel
 *       Parametros      :       (nenhum)
 *       Retorno         :       (nenhum)
@@ -2697,7 +2690,7 @@ void MCS_telaTesteChaveFimPapel(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Tela para o teste do sinal de porta aberta
+*       Descriï¿½ï¿½o       :       Tela para o teste do sinal de porta aberta
 *       Parametros      :       (nenhum)
 *       Retorno         :       (nenhum)
 ************************************************************************************/
@@ -2723,7 +2716,7 @@ void MCS_telaTesteChavePorta(void){
   }   
 }
 /************************************************************************************
-*       Descrição       :       Tela para teste da comunicação com o módulo
+*       Descriï¿½ï¿½o       :       Tela para teste da comunicaï¿½ï¿½o com o mï¿½dulo
 *                               de telemetria
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -2750,7 +2743,7 @@ void MCS_telaTesteTelemetria(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :      Tela para teste do led de grátis
+*       Descriï¿½ï¿½o       :      Tela para teste do led de grï¿½tis
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -2785,7 +2778,7 @@ void MCS_telaTesteSaidaLedGratis(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Tela para teste do controle de angulo de fase
+*       Descriï¿½ï¿½o       :       Tela para teste do controle de angulo de fase
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -2838,8 +2831,8 @@ void MCS_testaTesteAnguloFase(void){
   }  
 }
 /************************************************************************************
-*       Descrição       :       Tela para o usuário configurar a máquina com
-*                               o padrão de fábrica
+*       Descriï¿½ï¿½o       :       Tela para o usuï¿½rio configurar a mï¿½quina com
+*                               o padrï¿½o de fï¿½brica
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -2871,7 +2864,7 @@ void MCS_configuracaoFabrica(void){
   
 }
 /************************************************************************************
-*       Descrição       :       Tela para teste da reprodução das vozes
+*       Descriï¿½ï¿½o       :       Tela para teste da reproduï¿½ï¿½o das vozes
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -2905,7 +2898,7 @@ void MCS_telaTesteVoz(void){
   }          
 }
 /************************************************************************************
-*       Descrição       :       Tela para capturar as configurações de fábrica
+*       Descriï¿½ï¿½o       :       Tela para capturar as configuraï¿½ï¿½es de fï¿½brica
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -2937,8 +2930,8 @@ void MCS_telaCapturaConfigFabrica(void){
   HD44780_clearText();
 }
 /************************************************************************************
-*       Descrição       :       Interface para o usuário cadastrar a opção
-*                               de locação da máquina
+*       Descriï¿½ï¿½o       :       Interface para o usuï¿½rio cadastrar a opï¿½ï¿½o
+*                               de locaï¿½ï¿½o da mï¿½quina
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -2980,7 +2973,7 @@ void MCS_telaOpcaoLocacao(void){
   }      
 }
 /************************************************************************************
-*       Descrição       :       Interface para fazer o zeramento dos
+*       Descriï¿½ï¿½o       :       Interface para fazer o zeramento dos
 *                               totalizadores
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -2992,7 +2985,7 @@ void MCS_zeraContadores(void){
   unsigned char indice=0;
   unsigned char toggle=0;
   unsigned char ciclos=1;
-  unsigned char horas=0;
+  //unsigned char horas=0;
   unsigned short int senha;
   
   srand(MCS_contadorSemente);
@@ -3022,7 +3015,7 @@ void MCS_zeraContadores(void){
                                      ((bufferLinha[5]-'0'));
              
              recebido &= 0x3FFFF;             
-             horas = recebido>>14;
+             //horas = recebido>>14;
              
              senha = ((recebido&0x3FFF)^3004);
                HD44780_clearText();             
@@ -3087,7 +3080,7 @@ void MCS_zeraContadores(void){
   }      
 }
 /************************************************************************************
-*       Descrição       :       Tela para configuração do parâmetro de temperatura
+*       Descriï¿½ï¿½o       :       Tela para configuraï¿½ï¿½o do parï¿½metro de temperatura
 *                               inicial de preparo
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -3127,8 +3120,8 @@ void MCS_configuraTemperaturaInicial(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Interface para o usuário cadastrar
-*                               o tempo de pré-aquecimento
+*       Descriï¿½ï¿½o       :       Interface para o usuï¿½rio cadastrar
+*                               o tempo de prï¿½-aquecimento
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -3167,7 +3160,7 @@ void MCS_configuraTempoPreAquecimento(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Menu para cadastrar a mensagem de cliente
+*       Descriï¿½ï¿½o       :       Menu para cadastrar a mensagem de cliente
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -3238,7 +3231,7 @@ void MCS_configMensagemCliente(unsigned char index){
   }  
 }
 /************************************************************************************
-*       Descrição       :       Cadastra a primeira mensagem de cliente
+*       Descriï¿½ï¿½o       :       Cadastra a primeira mensagem de cliente
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -3247,7 +3240,7 @@ void MCS_cadastraMensagem_01(void){
   MCS_configMensagemCliente(0);  
 }
 /************************************************************************************
-*       Descrição       :       Cadastra a segunda mensagem de cliente
+*       Descriï¿½ï¿½o       :       Cadastra a segunda mensagem de cliente
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -3256,7 +3249,7 @@ void MCS_cadastraMensagem_02(void){
   MCS_configMensagemCliente(1);    
 }
 /************************************************************************************
-*       Descrição       :       Cadastra a terceira mensagem de cliente
+*       Descriï¿½ï¿½o       :       Cadastra a terceira mensagem de cliente
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -3265,7 +3258,7 @@ void MCS_cadastraMensagem_03(void){
   MCS_configMensagemCliente(2);      
 }
 /************************************************************************************
-*       Descrição       :       Cadastra a quarta mensagem de cliente
+*       Descriï¿½ï¿½o       :       Cadastra a quarta mensagem de cliente
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -3274,7 +3267,7 @@ void MCS_cadastraMensagem_04(void){
   MCS_configMensagemCliente(3);          
 }
 /************************************************************************************
-*       Descrição       :       Interface para o usuário cadastrar
+*       Descriï¿½ï¿½o       :       Interface para o usuï¿½rio cadastrar
 *                               o parametro desumificador
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -3314,8 +3307,8 @@ void MCS_cadastraDesumidificador(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Tela para configurar a velocidade que será
-*                               utilizada na autodesumidificação
+*       Descriï¿½ï¿½o       :       Tela para configurar a velocidade que serï¿½
+*                               utilizada na autodesumidificaï¿½ï¿½o
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -3369,7 +3362,7 @@ void MCS_configuraVelocidadeDesumificador(void){
   }   
 }
 /************************************************************************************
-*       Descrição       :       Tela para configurar a temperatura de desumificador
+*       Descriï¿½ï¿½o       :       Tela para configurar a temperatura de desumificador
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -3408,7 +3401,7 @@ void MCS_cadastraTemperaturaDesumificacao(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Faz a assinatura do sistema
+*       Descriï¿½ï¿½o       :       Faz a assinatura do sistema
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -3518,8 +3511,8 @@ void MCS_telaAssinatura(void){
   }  
 }
 /************************************************************************************
-*       Descrição       :       Interface para visualização da contagem
-*                               do horímetro
+*       Descriï¿½ï¿½o       :       Interface para visualizaï¿½ï¿½o da contagem
+*                               do horï¿½metro
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -3555,8 +3548,8 @@ void MCS_visualizacaoHorimetro(void){
   }  
 }
 /************************************************************************************
-*       Descrição       :       Interface para o usuário inserir a senha
-*                               de liberação do horímetro
+*       Descriï¿½ï¿½o       :       Interface para o usuï¿½rio inserir a senha
+*                               de liberaï¿½ï¿½o do horï¿½metro
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -3659,7 +3652,7 @@ void MCS_liberacaoHorimetro(void){
   }  
 }
 /************************************************************************************
-*       Descrição       :       Menu para realizar o acerto nos totalizadores
+*       Descriï¿½ï¿½o       :       Menu para realizar o acerto nos totalizadores
 *                               do sistema
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -3701,7 +3694,7 @@ void MCS_menuAjusteContadores(void){
   }
 }
 /************************************************************************************
-*       Descrição       :       Desenha as opções do menu de ajuste
+*       Descriï¿½ï¿½o       :       Desenha as opï¿½ï¿½es do menu de ajuste
 *                               dos contadores
 *       Parametros      :       (unsigned char) indice
 *       Retorno         :       nenhum
@@ -3714,7 +3707,7 @@ void MCS_desenhaOpcoesContadores(unsigned char indice){
   HD44780_writeString((char*)MCS_mensagemMenuAjusteContadores[indice]);        
 }
 /************************************************************************************
-*       Descrição       :       Tela para fazer o ajuste do contador de unidades
+*       Descriï¿½ï¿½o       :       Tela para fazer o ajuste do contador de unidades
 *                               vendidas parcial
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -3726,7 +3719,7 @@ void MCS_ajustaContadorUnidadesParcial(void){
   PARAMETROS_gravaContadorVendasParcial(parcial);                      
 }
 /************************************************************************************
-*       Descrição       :       Tela para fazer o ajuste do contador de 
+*       Descriï¿½ï¿½o       :       Tela para fazer o ajuste do contador de 
 *                               unidades vendidas total
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -3738,8 +3731,8 @@ void MCS_ajustaContadorUnidadasTotal(void){
   PARAMETROS_salvaContadorVendas(total);  
 }
 /************************************************************************************
-*       Descrição       :       Tela para fazer o ajuste do contador
-*                               de arrecadação parcial
+*       Descriï¿½ï¿½o       :       Tela para fazer o ajuste do contador
+*                               de arrecadaï¿½ï¿½o parcial
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -3750,7 +3743,7 @@ void MCS_ajustaArrecadacaoParcial(void){
   PARAMETROS_salvaContadorArrecadacao(arrecadacaoParcial);  
 }
 /************************************************************************************
-*       Descrição       :       Tela para fazer o ajuste do contador 
+*       Descriï¿½ï¿½o       :       Tela para fazer o ajuste do contador 
 *                               de arrecadacao total 
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -3762,7 +3755,7 @@ void MCS_ajustaArrecadacaoTotal(void){
   PARAMETROS_gravaTotalizadorPermanente(arrecadacaoTotal);  
 }
 /************************************************************************************
-*       Descrição       :       Tela genérica para o usuário digitar
+*       Descriï¿½ï¿½o       :       Tela genï¿½rica para o usuï¿½rio digitar
 *                               um valor de 8 digitos
 *       Parametros      :       (char*) titulo
 *       Retorno         :       (unsigned int) valor digitado
@@ -3826,8 +3819,8 @@ unsigned int MCS_telaInformaValorInt(char*titulo){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Faz a verificação da contrasenha
-*                               de segurança
+*       Descriï¿½ï¿½o       :       Faz a verificaï¿½ï¿½o da contrasenha
+*                               de seguranï¿½a
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned char) maior do que zero
 *                               se estiver correto
@@ -3839,7 +3832,7 @@ unsigned char MCS_checaContraSenha(void){
   unsigned char indice=0;
   unsigned char toggle=0;
   unsigned char ciclos=1;
-  unsigned char horas=0;
+  //unsigned char horas=0;
   unsigned short int senha;
   
   srand(MCS_contadorSemente);
@@ -3869,7 +3862,7 @@ unsigned char MCS_checaContraSenha(void){
                                      ((bufferLinha[5]-'0'));
              
              recebido &= 0x3FFFF;             
-             horas = recebido>>14;
+             //horas = recebido>>14;
              
              senha = ((recebido&0x3FFF)^3004);             
              if(senha==contraSenha)
@@ -3913,7 +3906,7 @@ unsigned char MCS_checaContraSenha(void){
   return 0;
 }
 /************************************************************************************
-*       Descrição       :       Tela para exibir a quantidade parcial
+*       Descriï¿½ï¿½o       :       Tela para exibir a quantidade parcial
 *                               de pipocas vendidas
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -3943,7 +3936,7 @@ void MCS_exibeTotalizadorUnidadesParcial(void){
   }     
 }
 /************************************************************************************
-*       Descrição       :       Tela para exibir a quantidade total de 
+*       Descriï¿½ï¿½o       :       Tela para exibir a quantidade total de 
 *                               pipocas vendidas
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -3973,7 +3966,7 @@ void MCS_exibeTotalizadorUnidadesTotal(void){
   }     
 }
 /************************************************************************************
-*       Descrição       :       Ponto de entrada do menu de configuração
+*       Descriï¿½ï¿½o       :       Ponto de entrada do menu de configuraï¿½ï¿½o
 *                               da rede wifi
 *       Parametros      :       nenhum
 *       Retorno         ;       nenhum
@@ -4012,7 +4005,7 @@ void MCS_configuracaoWifiEntry(void){
   }
 }
 /************************************************************************************
-*       Descrição       :       Desenha as opções do menu de configuração
+*       Descriï¿½ï¿½o       :       Desenha as opï¿½ï¿½es do menu de configuraï¿½ï¿½o
 *                               da rede wifi
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -4025,7 +4018,7 @@ void MCS_desenhaOpcoesMenuAjusteWifi(unsigned char indice){
   HD44780_writeString((char*)MCS_mensagemMenuWifi[indice]);  
 }
 /************************************************************************************
-*       Descrição       :       Exibe o SSID configurado para a rede wifi
+*       Descriï¿½ï¿½o       :       Exibe o SSID configurado para a rede wifi
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -4073,7 +4066,7 @@ void MCS_menuExibeSSID(void){
   }      
 }
 /************************************************************************************
-*       Descrição       :       Tela para o usuário alterar o SSID
+*       Descriï¿½ï¿½o       :       Tela para o usuï¿½rio alterar o SSID
 *                               da rede
 *       Parametros      :       nenhum
 *       Retorno         :       nenhm
@@ -4169,7 +4162,7 @@ void MCS_telaAlterarSSID(void){
   }      
 }
 /************************************************************************************
-*       Descrição       :       Salva os dados do SSID na memória do módulo
+*       Descriï¿½ï¿½o       :       Salva os dados do SSID na memï¿½ria do mï¿½dulo
 *                               Wifi
 *       Parametros      :       (char*) buffer com o SSID
 *       Retorno         :       nenhum
@@ -4196,7 +4189,7 @@ void MCS_telaSalvaSSID(char *ssid){
   }
 }
 /************************************************************************************
-*       Descrição       :       Remove os espaços após o final da string
+*       Descriï¿½ï¿½o       :       Remove os espaï¿½os apï¿½s o final da string
 *       Parametros      :       (char*) string
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -4211,8 +4204,8 @@ void MCS_removeEspacosFinalString(char*string){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Tela para excluir o SSID configurado
-*                               para a máquina
+*       Descriï¿½ï¿½o       :       Tela para excluir o SSID configurado
+*                               para a mï¿½quina
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -4257,7 +4250,7 @@ void MCS_removeSSID(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Tela para visualizar a senha da rede wifi
+*       Descriï¿½ï¿½o       :       Tela para visualizar a senha da rede wifi
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -4306,7 +4299,7 @@ void MCS_menuVisualizaSenhaWiFi(void){
   }      
 }
 /************************************************************************************
-*       Descrição       :       Tela para visualizar o MAC Address
+*       Descriï¿½ï¿½o       :       Tela para visualizar o MAC Address
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -4354,7 +4347,7 @@ void MCS_menuVisualizaMACAddress(void){
   }      
 }
 /************************************************************************************
-*       Descrição       :       Tela para visualizar o MAC Telemetria
+*       Descriï¿½ï¿½o       :       Tela para visualizar o MAC Telemetria
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -4403,7 +4396,7 @@ void MCS_menuVisualizaMACTelemetria(void){
   }      
 }
 /************************************************************************************
-*       Descrição       :       Tela para realizar a edição da senha da
+*       Descriï¿½ï¿½o       :       Tela para realizar a ediï¿½ï¿½o da senha da
 *                               rede wifi
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -4499,7 +4492,7 @@ void MCS_telaEditaSenhaWifi(void){
   }      
 }
 /************************************************************************************
-*       Descrição       :       Tela para salvar a senha wifi no módulo
+*       Descriï¿½ï¿½o       :       Tela para salvar a senha wifi no mï¿½dulo
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -4525,7 +4518,7 @@ void MCS_telaSalvaSenhaWiFi(char *senha){
   }
 }
 /************************************************************************************
-*       Descrição       :       Apaga a senha da rede wifi
+*       Descriï¿½ï¿½o       :       Apaga a senha da rede wifi
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -4570,8 +4563,8 @@ void MCS_apagaSenhaWifi(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Tela para o usuário configurar qual noteiro
-*                               será utilizado pela máquina
+*       Descriï¿½ï¿½o       :       Tela para o usuï¿½rio configurar qual noteiro
+*                               serï¿½ utilizado pela mï¿½quina
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -4623,8 +4616,8 @@ void MCS_selecionaTipoNoteiro(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Configura o modelo da impressora utilizada
-*                               para a leitura da arrecadação da máquina
+*       Descriï¿½ï¿½o       :       Configura o modelo da impressora utilizada
+*                               para a leitura da arrecadaï¿½ï¿½o da mï¿½quina
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -4676,8 +4669,8 @@ void MCS_menuConfiguraImpressora(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Tela para visualização das 
-*                               vendas realizadas com o cartão de crédito
+*       Descriï¿½ï¿½o       :       Tela para visualizaï¿½ï¿½o das 
+*                               vendas realizadas com o cartï¿½o de crï¿½dito
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -4705,9 +4698,9 @@ void MCS_telaVendasCartao(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Tela para o usuário configurar o tipo
-*                               do moedeiro que será utilizado
-*                               na máquina
+*       Descriï¿½ï¿½o       :       Tela para o usuï¿½rio configurar o tipo
+*                               do moedeiro que serï¿½ utilizado
+*                               na mï¿½quina
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -4757,7 +4750,7 @@ void MCS_telaEscolheMoedeiro(void){
   }  
 }
 /***********************************************************************************
-*       Descrição       :       Escreve os valores do rtc no displays
+*       Descriï¿½ï¿½o       :       Escreve os valores do rtc no displays
 *       Parametros      :       (unsigned char) hora
 *                               (unsigned char) minuto
 *                               (unsigned char) segundo
@@ -4783,7 +4776,7 @@ void MCS_exibeValores(unsigned char hora,unsigned char minuto,unsigned char segu
   HD44780_writeString(buffer);                        
 }
 /***********************************************************************************
-*       Descrição       :       Interface para ajuste do relógio
+*       Descriï¿½ï¿½o       :       Interface para ajuste do relï¿½gio
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -4792,7 +4785,7 @@ void MCS_ajusteRelogio(void){
   IAR_entry();
 }
 /************************************************************************************
-*       Descrição       :       Interface para teste do RTC
+*       Descriï¿½ï¿½o       :       Interface para teste do RTC
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -4801,8 +4794,8 @@ void MCS_testeRTC(void){
   IAR_testeRTC();
 }
 /************************************************************************************
-*       Descrição       :       Interface para o usuário cadastrar o numero
-*                               de série da máquina
+*       Descriï¿½ï¿½o       :       Interface para o usuï¿½rio cadastrar o numero
+*                               de sï¿½rie da mï¿½quina
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -4849,7 +4842,7 @@ void MCS_cadastraNumeroSerie(void){
   }  
 }
 /************************************************************************************
-*       Descrição       :       Desenha as opções do menu de exibição
+*       Descriï¿½ï¿½o       :       Desenha as opï¿½ï¿½es do menu de exibiï¿½ï¿½o
 *       Parametros      :       (unsigned char) indice
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -4864,8 +4857,8 @@ void MCS_desenhaOpcoesExibicao(unsigned char indice){
   HD44780_writeChar(0x7E);
 }
 /************************************************************************************
-*       Descrição       :       Menu com as opções de exibição 
-*                               da máquina
+*       Descriï¿½ï¿½o       :       Menu com as opï¿½ï¿½es de exibiï¿½ï¿½o 
+*                               da mï¿½quina
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -4905,7 +4898,7 @@ void MCS_menuOpcoesExibicao(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Desenha as opções do menu de operação
+*       Descriï¿½ï¿½o       :       Desenha as opï¿½ï¿½es do menu de operaï¿½ï¿½o
 *       Parametros      :       (unsigned char) indice
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -4920,8 +4913,8 @@ void MCS_desenhaOpcoesOperacao(unsigned char indice){
   HD44780_writeChar(0x7E);
 }
 /************************************************************************************
-*       Descrição       :       Menu com as opções de operação
-*                               da máquina
+*       Descriï¿½ï¿½o       :       Menu com as opï¿½ï¿½es de operaï¿½ï¿½o
+*                               da mï¿½quina
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -4961,7 +4954,7 @@ void MCS_menuOpcoesOperacao(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Menu com as opções da telemetria
+*       Descriï¿½ï¿½o       :       Menu com as opï¿½ï¿½es da telemetria
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -4970,7 +4963,7 @@ void MCS_menuTelemetria(void){
   
 }
 /************************************************************************************
-*       Descrição       :       Desenha as opções do menu para configuração
+*       Descriï¿½ï¿½o       :       Desenha as opï¿½ï¿½es do menu para configuraï¿½ï¿½o
 *                               do desumidificador
 *       Parametros      :       (unsigned char) indice
 *       Retorno         :       nenhum
@@ -4986,7 +4979,7 @@ void MCS_desenhaOpcoesDesumidificador(unsigned char indice){
   HD44780_writeChar(0x7E);
 }
 /************************************************************************************
-*       Descrição       :       Menu desumificação
+*       Descriï¿½ï¿½o       :       Menu desumificaï¿½ï¿½o
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -5025,8 +5018,8 @@ void MCS_menuDesumidificacao(void){
   }       
 }
 /************************************************************************************
-*       Descrição       :       Desenha as opções do menu para configuração
-*                               dos periféricos
+*       Descriï¿½ï¿½o       :       Desenha as opï¿½ï¿½es do menu para configuraï¿½ï¿½o
+*                               dos perifï¿½ricos
 *       Parametros      :       (unsigned char) indice
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -5041,7 +5034,7 @@ void MCS_desenhaOpcoesPerifericos(unsigned char indice){
   HD44780_writeChar(0x7E);
 }
 /************************************************************************************
-*       Descrição       :       Menu para configuração dos periféricos da máquina
+*       Descriï¿½ï¿½o       :       Menu para configuraï¿½ï¿½o dos perifï¿½ricos da mï¿½quina
 *       parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -5081,7 +5074,7 @@ void MCS_menuConfiguraPerifericos(void){
   }       
 }
 /************************************************************************************
-*       Descrição       :       Desenha os dados do menu avançado na tela
+*       Descriï¿½ï¿½o       :       Desenha os dados do menu avanï¿½ado na tela
 *       Parametros      :       (unsigned char) indice
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -5096,7 +5089,7 @@ void MCS_desenhaOpcoesAvancado(unsigned char indice){
   HD44780_writeChar(0x7E);
 }
 /************************************************************************************
-*       Descrição       :       Menu avançado
+*       Descriï¿½ï¿½o       :       Menu avanï¿½ado
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -5141,8 +5134,8 @@ void MCS_menuAvancado(void){
   } 
 }
 /************************************************************************************
-*       Descrição       :       Menu para teste/configuração do volume
-*                               da música
+*       Descriï¿½ï¿½o       :       Menu para teste/configuraï¿½ï¿½o do volume
+*                               da mï¿½sica
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -5194,7 +5187,7 @@ void MCS_testeAjusteVolumeMusica(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Interface para o usuário configurar o volume
+*       Descriï¿½ï¿½o       :       Interface para o usuï¿½rio configurar o volume
 *                               da voz
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -5242,7 +5235,7 @@ void MCS_interfaceConfiguraVolumeTesteVoz(void){
   }     
 }
 /************************************************************************************
-*       Descrição       :       Tela para cadastrar o tempo de desligamento
+*       Descriï¿½ï¿½o       :       Tela para cadastrar o tempo de desligamento
 *                               do motor da embalagem
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -5292,8 +5285,8 @@ void MCS_configuraTesteTempoEmbalagem(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Menu para exibição dos dados de faturamento
-*                               de cartão de crédito
+*       Descriï¿½ï¿½o       :       Menu para exibiï¿½ï¿½o dos dados de faturamento
+*                               de cartï¿½o de crï¿½dito
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -5331,7 +5324,7 @@ void MCS_menuConfigExibeCartao(void){
   }      
 }
 /************************************************************************************
-*       Descrição       :       Teste das saídas de coletor aberto utilizadas
+*       Descriï¿½ï¿½o       :       Teste das saï¿½das de coletor aberto utilizadas
 *                               para bloqueio do P70
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -5374,7 +5367,7 @@ void MCS_testeSaidaBloqueioP70(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Interface para o usuário cadastrar
+*       Descriï¿½ï¿½o       :       Interface para o usuï¿½rio cadastrar
 *                               a nova senha de acesso ao sistema
 *       Parametrso      :       nenhum
 *       Retorno         :       nenhum
@@ -5405,7 +5398,7 @@ void MCS_cadastraSenhas(void){
   }  
 }
 /************************************************************************************
-*       Descrição       :       Tela para o usuário informar uma senha
+*       Descriï¿½ï¿½o       :       Tela para o usuï¿½rio informar uma senha
 *       Parametros      :       (unsigned int) senha de acesso
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -5465,7 +5458,7 @@ unsigned short int MCS_digitaSenha(char *titulo){
   return 65535;
 }
 /************************************************************************************
-*       Descrição       :       Tela para reiniar a senha de administrador
+*       Descriï¿½ï¿½o       :       Tela para reiniar a senha de administrador
 *                               com zeros
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -5489,7 +5482,7 @@ void MCS_tela_reinicia_senha_root(void){
   vTaskDelay(5000);  
 }
 /************************************************************************************
-*       Descrição       :       Tela para realizar o reset da senha mestre
+*       Descriï¿½ï¿½o       :       Tela para realizar o reset da senha mestre
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -5500,7 +5493,7 @@ void MCS_tela_reset_master(void){
   unsigned char indice=0;
   unsigned char toggle=0;
   unsigned char ciclos=1;
-  unsigned char horas=0;
+  //unsigned char horas=0;
   unsigned short int senha;
   
   srand(MCS_contadorSemente);
@@ -5530,7 +5523,7 @@ void MCS_tela_reset_master(void){
                                      ((bufferLinha[5]-'0'));
              
              recebido &= 0x3FFFF;             
-             horas = recebido>>14;
+             //horas = recebido>>14;
              
              senha = ((recebido&0x3FFF)^3004);
                HD44780_clearText();             
@@ -5585,7 +5578,7 @@ void MCS_tela_reset_master(void){
   }   
 }
 /************************************************************************************
-*       Descrição       :       Menu para configuração do valor do crédito
+*       Descriï¿½ï¿½o       :       Menu para configuraï¿½ï¿½o do valor do crï¿½dito
 *                               do moedeiro UCA-1
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -5627,7 +5620,7 @@ void MCS_configura_valor_credito_uca1(void){
   }    
 }
 /************************************************************************************
-*       Descrição       :       Tela de configuração de um valor inteiro
+*       Descriï¿½ï¿½o       :       Tela de configuraï¿½ï¿½o de um valor inteiro
 *       Parametros      :       (char*) titutlo
 *                               (unsigned short int) valor
 *       Retorno         :       nenhum
@@ -5636,6 +5629,7 @@ unsigned short int MCS_configura_valor_ganho(char* titulo,unsigned short int val
   eTECLA tecla;
   char buffer_linha[17];
   unsigned char tamanho;
+  unsigned short int valor_init = valor;
 
   HD44780_clearText();
   HD44780_writeString(titulo);
@@ -5644,9 +5638,10 @@ unsigned short int MCS_configura_valor_ganho(char* titulo,unsigned short int val
     
     tecla = TECLADO_getch();
     switch(tecla){
-      case TECLA_ENTER:
-      case TECLA_ESC:        
+      case TECLA_ENTER:        
            return valor;
+      case TECLA_ESC:
+           return valor_init;
       case TECLA_INC:
            if(valor<100)
              valor+=1;
@@ -5668,26 +5663,26 @@ unsigned short int MCS_configura_valor_ganho(char* titulo,unsigned short int val
   return valor;  
 }
 /************************************************************************************
-*       Descrição       :       Configura o ganho KP do controlador PID do 
+*       Descriï¿½ï¿½o       :       Configura o ganho KP do controlador PID do 
 *                               motor
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
 void MCS_tela_configura_P(void){
   
-  PARAMETROS_grava_ganhoKP(MCS_configura_valor_ganho("Ganho P",PARAMETROS_le_ganhoKP()));
+  PARAMETROS_grava_ganho_KP(MCS_configura_valor_ganho("Ganho P",PARAMETROS_le_ganho_KP()));
 }
 /************************************************************************************
-*       Descrição       :       Configura o ganho KI do controlador PID
+*       Descriï¿½ï¿½o       :       Configura o ganho KI do controlador PID
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
 void MCS_tela_configura_I(void){
   
-  PARAMETROS_grava_ganho_KI(MCS_configura_valor_ganho("Ganho I",PARAMETROS_le_ganho_ki()));  
+  PARAMETROS_grava_ganho_KI(MCS_configura_valor_ganho("Ganho I",PARAMETROS_le_ganho_KI()));  
 }
 /************************************************************************************
-*       Descrição       :       Configura o ganho KD do controlador PID
+*       Descriï¿½ï¿½o       :       Configura o ganho KD do controlador PID
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -5696,7 +5691,7 @@ void MCS_tela_configura_D(void){
   PARAMETROS_grava_ganho_KD(MCS_configura_valor_ganho("Ganho D",PARAMETROS_le_ganho_KD()));    
 }
 /************************************************************************************
-*       Descrição       :       Desenha o fundo do menu de ajuste do PID
+*       Descriï¿½ï¿½o       :       Desenha o fundo do menu de ajuste do PID
 *       Parametros      :       (unsigned char) linha
 *       Retorno                 nenhum
 ************************************************************************************/
@@ -5708,7 +5703,7 @@ void MCS_desenha_fundo(unsigned char indice){
   HD44780_writeString((char*)MCS_mensagem_configuraPID[indice]);  
 }
 /************************************************************************************
-*       Descrição       :       Menu para configuração dos ganhos do PID
+*       Descriï¿½ï¿½o       :       Menu para configuraï¿½ï¿½o dos ganhos do PID
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ************************************************************************************/
@@ -5718,7 +5713,6 @@ void MCS_menu_configura_ganhos(void){
   
   HD44780_clearText();
   MCS_desenha_fundo(indice);
-  
   for(;TECLADO_getContadorInatividade();){
     
     
@@ -5727,7 +5721,6 @@ void MCS_menu_configura_ganhos(void){
       case TECLA_ENTER:
            if(MCS_funcAjustaPID[indice]!=NULL)
              MCS_funcAjustaPID[indice]();           
-           MCS_desenha_fundo(indice);
            break;
       case TECLA_ESC:
            return;
@@ -5738,7 +5731,8 @@ void MCS_menu_configura_ganhos(void){
            indice?(indice--):(indice=TAM_LISTA_PID-1);
            break;
     }
-    
+
+    MCS_desenha_fundo(indice);
   }   
 }
 /************************************************************************************
