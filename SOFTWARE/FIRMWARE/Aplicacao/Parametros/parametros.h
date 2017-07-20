@@ -259,6 +259,10 @@ unsigned short int PARAMETROS_le_ganho_KD(void);
 
 char* PARAMETROS_leVersaoCPU(void);
 
+void PARAMETROS_grava_correcao_erro(unsigned short int correcao_erro);
+
+unsigned short int PARAMETROS_le_correcao_erro(void);
+
 /***********************************************************************************
 *       Fim do arquivo
 ***********************************************************************************/
