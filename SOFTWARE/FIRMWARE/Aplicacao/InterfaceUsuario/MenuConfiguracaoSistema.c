@@ -20,7 +20,7 @@
 |       Autor              :  Marcos Aquino
 |       Data cria��o       :  11/03/2015
 |
-|       Revis�es           :  1.0.0.0
+|       Revis�es           :  1.0
 |                             1.1 - (23/06/2016) menus reagrupados, por Marcos
 |                             1.2 - (22/05/2017) Alterado para n�o pedir a senha
 |                                                com contrasenha para entrar no
@@ -221,12 +221,10 @@ const char *MCS_opcoesMenuPrincipal[TAM_MENU_PRINCIPAL]={
 
 const char *MCS_opcoesMenuPreparacao[TAM_MENU_PREPARACAO]={
   "(1)Temp. inicial",    
-  "(2)Temp. Final  ",
-  "(3)Rampa Calef. ",
-  "(4)Veloc. prep. ",
-  "(5)Retardo emb. ",
-  "(6)Prueba prep. ",
-  "(7)Ajuste de fab",
+  "(2)Veloc. prep. ",
+  "(3)Retardo emb. ",
+  "(4)Prueba prep. ",
+  "(5)Ajuste de fab",
   "   Volver       "
 };
 
@@ -334,7 +332,7 @@ const char *MCS_ocpoesPerifericos[TAM_MENU_PERIFERICOS]={
   "(1)Mod. impres. ",  
   "(2)Mod. noteiro ",
   "(3)Mod. moedeiro",
-  "(4)Cred. UCA'   ",
+  "(4)Cred. UCA    ",
   "  Voltar        "
 };
 

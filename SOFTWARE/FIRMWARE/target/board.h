@@ -27,8 +27,14 @@
 |                                          Removida a interrupção adicionar para
 |                                          desligar o gate do TRIAC, agora ele
 |                                          é desligado no cruzamento por zero
-|
-|
+|                             (21/07/2017) Removidas as opções do usuário de 
+|                                          mudar as configuração da temperatura                                             
+|                                          final e a rampa. Inseridas mudanças
+|                                          para o envio correto dos dados para a
+|                                          Telemetria. Refeito o TELET para
+|                                          funcionar como uma task separada,
+|                                          recebendo informações através de uma 
+|                                          fila. Ganhos PID agora são configuraveis.
 | __________________________________________________________________________________
 */
 #ifndef _BOARD_H_
@@ -48,36 +54,36 @@
 #ifdef _BRASIL_
   #define PORTUGUES
   #define FQ_REDE_60_HZ
-  #define STR_VERSAO_BOARD      "     1.11.2-BR  "
-  #define STR_VERSAO_BOARD_TELEMETRIA      "1.11.2-BR"
+  #define STR_VERSAO_BOARD      "     1.12.1-BR  "
+  #define STR_VERSAO_BOARD_TELEMETRIA      "1.12.1-BR"
 #endif
 
 #ifdef _URUGUAI_
   #define FQ_REDE_50_HZ
   #define ESPANHOL
-  #define STR_VERSAO_BOARD      "     1.11.2-UY  "
-  #define STR_VERSAO_BOARD_TELEMETRIA      "1.11.2-UY"
+  #define STR_VERSAO_BOARD      "     1.12.1-UY  "
+  #define STR_VERSAO_BOARD_TELEMETRIA      "1.12.1-UY"
 #endif
 
 #ifdef _PARAGUAI_
   #define FQ_REDE_50_HZ
   #define ESPANHOL
-  #define STR_VERSAO_BOARD      "     1.11.2-PY  "
-  #define STR_VERSAO_BOARD_TELEMETRIA      "1.11.2-PY"
+  #define STR_VERSAO_BOARD      "     1.12.1-PY  "
+  #define STR_VERSAO_BOARD_TELEMETRIA      "1.12.1-PY"
 #endif
 
 #ifdef _PARAGUAI_60HZ_
   #define FQ_REDE_60_HZ
   #define ESPANHOL
-  #define STR_VERSAO_BOARD      "  1.11.2-PYBR   "
-  #define STR_VERSAO_BOARD_TELEMETRIA      "1.11.2-PYBR"
+  #define STR_VERSAO_BOARD      "  1.12.1-PYBR   "
+  #define STR_VERSAO_BOARD_TELEMETRIA      "1.12.1-PYBR"
 #endif
 
 #ifdef _URUGUAI_60HZ_
   #define FQ_REDE_60_HZ
   #define ESPANHOL
-  #define STR_VERSAO_BOARD      "  1.11.2-UYBR   "
-  #define STR_VERSAO_BOARD_TELEMETRIA      "1.11.2-PYBR"
+  #define STR_VERSAO_BOARD      "  1.12.1-UYBR   "
+  #define STR_VERSAO_BOARD_TELEMETRIA      "1.12.1-PYBR"
 #endif
 //----------------------------------------------------------------------------------
 //      Definições para os demais países da América Latina
