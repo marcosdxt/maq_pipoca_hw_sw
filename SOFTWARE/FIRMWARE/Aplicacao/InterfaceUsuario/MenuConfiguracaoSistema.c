@@ -249,7 +249,7 @@ const char *MCS_opcoesOperacao[TAM_MENU_OPERACAO]={
   "(5) Deshumid.   ",  
   " Volver         "
 };
-
+/*
 #ifdef _BRASIL_
 const char *MCS_opcoesConfiguraCedulas[]={
   " [ ] R$ 2,00    ",
@@ -261,7 +261,7 @@ const char *MCS_opcoesConfiguraCedulas[]={
   " Volver         ",
 };
 #endif
-
+*/
 #ifdef _URUGUAI_
 const char *MCS_opcoesConfiguraCedulas[]={
   " [ ] $U 20,00   ",
@@ -373,6 +373,23 @@ const char *MCS_mensagemMenuAjusteContadores[TAM_LISTA_CONTADORES]={
   "(2) Unid. Total ",
   "(3) Arrec. Parc.",
   "(4) Arrec. Total",
+  "    Voltar      "
+};
+
+const char *MCS_mensagemAvancado[TAM_LISTA_AVANCADO]={//precisa traduzir
+  "(1) Hora/Data   ",
+  "(2) Aj. Contador",
+  "(3) Num. serie  ",
+  "(4) Test. prep. ",
+  "(5) Dur. proces.",
+  "(6) Vel. final 1",
+  "(7) Vel. final 2",
+  "(8) Vel. limpeza",
+  "(9) Zeramento   ",
+  "(10)Senha       ", 
+  "(11)Senha Mestre",
+  "(12)Ganhos PID  ",
+  "(13)Cor. erro   ",
   "    Voltar      "
 };
 #endif
