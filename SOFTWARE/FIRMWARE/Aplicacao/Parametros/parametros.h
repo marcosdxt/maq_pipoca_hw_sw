@@ -263,6 +263,10 @@ void PARAMETROS_grava_correcao_erro(unsigned short int correcao_erro);
 
 unsigned short int PARAMETROS_le_correcao_erro(void);
 
+void PARAMETROS_grava_constante_temperatura(unsigned short int valor);
+  
+unsigned short int PARAMETROS_le_constante_temperatura(void);
+
 /***********************************************************************************
 *       Fim do arquivo
 ***********************************************************************************/

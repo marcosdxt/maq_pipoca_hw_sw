@@ -34,7 +34,9 @@
 |                                          Telemetria. Refeito o TELET para
 |                                          funcionar como uma task separada,
 |                                          recebendo informações através de uma 
-|                                          fila. Ganhos PID agora são configuraveis.
+|                                          fila. Ganhos PID do motor agora é 
+|                                          configuraveis e pode ser habilitado
+|                                          no menu avancado.
 | __________________________________________________________________________________
 */
 #ifndef _BOARD_H_

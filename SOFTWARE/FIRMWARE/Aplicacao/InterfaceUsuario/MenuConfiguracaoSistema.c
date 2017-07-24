@@ -51,7 +51,7 @@
 #define TAM_MENU_PERIFERICOS                            5
 #define TAM_LISTA_HARDWARE                              19
 #define TAM_LISTA_WIFI                                  9
-#define TAM_LISTA_AVANCADO                              14
+#define TAM_LISTA_AVANCADO                              15
 #define TAM_LISTA_CONTADORES                            5
 #define TAM_LISTA_PID                                   4
 /************************************************************************************
@@ -194,6 +194,7 @@ const char *MCS_mensagemAvancado[TAM_LISTA_AVANCADO]={
   "(11)Senha Mestre",
   "(12)Ganhos PID  ",
   "(13)Cor. erro   ",
+  "(14)Con. temper.",
   "    Voltar      "
 };
 
@@ -390,6 +391,7 @@ const char *MCS_mensagemAvancado[TAM_LISTA_AVANCADO]={//precisa traduzir
   "(11)Senha Mestre",
   "(12)Ganhos PID  ",
   "(13)Cor. erro   ",
+  "(14)Con. temper.",
   "    Voltar      "
 };
 #endif
@@ -534,6 +536,8 @@ void MCS_tela_configura_P(void);
 void MCS_tela_configura_I(void);
 void MCS_tela_configura_D(void);
 
+void MCS_tela_configura_contante_temperatura(void);
+
 void IU_escreveTemperaturaResistenciaFree(unsigned char rpm);
 /************************************************************************************
 *       Descri��o       
@@ -655,6 +659,7 @@ void(*const MCS_funcAvancado[])(void)={
   MCS_tela_reset_master,
   MCS_menu_configura_ganhos,
   MCS_tela_correcao_erro,
+  MCS_tela_configura_contante_temperatura,
   NULL
 };
 
@@ -690,7 +695,7 @@ void MCS_desenhaOpcoesPreparacao(unsigned char indice);
 ************************************************************************************/
 
 /************************************************************************************
-*       Descri��o       :       Ponto de entrada do menu de configura��o
+*       Descricao       :       Ponto de entrada do menu de configuracao
 *                               dos parametros da m�quina
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -5690,14 +5695,51 @@ void MCS_tela_correcao_erro(void){
       case TECLA_ESC:
            return;
       case TECLA_INC:
-           habilita = (++habilita) % 2;
+           habilita = (habilita+1) % 2;
            break;
       case TECLA_DEC:
-           habilita = (++habilita) % 2;
+           habilita = (habilita+1) % 2;
            break;
     }
     HD44780_posicionaTexto(6,1);
     HD44780_writeString(habilita?"ON ":"OFF");
+  }   
+}
+////////////////////////aqui123
+/************************************************************************************
+*       Descri��o       :       Menu para configuracao da constante de temperatura
+*       Parametros      :       nenhum
+*       Retorno         :       nenhum
+************************************************************************************/
+void MCS_tela_configura_contante_temperatura(void){
+  eTECLA tecla;  
+  unsigned char valor=PARAMETROS_le_constante_temperatura();
+  char bufferLinha[17];
+  
+  HD44780_clearText();
+  HD44780_posicionaTexto(0,0);  
+  HD44780_writeString("Cont. Temperatura");
+  
+  for(;TECLADO_getContadorInatividade();){
+    
+    tecla = TECLADO_getch();
+    switch(tecla){
+      case TECLA_ENTER:
+           PARAMETROS_grava_correcao_erro(valor);
+           break;
+      case TECLA_ESC:
+           return;
+      case TECLA_INC:
+           valor = ((valor+1) % 3)+1;
+           break;
+      case TECLA_DEC:
+           valor?(valor--):3;
+           break;
+    }
+    
+    sprintf(bufferLinha,"%03d ",valor);
+    HD44780_posicionaTexto(0,1);  
+    HD44780_writeString(bufferLinha);
   }   
 }
 /************************************************************************************

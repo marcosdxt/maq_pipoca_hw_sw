@@ -749,7 +749,7 @@ unsigned char IU_preparaPipoca(void){
   inicial = PARAMETROS_leRotacaoInicialExpulsao();
   final = PARAMETROS_leVelocidadeFinalExpulsao();
   unsigned short int tempResf;
-  if(IU_compensadorTemperatura)
+  if(IU_compensadorTemperatura)//aqui123
     tempResf = PARAMETROS_leTemperaturaInicio() + ((IU_compensadorTemperatura-1)>>1);
   else
     tempResf = PARAMETROS_leTemperaturaInicio();
@@ -1508,9 +1508,9 @@ void IU_cicloCompensador(void){
   
   if(IU_contadorCompensador){
     if(IU_compensadorTemperatura<MAX_COMPENSADOR_TEMPERATURA)
-      IU_compensadorTemperatura++;
+      IU_compensadorTemperatura+= PARAMETROS_le_correcao_erro();//aqui123 trazer parametro
     if(IU_compensadorRotacao<MAX_COMPENSADOR_ROTACAO)
-      IU_compensadorTemperatura+=50;
+      IU_compensadorRotacao+=50;//aqui123 estava alterando o IU_compensadorTemperatura
     
     IU_contadorCompensador = TEMPO_COMPENSADOR;
     IU_contadorSaidaCompensador = TEMPO_SAIDA_COMPENSADOR;
