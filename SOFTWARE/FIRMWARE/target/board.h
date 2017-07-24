@@ -35,6 +35,8 @@
 |                                          funcionar como uma task separada,
 |                                          recebendo informações através de uma 
 |                                          fila. Ganhos PID agora são configuraveis.
+|                             (24/07/2017) Correção do envio da informação Cartão
+|                                          Total para a Telemetria.
 | __________________________________________________________________________________
 */
 #ifndef _BOARD_H_
@@ -54,46 +56,43 @@
 #ifdef _BRASIL_
   #define PORTUGUES
   #define FQ_REDE_60_HZ
-  #define STR_VERSAO_BOARD      "     1.12.1-BR  "
-  #define STR_VERSAO_BOARD_TELEMETRIA      "1.12.1-BR"
+  #define STR_VERSAO_BOARD      "     1.12.2-BR  "
+  #define STR_VERSAO_BOARD_TELEMETRIA      "1.12.2-BR"
 #endif
 
 #ifdef _URUGUAI_
   #define FQ_REDE_50_HZ
   #define ESPANHOL
-  #define STR_VERSAO_BOARD      "     1.12.1-UY  "
-  #define STR_VERSAO_BOARD_TELEMETRIA      "1.12.1-UY"
+  #define STR_VERSAO_BOARD      "     1.12.2-UY  "
+  #define STR_VERSAO_BOARD_TELEMETRIA      "1.12.2-UY"
 #endif
 
 #ifdef _PARAGUAI_
   #define FQ_REDE_50_HZ
   #define ESPANHOL
-  #define STR_VERSAO_BOARD      "     1.12.1-PY  "
-  #define STR_VERSAO_BOARD_TELEMETRIA      "1.12.1-PY"
+  #define STR_VERSAO_BOARD      "     1.12.2-PY  "
+  #define STR_VERSAO_BOARD_TELEMETRIA      "1.12.2-PY"
 #endif
 
 #ifdef _PARAGUAI_60HZ_
   #define FQ_REDE_60_HZ
   #define ESPANHOL
-  #define STR_VERSAO_BOARD      "  1.12.1-PYBR   "
-  #define STR_VERSAO_BOARD_TELEMETRIA      "1.12.1-PYBR"
+  #define STR_VERSAO_BOARD      "  1.12.2-PYBR   "
+  #define STR_VERSAO_BOARD_TELEMETRIA      "1.12.2-PYBR"
 #endif
 
 #ifdef _URUGUAI_60HZ_
   #define FQ_REDE_60_HZ
   #define ESPANHOL
-  #define STR_VERSAO_BOARD      "  1.12.1-UYBR   "
-  #define STR_VERSAO_BOARD_TELEMETRIA      "1.12.1-PYBR"
+  #define STR_VERSAO_BOARD      "  1.12.2-UYBR   "
+  #define STR_VERSAO_BOARD_TELEMETRIA      "1.12.2-UYBR"
 #endif
 //----------------------------------------------------------------------------------
 //      Definições para os demais países da América Latina
 //----------------------------------------------------------------------------------
 
-
 void BOARD_ini(void);
 void BOARD_timerHook(void);
-
-
 
 
 #endif// _BOARD_H_

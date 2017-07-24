@@ -121,7 +121,7 @@ void TELET_main(void*pPar){
                                       PARAMETROS_leContadorArrecadacao()*100,
                                       PARAMETROS_leTotalizadorPermanente()*100,
                                       flags,
-                                      PARAMETROS_carregaOperacoesCartao()*100,
+                                      PARAMETROS_carregaFaturamentoTotalCartao()*100,
                                       PARAMETROS_leContadorVendasParcial(),
                                       PARAMETROS_carregaFaturamentoParcialCartao()*100,
                                       PARAMETROS_leComissaoPonto(),
