@@ -1975,5 +1975,38 @@ unsigned short int PARAMETROS_le_constante_temperatura(void){
   return 1;  
 }
 /***********************************************************************************
+*       Descri��o       :       Grava constante de temperatura
+*       Parametros      :       (unsigned short int) valor
+*       Retorno         :       nenhum
+***********************************************************************************/
+void PARAMETROS_grava_constante_temperatura(unsigned short int valor){
+  unsigned char buffer[3];
+  unsigned short int crc;
+ 
+  buffer[0] = valor;
+  crc = CCTALK_calculaCRC(buffer,0,1);   
+  buffer[1] = crc>>8;
+  buffer[2] = crc;
+  
+  MEMORYWRAPPER_writeBytes(ADR_COSTANTE_TEMPERATURA,buffer,3);
+}
+/***********************************************************************************
+*       Descri��o       :       le constante de temperatura
+*       Parametros      :       nenhum
+*       Retorno         :       (unsigned short int) valor
+***********************************************************************************/
+unsigned short int PARAMETROS_le_constante_temperatura(void){
+  unsigned char buffer[3];
+  unsigned short int crc;
+  
+  MEMORYWRAPPER_readBytes(ADR_COSTANTE_TEMPERATURA,buffer,3);
+  crc = CCTALK_calculaCRC(buffer,0,1);
+  
+  if(crc==(buffer[1]<<8 | buffer[2])){
+    return (unsigned int)buffer[0];
+  }
+  return 1;  
+}
+/***********************************************************************************
 *       Fim do arquivo
 ***********************************************************************************/

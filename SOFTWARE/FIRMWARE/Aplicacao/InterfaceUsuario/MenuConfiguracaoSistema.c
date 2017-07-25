@@ -527,6 +527,7 @@ unsigned short int MCS_digitaSenha(char *titulo);
 void MCS_tela_reinicia_senha_root(void);
 void MCS_tela_reset_master(void);
 void MCS_configura_valor_credito_uca1(void);
+void MCS_tela_configura_contante_temperatura(void);
 
 void MCS_tela_configura_PID(void);
 void MCS_menu_configura_ganhos(void);
@@ -5738,6 +5739,42 @@ void MCS_tela_configura_contante_temperatura(void){
     }
     
     sprintf(bufferLinha,"%03d ",valor);
+    HD44780_posicionaTexto(0,1);  
+    HD44780_writeString(bufferLinha);
+  }   
+}
+/************************************************************************************
+*       Descri��o       :       Menu para configuracao da constante de temperatura
+*       Parametros      :       nenhum
+*       Retorno         :       nenhum
+************************************************************************************/
+void MCS_tela_configura_contante_temperatura(void){
+  eTECLA tecla;  
+  unsigned char valor=PARAMETROS_le_constante_temperatura();
+  char bufferLinha[17];
+ 
+  HD44780_clearText();
+  HD44780_posicionaTexto(0,0);  
+  HD44780_writeString("Cont. Temperatura");
+  
+  for(;TECLADO_getContadorInatividade();){
+ 
+    tecla = TECLADO_getch();
+    switch(tecla){
+      case TECLA_ENTER:
+           PARAMETROS_grava_correcao_erro(valor);
+           break;
+      case TECLA_ESC:
+           return;
+      case TECLA_INC:
+           (valor==4)?1:valor++;
+           break;
+      case TECLA_DEC:
+           (valor-1)?valor--:4;
+           break;
+    }
+    
+    sprintf(bufferLinha,"%02d oC",valor);
     HD44780_posicionaTexto(0,1);  
     HD44780_writeString(bufferLinha);
   }   
