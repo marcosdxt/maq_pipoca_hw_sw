@@ -1329,8 +1329,9 @@ void IU_enviaTelemetria(void){
 ***********************************************************************************/
 void IU_stampEstadoConexaoModuloTelemetria(void){
   
+  char dummy[64];
   HD44780_posicionaTexto(8,1);
-  if(TELET_getEstadoConexaoTelemetria())
+  if(TELET_leSenhaWifi(dummy))
     HD44780_writeString("[TON ]");
   else
     HD44780_writeString("[TOFF]");  

@@ -2656,7 +2656,8 @@ void MCS_telaTesteChavePorta(void){
 ************************************************************************************/
 void MCS_telaTesteTelemetria(void){
   eTECLA tecla;
-
+  char dummy[64];
+  
   HD44780_clearText();
   HD44780_writeString(" Comm mod telet");
   
@@ -2667,7 +2668,7 @@ void MCS_telaTesteTelemetria(void){
       return;
     
     HD44780_posicionaTexto(3,1);
-    if(TELET_getEstadoConexaoTelemetria())
+    if(TELET_leSenhaWifi(dummy))
       HD44780_writeString("[ONLINE ]");
     else
       HD44780_writeString("[OFFLINE]");

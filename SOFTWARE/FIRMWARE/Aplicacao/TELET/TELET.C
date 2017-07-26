@@ -114,9 +114,7 @@ void TELET_main(void*pPar){
         flags |= IU_getFalhaMotor()?0x04:0x00;
         flags |= IU_getFalhaDosador()?0x02:0x00;
 
-
- 
-        if(TELET_escreveBlocoOperacao(PARAMETROS_carregaNumeroSerie(),
+        TELET_escreveBlocoOperacao(PARAMETROS_carregaNumeroSerie(),
                                       PARAMETROS_leContadorVendas(),
                                       PARAMETROS_leContadorArrecadacao()*100,
                                       PARAMETROS_leTotalizadorPermanente()*100,
@@ -127,11 +125,7 @@ void TELET_main(void*pPar){
                                       PARAMETROS_leComissaoPonto(),
                                       PARAMETROS_leVersaoCPU(),
                                       PARAMETROS_leFlagLocacao(),
-                                      PARAMETROS_leParametro(VALOR_PIPOCA)*100)){
-          TELET_estadoConexaoTelemetria = SILENT_TIME_RELOAD;
-        }else{
-          TELET_estadoConexaoTelemetria--;
-        }
+                                      PARAMETROS_leParametro(VALOR_PIPOCA)*100));
       }  
     }  
   }  
