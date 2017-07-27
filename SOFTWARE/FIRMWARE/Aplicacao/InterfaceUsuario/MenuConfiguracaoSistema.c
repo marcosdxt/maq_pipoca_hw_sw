@@ -5706,43 +5706,6 @@ void MCS_tela_correcao_erro(void){
     HD44780_writeString(habilita?"ON ":"OFF");
   }   
 }
-////////////////////////aqui123
-/************************************************************************************
-*       Descri��o       :       Menu para configuracao da constante de temperatura
-*       Parametros      :       nenhum
-*       Retorno         :       nenhum
-************************************************************************************/
-void MCS_tela_configura_contante_temperatura(void){
-  eTECLA tecla;  
-  unsigned char valor=PARAMETROS_le_constante_temperatura();
-  char bufferLinha[17];
-  
-  HD44780_clearText();
-  HD44780_posicionaTexto(0,0);  
-  HD44780_writeString("Cont. Temperatura");
-  
-  for(;TECLADO_getContadorInatividade();){
-    
-    tecla = TECLADO_getch();
-    switch(tecla){
-      case TECLA_ENTER:
-           PARAMETROS_grava_correcao_erro(valor);
-           break;
-      case TECLA_ESC:
-           return;
-      case TECLA_INC:
-           valor = ((valor+1) % 3)+1;
-           break;
-      case TECLA_DEC:
-           valor?(valor--):3;
-           break;
-    }
-    
-    sprintf(bufferLinha,"%03d ",valor);
-    HD44780_posicionaTexto(0,1);  
-    HD44780_writeString(bufferLinha);
-  }   
-}
 /************************************************************************************
 *       Descri��o       :       Menu para configuracao da constante de temperatura
 *       Parametros      :       nenhum
@@ -5762,15 +5725,15 @@ void MCS_tela_configura_contante_temperatura(void){
     tecla = TECLADO_getch();
     switch(tecla){
       case TECLA_ENTER:
-           PARAMETROS_grava_correcao_erro(valor);
-           break;
+           PARAMETROS_grava_constante_temperatura(valor);
+           return;
       case TECLA_ESC:
            return;
       case TECLA_INC:
-           (valor==4)?1:valor++;
+           (valor==4)?(valor=1):(valor++);
            break;
       case TECLA_DEC:
-           (valor-1)?valor--:4;
+           (valor-1)?(valor--):(valor=4);
            break;
     }
     

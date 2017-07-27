@@ -71,8 +71,8 @@
 
 #define MAX_COMPENSADOR_TEMPERATURA                             10
 #define MAX_COMPENSADOR_ROTACAO                                 500
-#define TEMPO_COMPENSADOR                                       2*60*1000
-#define TEMPO_SAIDA_COMPENSADOR                                 2*60*1000
+#define TEMPO_COMPENSADOR                                       5*60*1000
+#define TEMPO_SAIDA_COMPENSADOR                                 5*60*1000
 
 /***********************************************************************************
 *       Constantes
@@ -749,7 +749,7 @@ unsigned char IU_preparaPipoca(void){
   inicial = PARAMETROS_leRotacaoInicialExpulsao();
   final = PARAMETROS_leVelocidadeFinalExpulsao();
   unsigned short int tempResf;
-  if(IU_compensadorTemperatura)//aqui123
+  if(IU_compensadorTemperatura)
     tempResf = PARAMETROS_leTemperaturaInicio() + ((IU_compensadorTemperatura-1)>>1);
   else
     tempResf = PARAMETROS_leTemperaturaInicio();
@@ -1490,7 +1490,7 @@ void IU_tickCompensador(void){
     IU_contadorSaidaCompensador = TEMPO_SAIDA_COMPENSADOR;
     
     if(IU_compensadorTemperatura)
-      IU_compensadorTemperatura--;
+      IU_compensadorTemperatura-= PARAMETROS_le_correcao_erro();
     if(IU_compensadorRotacao>=50)
       IU_compensadorRotacao-=50;
   }  
@@ -1505,16 +1505,14 @@ void IU_tickCompensador(void){
 *       Retorno         :       nenhum
 ***********************************************************************************/
 void IU_cicloCompensador(void){
-  
   if(IU_contadorCompensador){
     if(IU_compensadorTemperatura<MAX_COMPENSADOR_TEMPERATURA)
-      IU_compensadorTemperatura+= PARAMETROS_le_correcao_erro();//aqui123 trazer parametro
+      IU_compensadorTemperatura+= PARAMETROS_le_correcao_erro();
     if(IU_compensadorRotacao<MAX_COMPENSADOR_ROTACAO)
       IU_compensadorRotacao+=50;
-    
+  }  
     IU_contadorCompensador = TEMPO_COMPENSADOR;
     IU_contadorSaidaCompensador = TEMPO_SAIDA_COMPENSADOR;
-  }  
 }
 /***********************************************************************************
 *       Descri��o       :       Realiza o resfriamento da panela 
