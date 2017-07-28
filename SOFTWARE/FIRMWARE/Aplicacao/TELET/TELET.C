@@ -54,7 +54,7 @@ unsigned char TELET_bufferRX[TAM_BUF_RX];
 unsigned char TELET_bytesRecebidos;
 unsigned char TELET_bytesEnviados;
 unsigned char TELET_bytesParaEnviar;
-unsigned char TELET_estadoConexaoTelemetria = SILENT_TIME_RELOAD;
+unsigned char TELET_estadoConexaoTelemetria = 1;
 unsigned short TELET_silentTime=0;
 xQueueHandle filaEstados;
 
@@ -114,7 +114,7 @@ void TELET_main(void*pPar){
         flags |= IU_getFalhaMotor()?0x04:0x00;
         flags |= IU_getFalhaDosador()?0x02:0x00;
 
-        TELET_escreveBlocoOperacao(PARAMETROS_carregaNumeroSerie(),
+        if(TELET_escreveBlocoOperacao(PARAMETROS_carregaNumeroSerie(),
                                       PARAMETROS_leContadorVendas(),
                                       PARAMETROS_leContadorArrecadacao()*100,
                                       PARAMETROS_leTotalizadorPermanente()*100,
@@ -125,7 +125,11 @@ void TELET_main(void*pPar){
                                       PARAMETROS_leComissaoPonto(),
                                       PARAMETROS_leVersaoCPU(),
                                       PARAMETROS_leFlagLocacao(),
-                                      PARAMETROS_leParametro(VALOR_PIPOCA)*100));
+                                      PARAMETROS_leParametro(VALOR_PIPOCA)*100)){
+          TELET_estadoConexaoTelemetria = 1;
+        }else{
+          TELET_estadoConexaoTelemetria = 0;
+        }
       }  
     }  
   }  
@@ -315,7 +319,7 @@ unsigned char TELET_checksum(unsigned char *pData,unsigned char tamanho){
 ***********************************************************************************/
 unsigned char TELET_getEstadoConexaoTelemetria(void){
 
-  return (unsigned char)TELET_estadoConexaoTelemetria;
+  return TELET_estadoConexaoTelemetria;
 }
 /***********************************************************************************
 *       Descrição       :       Faz a leitura do SSID configurado para a 
