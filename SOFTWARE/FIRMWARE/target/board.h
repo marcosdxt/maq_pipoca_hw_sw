@@ -1,7 +1,7 @@
 /*__________________________________________________________________________________
 |	Marcos Aquino Projetos Exclusivos
 |       
-|       Balneário Camboriú - SC
+|       Balneï¿½rio Camboriï¿½ - SC
 |       www.aquino.eng.br
 | __________________________________________________________________________________
 |
@@ -9,7 +9,7 @@
 |       or in whole, or used, except when legally licensed by Chave Digital
 |       or its distributors.
 |
-|       Este código é propriedade da Chave Digital e não pode ser copiado, em parte 
+|       Este cï¿½digo ï¿½ propriedade da Chave Digital e nï¿½o pode ser copiado, em parte 
 |       ou em todo, ou utilizado, exceto quando for legalmente licenciado pela 
 |       Chave Digital ou por um de seus distribuidores.
 | __________________________________________________________________________________
@@ -17,25 +17,25 @@
 |       Arquivo            :  board.h
 | 
 |       Autor              :  Marcos Aquino
-|       Data criação       :  09/02/2015
+|       Data criaï¿½ï¿½o       :  09/02/2015
 |
-|       Revisões           :  1.0.0.0
-|                             (20/05/2017) Alterado para rodar a vesão
+|       Revisï¿½es           :  1.0.0.0
+|                             (20/05/2017) Alterado para rodar a vesï¿½o
 |                                          do controlador PID que utiliza
-|                                          soma para a integração e diferença
+|                                          soma para a integraï¿½ï¿½o e diferenï¿½a
 |                                          para o diferenciador
-|                                          Removida a interrupção adicionar para
+|                                          Removida a interrupï¿½ï¿½o adicionar para
 |                                          desligar o gate do TRIAC, agora ele
-|                                          é desligado no cruzamento por zero
-|                             (21/07/2017) Removidas as opções do usuário de 
-|                                          mudar as configuração da temperatura                                             
-|                                          final e a rampa. Inseridas mudanças
+|                                          ï¿½ desligado no cruzamento por zero
+|                             (21/07/2017) Removidas as opï¿½ï¿½es do usuï¿½rio de 
+|                                          mudar as configuraï¿½ï¿½o da temperatura                                             
+|                                          final e a rampa. Inseridas mudanï¿½as
 |                                          para o envio correto dos dados para a
 |                                          Telemetria. Refeito o TELET para
 |                                          funcionar como uma task separada,
-|                                          recebendo informações através de uma 
-|                                          fila. Ganhos PID agora são configuraveis.
-|                             (24/07/2017) Correção do envio da informação Cartão
+|                                          recebendo informaï¿½ï¿½es atravï¿½s de uma 
+|                                          fila. Ganhos PID agora sï¿½o configuraveis.
+|                             (24/07/2017) Correï¿½ï¿½o do envio da informaï¿½ï¿½o Cartï¿½o
 |                                          Total para a Telemetria.
 | __________________________________________________________________________________
 */
@@ -51,7 +51,7 @@
 //#define _PARAGUAI_60HZ_
 //#define _URUGUAI_60HZ_
 //----------------------------------------------------------------------------------
-//      Definições para o brasil
+//      Definiï¿½ï¿½es para o brasil
 //----------------------------------------------------------------------------------
 #ifdef _BRASIL_
   #define PORTUGUES
@@ -88,7 +88,7 @@
   #define STR_VERSAO_BOARD_TELEMETRIA      "1.12.3-UYBR"
 #endif
 //----------------------------------------------------------------------------------
-//      Definições para os demais países da América Latina
+//      Definiï¿½ï¿½es para os demais paï¿½ses da Amï¿½rica Latina
 //----------------------------------------------------------------------------------
 
 void BOARD_ini(void);

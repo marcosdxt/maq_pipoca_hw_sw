@@ -1,5 +1,5 @@
  /*__________________________________________________________________________________
-|	Quark Tecnologia Eletrônica Embarcada
+|	Quark Tecnologia Eletrï¿½nica Embarcada
 |       
 |       Itapema - SC
 |       www.quarktee.com.br
@@ -9,32 +9,32 @@
 |       or in whole, or used, except when legally licensed by Quark 
 |       or its distributors.
 |
-|       Este código é propriedade da Quark  e não pode ser copiado, em parte 
+|       Este cï¿½digo ï¿½ propriedade da Quark  e nï¿½o pode ser copiado, em parte 
 |       ou em todo, ou utilizado, exceto quando for legalmente licenciado pela 
 |       Quark  ou por um de seus distribuidores.
 | __________________________________________________________________________________
 |
 |       Arquivo            :  InterfaceUsuario.c
-|       Descrição          :  Menus de interface com o usuário
+|       Descriï¿½ï¿½o          :  Menus de interface com o usuï¿½rio
 | 
 |       Autor              :  Marcos Aquino
-|       Data criação       :  09/02/2015
+|       Data criaï¿½ï¿½o       :  09/02/2015
 |
-|       Revisões           :  1.0.0.0
+|       Revisï¿½es           :  1.0.0.0
 |
 |                             (23/08/2016) Alterado para enviar os dados TELET
 |                                          quando houver um bloqueio por falha
 |                                          Foram inseridas chamadas para envio
-|                                          no loop de falha da resistência e no
-|                                          de sinalização de falha
+|                                          no loop de falha da resistï¿½ncia e no
+|                                          de sinalizaï¿½ï¿½o de falha
 |                             (20/05/2017) Alterado a forma como faz a limpeza da
-|                                          máquina durante o preparo. Agora utiliza
-|                                          a função serve_pipoca.
+|                                          mï¿½quina durante o preparo. Agora utiliza
+|                                          a funï¿½ï¿½o serve_pipoca.
 |                                          Dentro do menu pipoca_teste havia uma 
 |                                          chamada errada para a limpeza, onde a velocidade
-|                                          estava com o parâmetro do valor da pipoca
+|                                          estava com o parï¿½metro do valor da pipoca
 |                                          Criado menu para reiniciar a senha mestre,
-|                                          para utilizá-lo é necessário usar o gerador
+|                                          para utilizï¿½-lo ï¿½ necessï¿½rio usar o gerador
 |                                          de contra-senha
 | __________________________________________________________________________________
 */
@@ -49,7 +49,7 @@
 
 
 /***********************************************************************************
-*       Definições
+*       Definiï¿½ï¿½es
 ***********************************************************************************/
 #define INVERTE_CICLO                                           2
 #define CICLOS_PIPOCA                                           2
@@ -71,8 +71,8 @@
 
 #define MAX_COMPENSADOR_TEMPERATURA                             10
 #define MAX_COMPENSADOR_ROTACAO                                 500
-#define TEMPO_COMPENSADOR                                       2*60*1000
-#define TEMPO_SAIDA_COMPENSADOR                                 2*60*1000
+#define TEMPO_COMPENSADOR                                       5*60*1000
+#define TEMPO_SAIDA_COMPENSADOR                                 5*60*1000
 
 /***********************************************************************************
 *       Constantes
@@ -80,7 +80,7 @@
 // const unsigned int numeroSerie=147;
 
 /***********************************************************************************
-*       Enumerações
+*       Enumeraï¿½ï¿½es
 ***********************************************************************************/
 enum eESTADO_LEDS{
   NORMAL,
@@ -116,7 +116,7 @@ unsigned int IU_contadorSaidaCompensador=0;
 unsigned char IU_compensadorTemperatura=0;
 unsigned short int IU_compensadorRotacao=0;
 /***********************************************************************************
-*       Funções
+*       Funï¿½ï¿½es
 ***********************************************************************************/
 void IU_desenhaPrecoPipoca(void);
 void IU_escreveDinheiroInserido(void);
@@ -153,11 +153,11 @@ unsigned char IU_getFalhaDosador(void);
 unsigned char IU_getFalhaMotor(void);
 
 /***********************************************************************************
-*       Implementação das funções
+*       Implementaï¿½ï¿½o das funï¿½ï¿½es
 ***********************************************************************************/
 
 /***********************************************************************************
-*       Descrição       :       Função principal da interface com o usuário
+*       Descriï¿½ï¿½o       :       Funï¿½ï¿½o principal da interface com o usuï¿½rio
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -186,7 +186,7 @@ void IU_entry(void*pPar){
   HD44780_2_writeString(STRING_VERSAO);
   
   // Verifica se deve entrar no 
-  // menu avançado
+  // menu avanï¿½ado
   for(unsigned char i=0;i<10;i++){
     if(TECLADO_getch()==TECLA_MENU_AVANCADO){
       HD44780_clearText();
@@ -201,7 +201,7 @@ void IU_entry(void*pPar){
   IU_exibeNumeroSerie();
   vTaskDelay(2000);    
   
-  CA_ini();// Controle de amostra grátis
+  CA_ini();// Controle de amostra grï¿½tis
      
   
   unsigned short int velocidadeLimpeza = PARAMETROS_leVelocidadeLimpeza();
@@ -213,8 +213,8 @@ void IU_entry(void*pPar){
   //TELET_ini();  
         
   
-  // Faz a verificação inicial da resistência
-  // e trava o processo se não localizar    
+  // Faz a verificaï¿½ï¿½o inicial da resistï¿½ncia
+  // e trava o processo se nï¿½o localizar    
   HD44780_clearText();
   HD44780_writeString("  Aguardando   ");
   HD44780_posicionaTexto(0,1);
@@ -366,20 +366,20 @@ void IU_entry(void*pPar){
       }
       
       
-      HD44780_posicionaTexto(7,1);  // Remove as indicações de erro do 
+      HD44780_posicionaTexto(7,1);  // Remove as indicaï¿½ï¿½es de erro do 
       HD44780_writeString("     "); // lcd interno
       
       unsigned int valorPipoca = PARAMETROS_leParametro(VALOR_PIPOCA);
       
       ///---------------------------------------------------///
       ///                                                   ///
-      /// Faz o modo de funcionamento de locacação          ///
+      /// Faz o modo de funcionamento de locacaï¿½ï¿½o          ///
       ///                                                   ///
       ///---------------------------------------------------///
       static unsigned char flagLocacao=0;      
       if(PARAMETROS_leFlagLocacao()){
         IU_propaganda();  // Faz a propaganda              
-        flagLocacao = 1; // Esse flag fica setado para indicar que precisar reiniciar o noteiro quando saida da locação
+        flagLocacao = 1; // Esse flag fica setado para indicar que precisar reiniciar o noteiro quando saida da locaï¿½ï¿½o
         CA_setterLedGratis(1);
         MP_enviaSinal(BV20_BLOQUEADO);        
       }else{
@@ -459,12 +459,12 @@ void IU_entry(void*pPar){
         AL_setterLeds(FITA_LED_ESQUERDA,0,0);
         AL_setterLeds(FITA_LED_DIREITA,0,1);
         IU_ciclosPropaganda = 10;           
-      }//Fim do inicio da preparação
+      }//Fim do inicio da preparaï¿½ï¿½o
       
       IU_creditoPipoca = 0;          
-   }//Fim da verificação cíclica
+   }//Fim da verificaï¿½ï¿½o cï¿½clica
    else{          
-     // Falha no teste de verificação 
+     // Falha no teste de verificaï¿½ï¿½o 
      // funcional     
      for(;;){
        TELET_enviaEstado(ESTADO_MONITORACAO);
@@ -476,7 +476,7 @@ void IU_entry(void*pPar){
      }       
    }
    
-   // Escreve informações no display
+   // Escreve informaï¿½ï¿½es no display
    IU_escreveTemperaturaResistencia(0);            
    IU_exibeContadorVendas();
    AL_tick(); 
@@ -485,8 +485,8 @@ void IU_entry(void*pPar){
   }  
 }
 /***********************************************************************************
-*       Descrição       :       Desenha os erros nos displays da máquina
-*       Parametros      :       (unsigned char) código
+*       Descriï¿½ï¿½o       :       Desenha os erros nos displays da mï¿½quina
+*       Parametros      :       (unsigned char) cï¿½digo
 *       Retorno         :       nenhum
 ***********************************************************************************/
 void IU_escreveErros(unsigned char codigo){
@@ -496,7 +496,7 @@ void IU_escreveErros(unsigned char codigo){
   //HD44780_2_posicionaTexto(0,1);  
   
   switch(codigo){
-      // Não foi detectada embalagem
+      // Nï¿½o foi detectada embalagem
       case 1: 
               HD44780_writeString("| E01");
               #ifdef PORTUGUES              
@@ -514,7 +514,7 @@ void IU_escreveErros(unsigned char codigo){
               MP_enviaSinal(BV20_BLOQUEADO);   
               bloqueado = 1;
               break;       
-      // Não foi detectado termistor
+      // Nï¿½o foi detectado termistor
       case 2: HD44780_writeString("| E02");
               #ifdef PORTUGUES         
               HD44780_2_posicionaTexto(0,0);              
@@ -531,7 +531,7 @@ void IU_escreveErros(unsigned char codigo){
               MP_enviaSinal(BV20_BLOQUEADO);          
               bloqueado = 1;
               break;     
-      // Não foi detectado noteiro
+      // Nï¿½o foi detectado noteiro
       case 3: HD44780_writeString("| E03");
               #ifdef PORTUGUES   
               HD44780_2_posicionaTexto(0,0);                     
@@ -548,7 +548,7 @@ void IU_escreveErros(unsigned char codigo){
               MP_enviaSinal(BV20_BLOQUEADO);          
               bloqueado = 1;
               break;        
-      // Não foi detectada rotação do ventilador
+      // Nï¿½o foi detectada rotaï¿½ï¿½o do ventilador
       case 4: HD44780_writeString("| E04");
               #ifdef PORTUGUES         
               HD44780_2_posicionaTexto(0,0);              
@@ -574,7 +574,7 @@ void IU_escreveErros(unsigned char codigo){
   }  
 }
 /***********************************************************************************
-*       Descrição       :       Escreve a mensagem iniciando preparo
+*       Descriï¿½ï¿½o       :       Escreve a mensagem iniciando preparo
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -595,7 +595,7 @@ void IU_mensagemIniciandoPreparo(void){
   #endif  
 }
 /***********************************************************************************
-*       Descrição       :       Escreve a temperatura de preparo no lcd interno
+*       Descriï¿½ï¿½o       :       Escreve a temperatura de preparo no lcd interno
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -616,7 +616,7 @@ void IU_escreveTemperaturaResistencia(unsigned char rpm){
   IU_stampEstadoConexaoModuloTelemetria();
 }
 /***********************************************************************************
-*       Descrição       :       Getter para o IU_falhaDosador
+*       Descriï¿½ï¿½o       :       Getter para o IU_falhaDosador
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -625,7 +625,7 @@ unsigned char IU_getFalhaDosador(void){
     return IU_dosador;
 }
 /***********************************************************************************
-*       Descrição       :       Getter para o IU_falhaMotor
+*       Descriï¿½ï¿½o       :       Getter para o IU_falhaMotor
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -634,7 +634,7 @@ unsigned char IU_getFalhaMotor(void){
   return IU_falhaMotor;
 }
 /***********************************************************************************
-*       Descrição       :       Escreve a temperatura de preparo no lcd interno
+*       Descriï¿½ï¿½o       :       Escreve a temperatura de preparo no lcd interno
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -648,7 +648,7 @@ void IU_escreveTemperaturaResistenciaFree(unsigned char rpm){
   HD44780_writeString(tmp);        
 }
 /***********************************************************************************
-*       Descrição       :       Escreve o valor da pipoca no display de cliente
+*       Descriï¿½ï¿½o       :       Escreve o valor da pipoca no display de cliente
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -682,8 +682,8 @@ void IU_desenhaPrecoPipoca(void){
   HD44780_2_writeChar(' ');
 }
 /***********************************************************************************
-*       Descrição       :       Escreve no display o total de dinheiro inserido
-*                               pelo usuário
+*       Descriï¿½ï¿½o       :       Escreve no display o total de dinheiro inserido
+*                               pelo usuï¿½rio
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -719,9 +719,9 @@ void IU_escreveDinheiroInserido(void){
     IU_mensagemClienteStandby();  
 }
 /***********************************************************************************
-*       Descrição       :       Inicia o procedimento de preparação da pipoca
+*       Descriï¿½ï¿½o       :       Inicia o procedimento de preparaï¿½ï¿½o da pipoca
 *       Parametros      :       nenhum
-*       Retorno         :       (unsigned char) código de erro
+*       Retorno         :       (unsigned char) cï¿½digo de erro
 ***********************************************************************************/
 unsigned char IU_preparaPipoca(void){
   unsigned char resfriamento=0;
@@ -758,8 +758,8 @@ unsigned char IU_preparaPipoca(void){
   
   unsigned char res = IU_preAquecimento(tempResf);
   
-  // Recodifica os erros para o padrão da
-  // função principal, corrigir isso algum dia!
+  // Recodifica os erros para o padrï¿½o da
+  // funï¿½ï¿½o principal, corrigir isso algum dia!
   switch(res){
     case 0 : break;
     case 1 : return 5;
@@ -768,11 +768,11 @@ unsigned char IU_preparaPipoca(void){
     default: return 8;
   } 
   
-  // Seta a temperatura de processo na resistência
+  // Seta a temperatura de processo na resistï¿½ncia
   MU_setTemperatura(tempResf,fator);  
   MU_setRPM(v1);  
   
-  // Aguarda a resistência atingir a temperatura de processo
+  // Aguarda a resistï¿½ncia atingir a temperatura de processo
   // antes de jogar o milho na panela  
   unsigned char iA=0;
   {
@@ -788,7 +788,7 @@ unsigned char IU_preparaPipoca(void){
       vTaskDelay(1000);      
             
       // Oscila a fita led durante a etapa de aguardar
-      // o início da preparação
+      // o inï¿½cio da preparaï¿½ï¿½o
       if(animacaoPreparo)
         IU_oscilaFitaPreparacao();        
     }
@@ -821,7 +821,7 @@ unsigned char IU_preparaPipoca(void){
   vTaskDelay(1000);
   // Se houver erro no dosador, 
   // marca com erro e encerra
-  // antes desligando o motor e a resistência
+  // antes desligando o motor e a resistï¿½ncia
   if(!DM_aplicaDosagem()){
      MU_setRPM(0); 
      MU_setTemperatura(0,0);
@@ -861,14 +861,14 @@ unsigned char IU_preparaPipoca(void){
   for(unsigned char i=0;i<tempo;i++){
     
     // Ciclos de 
-    // atualização da temperatura
+    // atualizaï¿½ï¿½o da temperatura
     if(!--buc){
       buc = rampa;
       if(temperatura>tempResf){
         tempResf++;
         MU_setTemperatura(tempResf,fator); 
       }
-    }// Fim do ciclo de atualização 
+    }// Fim do ciclo de atualizaï¿½ï¿½o 
     
     if(ciclosCopo<10){
       AL_setterEstado(LEDS_DOBRA_COPO);
@@ -882,8 +882,8 @@ unsigned char IU_preparaPipoca(void){
     AL_tick();
     vTaskDelay(1000);  
     
-    // Motor sem rotação é falha
-    // no fusível ou sensor
+    // Motor sem rotaï¿½ï¿½o ï¿½ falha
+    // no fusï¿½vel ou sensor
     if(!MU_getRPMmedido()){
        MU_setRPM(0); 
        MU_setTemperatura(0,1);
@@ -930,8 +930,8 @@ unsigned char IU_preparaPipoca(void){
   return 0;  
 }
 /***********************************************************************************
-*       Descrição       :       Fica rolando as mensagens no display durante
-*                               a fase onde aguarda a resistência atingir
+*       Descriï¿½ï¿½o       :       Fica rolando as mensagens no display durante
+*                               a fase onde aguarda a resistï¿½ncia atingir
 *                               a temperatura de inicio do processo
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -969,7 +969,7 @@ void IU_mensagensAguardaAquecimento(unsigned char indice){
   HD44780_2_writeString((char*)mensagensAguardandoAquecer[indice%8][1]);
 }
 /***********************************************************************************
-*       Descrição       :       Limpeza da pipoqueira com ar
+*       Descriï¿½ï¿½o       :       Limpeza da pipoqueira com ar
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -981,7 +981,7 @@ void IU_limpezaPipoqueira(unsigned short int velocidade){
   MU_setRPM(0);    
 }
 /***********************************************************************************
-*       Descrição       :       Piscada da fita de leds e exibição da mensagem
+*       Descriï¿½ï¿½o       :       Piscada da fita de leds e exibiï¿½ï¿½o da mensagem
 *                               de propaganda
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -1025,7 +1025,7 @@ void IU_propaganda(void){
   }      
 }
 /***********************************************************************************
-*       Descrição       :       Exibe o contador de vendas no display interno
+*       Descriï¿½ï¿½o       :       Exibe o contador de vendas no display interno
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1041,7 +1041,7 @@ void IU_exibeContadorVendas(void){
   HD44780_writeString(bufferLinha);
 }
 /***********************************************************************************
-*       Descrição       :       Tela que exibe no display externo
+*       Descriï¿½ï¿½o       :       Tela que exibe no display externo
 *                               o tempo que falta durante o preparo da pipoca
 *       Parametros      :       (unsigned short int) tempo restante
 *       Retorno         :       nenhum
@@ -1079,7 +1079,7 @@ void IU_exibeTempoUsuario(unsigned short int tempo){
   HD44780_2_writeString(bufferLinha);        
 }
 /***********************************************************************************
-*       Descrição       :       Atualiza os totalizadores 
+*       Descriï¿½ï¿½o       :       Atualiza os totalizadores 
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1094,7 +1094,7 @@ void IU_atualizaTotalizadores(unsigned int valorPipoca){
   dinheiro+=valorPipoca;
   PARAMETROS_salvaContadorArrecadacao(dinheiro);
           
-  // Totalizador de histórico de faturamento
+  // Totalizador de histï¿½rico de faturamento
   unsigned int historico = PARAMETROS_leTotalizadorPermanente();
   historico+=valorPipoca;
   PARAMETROS_gravaTotalizadorPermanente(historico);      
@@ -1121,10 +1121,10 @@ void IU_atualizaTotalizadores(unsigned int valorPipoca){
 
 }
 /***********************************************************************************
-*       Descrição       :       Verificação ciclica
+*       Descriï¿½ï¿½o       :       Verificaï¿½ï¿½o ciclica
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned char) maior do que zero
-*                                               senão houverem falhas
+*                                               senï¿½o houverem falhas
 *                                               no hardware
 ***********************************************************************************/
 unsigned char IU_verificacaoCiclica(void){
@@ -1147,7 +1147,7 @@ unsigned char IU_verificacaoCiclica(void){
    return 0;  
 }
 /***********************************************************************************
-*       Descrição       :       Tela com o pré-aquecimento da resistência
+*       Descriï¿½ï¿½o       :       Tela com o prï¿½-aquecimento da resistï¿½ncia
 *       Parametros      :       nenhum
 *       Retorno         :       (unsigned char) maior do que zero
 *                                               se conseguir executar
@@ -1220,8 +1220,8 @@ unsigned char IU_preAquecimento(unsigned short int velocidade){
   return 0;   
 }
 /***********************************************************************************
-*       Descrição       :       Escreve no display o total de dinheiro inserido
-*                               pelo usuário
+*       Descriï¿½ï¿½o       :       Escreve no display o total de dinheiro inserido
+*                               pelo usuï¿½rio
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1245,7 +1245,7 @@ void IU_escreveDinheiroSaldo(void){
     IU_mensagemClienteStandby();
 }
 /***********************************************************************************
-*       Descrição       :       Interface para servir a pipoca ao usuário
+*       Descriï¿½ï¿½o       :       Interface para servir a pipoca ao usuï¿½rio
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1257,7 +1257,7 @@ void IU_servePipoca(unsigned int inicial,unsigned int final){
   MU_setRPM(0);  
 }
 /***********************************************************************************
-*       Descrição       :       Faz a rolagem da mensagem na segunda linha
+*       Descriï¿½ï¿½o       :       Faz a rolagem da mensagem na segunda linha
 *                               do display de cliente
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
@@ -1280,7 +1280,7 @@ void IU_mensagemClienteStandby(void){
   indice = (indice+1) % 4;  
 }
 /***********************************************************************************
-*       Descrição       :       Oscila a fita de leds durante a preparação
+*       Descriï¿½ï¿½o       :       Oscila a fita de leds durante a preparaï¿½ï¿½o
 *       Parametros      :       nenhum
 *       Retorno         :       nwenhum
 ***********************************************************************************/
@@ -1299,7 +1299,7 @@ void IU_oscilaFitaPreparacao(void){
   }  
 }
 /***********************************************************************************
-*       Descrição       :       Envia os dados de telemetria para o módulo
+*       Descriï¿½ï¿½o       :       Envia os dados de telemetria para o mï¿½dulo
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1322,8 +1322,8 @@ void IU_enviaTelemetria(void){
                                                           PARAMETROS_carregaOperacoesCartao()); */
 }
 /***********************************************************************************
-*       Descrição       :       Stamp do estado da conexão com 
-*                               o módulo de telemetria
+*       Descriï¿½ï¿½o       :       Stamp do estado da conexï¿½o com 
+*                               o mï¿½dulo de telemetria
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1337,8 +1337,8 @@ void IU_stampEstadoConexaoModuloTelemetria(void){
     HD44780_writeString("[TOFF]");  
 }
 /***********************************************************************************
-*       Descrição       :       Interface para resfriamento da
-*                               resistência
+*       Descriï¿½ï¿½o       :       Interface para resfriamento da
+*                               resistï¿½ncia
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1390,9 +1390,9 @@ unsigned char IU_interfaceResfriamento(unsigned short int temperatura){
   return 1;
 }
 /***********************************************************************************
-*       Descrição       :       Função que faz o aquecimento da panela 
+*       Descriï¿½ï¿½o       :       Funï¿½ï¿½o que faz o aquecimento da panela 
 *                               por fim de realizar a secagem da umidade
-*                               interna da máquina
+*                               interna da mï¿½quina
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1438,7 +1438,7 @@ void IU_processoSecagem(void){
   HD44780_clearText();
 }
 /***********************************************************************************
-*       Descrição       :       Faz a verificação inicial da resistência
+*       Descriï¿½ï¿½o       :       Faz a verificaï¿½ï¿½o inicial da resistï¿½ncia
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1478,7 +1478,7 @@ unsigned char IU_verificacaoInicialResistencia(void){
   return 0;
 }
 /***********************************************************************************
-*       Descrição       :       Timer hook para o compensador
+*       Descriï¿½ï¿½o       :       Timer hook para o compensador
 *                               da temperatura de processo
 *       Parametros      :       nenhum
 *       Retorno         :       
@@ -1491,7 +1491,7 @@ void IU_tickCompensador(void){
     IU_contadorSaidaCompensador = TEMPO_SAIDA_COMPENSADOR;
     
     if(IU_compensadorTemperatura)
-      IU_compensadorTemperatura--;
+      IU_compensadorTemperatura-= PARAMETROS_le_correcao_erro();
     if(IU_compensadorRotacao>=50)
       IU_compensadorRotacao-=50;
   }  
@@ -1500,25 +1500,23 @@ void IU_tickCompensador(void){
     IU_contadorCompensador--;
 }
 /***********************************************************************************
-*       Descrição       :       Chamada para o compensador que ocorre
-*                               a cada preparação de pipoca
+*       Descriï¿½ï¿½o       :       Chamada para o compensador que ocorre
+*                               a cada preparaï¿½ï¿½o de pipoca
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
 void IU_cicloCompensador(void){
-  
   if(IU_contadorCompensador){
     if(IU_compensadorTemperatura<MAX_COMPENSADOR_TEMPERATURA)
-      IU_compensadorTemperatura++;
+      IU_compensadorTemperatura+= PARAMETROS_le_correcao_erro();
     if(IU_compensadorRotacao<MAX_COMPENSADOR_ROTACAO)
-      IU_compensadorTemperatura+=50;
-    
+      IU_compensadorRotacao+=50;
+  }  
     IU_contadorCompensador = TEMPO_COMPENSADOR;
     IU_contadorSaidaCompensador = TEMPO_SAIDA_COMPENSADOR;
-  }  
 }
 /***********************************************************************************
-*       Descrição       :       Realiza o resfriamento da panela 
+*       Descriï¿½ï¿½o       :       Realiza o resfriamento da panela 
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
@@ -1551,16 +1549,16 @@ void IU_resfriamentoPanela(void){
   MU_setRPM(0);      
 }
 /***********************************************************************************
-*       Descrição       :       Getter para o número de série da máquina
+*       Descriï¿½ï¿½o       :       Getter para o nï¿½mero de sï¿½rie da mï¿½quina
 *       Parametros      :       nenhum
-*       Retorno         :       (unsigned int) número de série da máquina
+*       Retorno         :       (unsigned int) nï¿½mero de sï¿½rie da mï¿½quina
 ***********************************************************************************/
 unsigned int IU_getNumeroSerie(void){
   
    return PARAMETROS_carregaNumeroSerie();
 }
 /***********************************************************************************
-*       Descrição       :       Exibe o número de série da placa
+*       Descriï¿½ï¿½o       :       Exibe o nï¿½mero de sï¿½rie da placa
 *       Parametros      :       nenhum
 *       Retorno         :       nenhum
 ***********************************************************************************/
