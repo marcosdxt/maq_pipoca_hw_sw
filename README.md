@@ -1,4 +1,4 @@
-# Projeto da Máquina Mais Pipoca G1
+# Projeto da Máquina de Pipocas
 
 # Hardware
 Arquivos do projeto eletrônico das placas eletrônicas
