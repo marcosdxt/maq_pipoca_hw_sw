@@ -11,7 +11,7 @@ Potência
 Placa que realiza contém 
 
 # Software
-Código-fonte do firmware da máquina Mais Pipoca G1
+Código-fonte do firmware da máquina de Pipocas
 
 # Changelog
 (20/05/2017) 1.11.2 - Alterado para rodar a vesão do controlador PID que utiliza
